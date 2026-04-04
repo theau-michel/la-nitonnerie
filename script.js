@@ -84,3 +84,29 @@ function go(p) {
 }
 
 loadData();
+async function loadWorks() {
+  const res = await fetch('/.netlify/functions/get-works');
+  const data = await res.json();
+
+  const container = document.getElementById('gallery');
+
+  data.records.forEach(item => {
+    const f = item.fields;
+
+    const imageUrl = f["Photo de l'œuvre"]?.[0]?.url;
+
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    card.innerHTML = `
+      <img src="${imageUrl}" alt="${f.Titre}" />
+      <h3>${f.Titre}</h3>
+      <p>${f.Technique}</p>
+      <p>${f.Catégorie}</p>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+loadWorks();
