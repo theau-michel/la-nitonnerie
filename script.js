@@ -25,20 +25,21 @@ async function loadData() {
     document.getElementById("gg").innerHTML =
       `<div class="state-msg">Impossible de charger les œuvres.</div>`;
     document.getElementById("count-label").textContent = "";
+    document.getElementById("stat-oeuvres").textContent = "—";
+    document.getElementById("stat-artistes").textContent = "—";
+    console.error(e);
   }
 }
 
 function card(w) {
-  const isPetit =
-    w.categorie === "Petit Niton (3 - 6 ans)" ||
-    w.categorie === "Petits Nitons";
+  const isPetit = w.categorie === "Petits Nitons";
 
   const badge = w.categorie
     ? `<span class="cat-badge ${isPetit ? "badge-p" : "badge-g"}">${w.categorie}</span>`
     : "";
 
   const photo = w.photo
-    ? `<img src="${w.photo}" alt="${w.titre}">`
+    ? `<img src="${w.photo}" alt="${escapeHtml(w.titre)}">`
     : "";
 
   return `
@@ -49,8 +50,8 @@ function card(w) {
         ${badge}
       </div>
       <div class="at">
-        <h4>${w.titre}</h4>
-        ${w.technique ? `<div class="by">${w.technique}</div>` : ""}
+        <h4>${escapeHtml(w.titre)}</h4>
+        ${w.technique ? `<div class="by">${escapeHtml(w.technique)}</div>` : ""}
       </div>
     </div>
   `;
@@ -61,9 +62,11 @@ function renderGal(filter) {
 
   const list = filter === "all"
     ? ALL_WORKS
-    : ALL_WORKS.filter(
-        (w) => w.categorie === filter || w.technique === filter
-      );
+    : ALL_WORKS.filter((w) => {
+        const technique = (w.technique || "").toLowerCase();
+        const target = String(filter).toLowerCase();
+        return w.categorie === filter || technique === target;
+      });
 
   document.getElementById("gg").innerHTML = list.length
     ? list.map(card).join("")
@@ -75,7 +78,10 @@ function renderGal(filter) {
 
 function updateStats() {
   document.getElementById("stat-oeuvres").textContent = ALL_WORKS.length;
-  document.getElementById("stat-artistes").textContent = "—";
+
+  const petits = ALL_WORKS.filter((w) => w.categorie === "Petits Nitons").length;
+  const grands = ALL_WORKS.filter((w) => w.categorie === "Grands Nitons").length;
+  document.getElementById("stat-artistes").textContent = `${petits + grands}`;
 }
 
 document.addEventListener("click", (e) => {
@@ -92,6 +98,15 @@ function go(p) {
   document.getElementById("pg-" + p).classList.add("on");
   document.getElementById("n" + p).classList.add("on");
   window.scrollTo(0, 0);
+}
+
+function escapeHtml(str) {
+  return String(str)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
 
 loadData();
