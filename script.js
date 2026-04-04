@@ -15,7 +15,7 @@ async function loadData() {
         titre: f["Titre"] || "Sans titre",
         technique: f["Technique"] || "",
         categorie: f["Catégorie"] || "",
-        photo: f["Photo de l'œuvre"]?.[0]?.url || "",
+        photo: f["Photo de l'œuvre"]?.[0]?.url || ""
       };
     });
 
@@ -41,8 +41,6 @@ function card(w) {
     ? `<img src="${w.photo}" alt="${w.titre}">`
     : "";
 
-  const meta = [w.technique].filter(Boolean).join(" · ");
-
   return `
     <div class="ac">
       <div class="ai">
@@ -51,8 +49,8 @@ function card(w) {
         ${badge}
       </div>
       <div class="at">
-        <h4>${w.titre || "Sans titre"}</h4>
-        ${meta ? `<div class="by">${meta}</div>` : ""}
+        <h4>${w.titre}</h4>
+        ${w.technique ? `<div class="by">${w.technique}</div>` : ""}
       </div>
     </div>
   `;
