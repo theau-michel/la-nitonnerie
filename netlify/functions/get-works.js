@@ -1,40 +1,21 @@
 exports.handler = async function () {
-  const AIRTABLE_TOKEN = process.env.AIRTABLE_TOKEN;
-  const BASE_ID = process.env.AIRTABLE_BASE_ID;
-  const TABLE = process.env.AIRTABLE_TABLE_OEUVRES;
-
-  const url = `https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(TABLE)}`;
-
-  try {
-    const response = await fetch(url, {
-      headers: {
-        Authorization: `Bearer ${AIRTABLE_TOKEN}`,
-      },
-    });
-
-    if (!response.ok) {
-      return {
-        statusCode: response.status,
-        body: JSON.stringify({
-          error: "Erreur Airtable",
-          details: await response.text(),
-        }),
-      };
-    }
-
-    const data = await response.json();
-
-    return {
-      statusCode: 200,
-      body: JSON.stringify(data),
-    };
-  } catch (error) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({
-        error: "Erreur serveur",
-        details: error.message,
-      }),
-    };
-  }
+  return {
+    statusCode: 200,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      hasToken: !!process.env.AIRTABLE_TOKEN,
+      tokenStartsWithPat: process.env.AIRTABLE_TOKEN
+        ? process.env.AIRTABLE_TOKEN.startsWith("pat")
+        : false,
+      tokenLength: process.env.AIRTABLE_TOKEN
+        ? process.env.AIRTABLE_TOKEN.length
+        : 0,
+      hasBaseId: !!process.env.AIRTABLE_BASE_ID,
+      baseStartsWithApp: process.env.AIRTABLE_BASE_ID
+        ? process.env.AIRTABLE_BASE_ID.startsWith("app")
+        : false,
+      hasTableOeuvres: !!process.env.AIRTABLE_TABLE_OEUVRES,
+      hasTableArtistes: !!process.env.AIRTABLE_TABLE_ARTISTES
+    })
+  };
 };
