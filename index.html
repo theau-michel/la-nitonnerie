@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -20,16 +19,17 @@
 
   <div class="header">
     <h1>La Galerie</h1>
-    <div id="count">Chargement…</div>
+    <div id="count-label">Chargement…</div>
   </div>
 
   <div class="filters">
-    <button data-f="all" class="active">Tout</button>
-    <button data-f="Petits Nitons">Petit Niton</button>
-    <button data-f="Grands Nitons">Grand Niton</button>
+    <button class="fb on" data-f="all">Tout</button>
+    <button class="fb" data-f="Petits Nitons">Petit Niton</button>
+    <button class="fb" data-f="Grands Nitons">Grand Niton</button>
   </div>
 
-  <div id="gallery"></div>
+  <!-- ✔️ CONTENEUR CORRECT POUR TON JS -->
+  <div id="gg"></div>
 
 </section>
 
