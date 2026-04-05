@@ -2,132 +2,69 @@ const AIRTABLE_TOKEN = "patXBTkvRqR87CFKO.92a2f3540374de1fca10cf9899844e705358fe
 const AIRTABLE_BASE_ID = "appCRGgKOrUSJYWJ8";
 const AIRTABLE_TABLE_OEUVRES = "Œuvres";
 
-let ALL_WORKS = [];
-let curFilter = "all";
+let DATA = [];
 
-async function loadData() {
+async function load() {
   try {
-    const params = new URLSearchParams();
-
-    ["Titre", "Technique", "Photo de l'œuvre", "Catégorie", "Publier"].forEach((f) =>
-      params.append("fields[]", f)
-    );
-
-    // Temporairement, on n'applique PAS le filtre Publier
-    // pour vérifier que les œuvres remontent bien.
-    // Quand tout marche, on pourra remettre :
-    // params.append("filterByFormula", "{Publier}=1");
-
-    const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(AIRTABLE_TABLE_OEUVRES)}?${params.toString()}`;
+    const url = `https://api.airtable.com/v0/${BASE}/${encodeURIComponent(TABLE)}`;
 
     const res = await fetch(url, {
       headers: {
-        Authorization: `Bearer ${AIRTABLE_TOKEN}`,
-      },
+        Authorization: `Bearer ${TOKEN}`
+      }
     });
 
-    if (!res.ok) {
-      throw new Error(`Erreur Airtable ${res.status}`);
-    }
+    if (!res.ok) throw new Error("Erreur API");
 
-    const data = await res.json();
-    console.log("DATA AIRTABLE =", data);
+    const json = await res.json();
+    console.log(json);
 
-    ALL_WORKS = (data.records || []).map((item) => {
-      const f = item.fields || {};
-      return {
-        titre: f["Titre"] || "Sans titre",
-        technique: f["Technique"] || "",
-        categorie: f["Catégorie"] || "",
-        photo: f["Photo de l'œuvre"]?.[0]?.url || ""
-      };
-    });
+    DATA = json.records.map(r => ({
+      titre: r.fields["Titre"] || "",
+      technique: r.fields["Technique"] || "",
+      categorie: r.fields["Catégorie"] || "",
+      photo: r.fields["Photo de l'œuvre"]?.[0]?.url || ""
+    }));
 
-    document.getElementById("count-label").textContent = `RAW: ${ALL_WORKS.length}`;
+    render("all");
 
-    renderGal(curFilter);
-    updateStats();
+    document.getElementById("count").innerText =
+      DATA.length + " œuvres";
+
   } catch (e) {
-    document.getElementById("gg").innerHTML =
-      `<div class="state-msg">Impossible de charger les œuvres.</div>`;
-    document.getElementById("count-label").textContent = "";
-    document.getElementById("stat-oeuvres").textContent = "—";
-    document.getElementById("stat-artistes").textContent = "—";
     console.error(e);
+    document.getElementById("gallery").innerHTML =
+      "Erreur de chargement";
   }
 }
 
-function card(w) {
-  const isPetit = w.categorie === "Petits Nitons";
+function render(filter) {
 
-  const badge = w.categorie
-    ? `<span class="cat-badge ${isPetit ? "badge-p" : "badge-g"}">${escapeHtml(w.categorie)}</span>`
-    : "";
+  let list = DATA;
 
-  const photo = w.photo
-    ? `<img src="${w.photo}" alt="${escapeHtml(w.titre)}">`
-    : "";
+  if (filter !== "all") {
+    list = DATA.filter(x =>
+      x.categorie === filter
+    );
+  }
 
-  return `
-    <div class="ac">
-      <div class="ai">
-        ${photo}
-        <div class="ao"></div>
-        ${badge}
-      </div>
-      <div class="at">
-        <h4>${escapeHtml(w.titre)}</h4>
-        ${w.technique ? `<div class="by">${escapeHtml(w.technique)}</div>` : ""}
-      </div>
+  const html = list.map(x => `
+    <div class="card">
+      <img src="${x.photo}" />
+      <h3>${x.titre}</h3>
+      <p>${x.technique}</p>
     </div>
-  `;
+  `).join("");
+
+  document.getElementById("gallery").innerHTML = html;
 }
 
-function renderGal(filter) {
-  curFilter = filter;
-
-  const list =
-    filter === "all"
-      ? ALL_WORKS
-      : ALL_WORKS.filter((w) => {
-          const technique = (w.technique || "").toLowerCase();
-          const target = String(filter).toLowerCase();
-          return w.categorie === filter || technique === target;
-        });
-
-  document.getElementById("gg").innerHTML = list.length
-    ? list.map(card).join("")
-    : `<div class="state-msg">Aucune œuvre dans cette catégorie pour le moment.</div>`;
-}
-
-function updateStats() {
-  document.getElementById("stat-oeuvres").textContent = ALL_WORKS.length;
-  document.getElementById("stat-artistes").textContent = "—";
-}
-
-document.addEventListener("click", (e) => {
-  if (e.target.classList.contains("fb")) {
-    document.querySelectorAll(".fb").forEach((b) => b.classList.remove("on"));
-    e.target.classList.add("on");
-    renderGal(e.target.dataset.f);
-  }
+document.querySelectorAll(".filters button").forEach(btn => {
+  btn.onclick = () => {
+    document.querySelectorAll(".filters button").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    render(btn.dataset.f);
+  };
 });
 
-function go(p) {
-  document.querySelectorAll(".pg").forEach((x) => x.classList.remove("on"));
-  document.querySelectorAll(".nav-links a").forEach((x) => x.classList.remove("on"));
-  document.getElementById("pg-" + p).classList.add("on");
-  document.getElementById("n" + p).classList.add("on");
-  window.scrollTo(0, 0);
-}
-
-function escapeHtml(str) {
-  return String(str)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
-
-loadData();
+load();
