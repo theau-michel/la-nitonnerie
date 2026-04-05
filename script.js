@@ -8,11 +8,14 @@ let curFilter = "all";
 async function loadData() {
   try {
     const params = new URLSearchParams();
+
     ["Titre", "Technique", "Photo de l'œuvre", "Catégorie", "Publier"].forEach((f) =>
       params.append("fields[]", f)
     );
 
-    // TEMPORAIRE : on enlève le filtre Publier pour voir si Airtable renvoie quelque chose
+    // Temporairement, on n'applique PAS le filtre Publier
+    // pour vérifier que les œuvres remontent bien.
+    // Quand tout marche, on pourra remettre :
     // params.append("filterByFormula", "{Publier}=1");
 
     const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(AIRTABLE_TABLE_OEUVRES)}?${params.toString()}`;
@@ -36,39 +39,11 @@ async function loadData() {
         titre: f["Titre"] || "Sans titre",
         technique: f["Technique"] || "",
         categorie: f["Catégorie"] || "",
-        photo: f["Photo de l'œuvre"]?.[0]?.url || "",
+        photo: f["Photo de l'œuvre"]?.[0]?.url || ""
       };
     });
 
     document.getElementById("count-label").textContent = `RAW: ${ALL_WORKS.length}`;
-
-    renderGal(curFilter);
-    updateStats();
-  } catch (e) {
-    document.getElementById("gg").innerHTML =
-      `<div class="state-msg">Impossible de charger les œuvres.</div>`;
-    document.getElementById("count-label").textContent = "";
-    document.getElementById("stat-oeuvres").textContent = "—";
-    document.getElementById("stat-artistes").textContent = "—";
-    console.error(e);
-  }
-}
-
-    if (!res.ok) {
-      throw new Error(`Erreur Airtable ${res.status}`);
-    }
-
-    const data = await res.json();
-
-    ALL_WORKS = (data.records || []).map((item) => {
-      const f = item.fields || {};
-      return {
-        titre: f["Titre"] || "Sans titre",
-        technique: f["Technique"] || "",
-        categorie: f["Catégorie"] || "",
-        photo: f["Photo de l'œuvre"]?.[0]?.url || "",
-      };
-    });
 
     renderGal(curFilter);
     updateStats();
@@ -123,9 +98,6 @@ function renderGal(filter) {
   document.getElementById("gg").innerHTML = list.length
     ? list.map(card).join("")
     : `<div class="state-msg">Aucune œuvre dans cette catégorie pour le moment.</div>`;
-
-  document.getElementById("count-label").textContent =
-    `${list.length} œuvre${list.length > 1 ? "s" : ""} exposée${list.length > 1 ? "s" : ""}`;
 }
 
 function updateStats() {
