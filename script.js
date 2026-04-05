@@ -11,7 +11,9 @@ async function loadData() {
     ["Titre", "Technique", "Photo de l'œuvre", "Catégorie", "Publier"].forEach((f) =>
       params.append("fields[]", f)
     );
-    params.append("filterByFormula", "{Publier}=1");
+
+    // TEMPORAIRE : on enlève le filtre Publier pour voir si Airtable renvoie quelque chose
+    // params.append("filterByFormula", "{Publier}=1");
 
     const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(AIRTABLE_TABLE_OEUVRES)}?${params.toString()}`;
 
@@ -20,6 +22,37 @@ async function loadData() {
         Authorization: `Bearer ${AIRTABLE_TOKEN}`,
       },
     });
+
+    if (!res.ok) {
+      throw new Error(`Erreur Airtable ${res.status}`);
+    }
+
+    const data = await res.json();
+    console.log("DATA AIRTABLE =", data);
+
+    ALL_WORKS = (data.records || []).map((item) => {
+      const f = item.fields || {};
+      return {
+        titre: f["Titre"] || "Sans titre",
+        technique: f["Technique"] || "",
+        categorie: f["Catégorie"] || "",
+        photo: f["Photo de l'œuvre"]?.[0]?.url || "",
+      };
+    });
+
+    document.getElementById("count-label").textContent = `RAW: ${ALL_WORKS.length}`;
+
+    renderGal(curFilter);
+    updateStats();
+  } catch (e) {
+    document.getElementById("gg").innerHTML =
+      `<div class="state-msg">Impossible de charger les œuvres.</div>`;
+    document.getElementById("count-label").textContent = "";
+    document.getElementById("stat-oeuvres").textContent = "—";
+    document.getElementById("stat-artistes").textContent = "—";
+    console.error(e);
+  }
+}
 
     if (!res.ok) {
       throw new Error(`Erreur Airtable ${res.status}`);
