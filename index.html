@@ -1,39 +1,459 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>La Nitonnerie</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Nitonnerie — Galerie d'art enfantin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cr:#F7F3EC;--cb:#FCFBF8;--ink:#22201C;--am:#C8923B;--sg:#A8B0A2;
+  --serif:'Cormorant Garamond',Georgia,serif;--sans:'Inter',sans-serif;
+}
+body{background:var(--cr);color:var(--ink);font-family:var(--sans);font-weight:300;font-size:15px;line-height:1.65}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--cb);border-bottom:1px solid rgba(34,32,28,0.08);padding:0 5vw;display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:var(--serif);font-size:1.35rem;font-weight:400;letter-spacing:0.03em;color:var(--ink);cursor:pointer}
+.logo em{font-style:italic;color:var(--am)}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;color:var(--ink);opacity:0.45;cursor:pointer;transition:opacity 0.2s,color 0.2s;font-weight:400;white-space:nowrap}
+.nav-links a:hover{opacity:0.75}
+.nav-links a.on{opacity:1;color:var(--am)}
+.pg{display:none;padding-top:64px;min-height:100vh}
+.pg.on{display:block}
 
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+/* GALERIE */
+.gh{padding:4rem 5vw 2rem;display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid rgba(34,32,28,0.08)}
+.gh h2{font-family:var(--serif);font-size:2.6rem;font-weight:300}
+.gh span{font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--sg)}
+.gf{padding:1.4rem 5vw;display:flex;gap:0.7rem;flex-wrap:wrap;border-bottom:1px solid rgba(34,32,28,0.06)}
+.fb{padding:0.32rem 1rem;border:1px solid rgba(34,32,28,0.16);background:none;font-family:var(--sans);font-size:0.67rem;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;color:var(--ink);font-weight:400;transition:all 0.2s}
+.fb:hover{border-color:var(--am);color:var(--am)}
+.fb.on{background:var(--am);color:var(--cb);border-color:var(--am)}
+.gg{padding:3rem 5vw 6rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:2.5rem}
+.ac{cursor:pointer}
+.ai{aspect-ratio:3/4;margin-bottom:1rem;overflow:hidden;position:relative;background:var(--cb)}
+.ai img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s}
+.ac:hover .ai img{transform:scale(1.03)}
+.ai .placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+.ai .placeholder svg{width:32px;height:32px;opacity:0.12}
+.ao{position:absolute;inset:0;background:rgba(34,32,28,0);transition:background 0.3s}
+.ac:hover .ao{background:rgba(34,32,28,0.05)}
+.cat-badge{position:absolute;top:0.8rem;right:0.8rem;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.6rem;font-weight:400}
+.badge-p{background:rgba(200,146,59,0.15);color:var(--am)}
+.badge-g{background:rgba(168,176,162,0.2);color:#5a6355}
+.at h4{font-family:var(--serif);font-size:1.1rem;font-weight:400;margin-bottom:0.15rem}
+.at .by{font-size:0.7rem;color:var(--sg);letter-spacing:0.05em}
+.at .ag{display:inline-block;margin-top:0.4rem;font-size:0.63rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--am);border-bottom:1px solid rgba(200,146,59,0.25);padding-bottom:1px}
+.state-msg{padding:5rem 0;text-align:center;color:var(--sg);font-size:0.85rem;letter-spacing:0.06em;grid-column:1/-1;line-height:2}
+.loader{display:inline-block;width:18px;height:18px;border:1px solid rgba(34,32,28,0.12);border-top-color:var(--am);border-radius:50%;animation:spin 0.8s linear infinite;vertical-align:middle;margin-right:0.5rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* NITON D'OR */
+.niton-teaser{min-height:calc(100vh - 64px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:5rem 5vw;background:var(--cb)}
+.eyebrow{font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--sg);margin-bottom:2.5rem}
+.niton-teaser h2{font-family:var(--serif);font-size:clamp(3rem,6vw,5.5rem);font-weight:300;line-height:1.05;margin-bottom:1rem;max-width:700px}
+.niton-teaser h2 em{font-style:italic;color:var(--am)}
+.niton-teaser .sub{font-size:0.95rem;color:rgba(34,32,28,0.5);max-width:440px;margin:0 auto 3.5rem;line-height:1.9}
+.prizes{display:flex;gap:3rem;justify-content:center;margin-bottom:4rem;flex-wrap:wrap;align-items:center}
+.prize .val{font-family:var(--serif);font-size:2.8rem;font-weight:300;color:var(--am);line-height:1}
+.prize .rank{font-size:0.65rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--sg);margin-top:0.4rem}
+.prize-sep{width:1px;height:60px;background:rgba(34,32,28,0.1)}
+.cats{display:flex;gap:1.5rem;justify-content:center;margin-bottom:4rem;flex-wrap:wrap}
+.cat-pill{padding:0.5rem 1.5rem;border:1px solid rgba(34,32,28,0.15);font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(34,32,28,0.5)}
+.cat-pill strong{display:block;font-size:0.65rem;color:var(--sg);margin-top:0.2rem;font-weight:300}
+.coming-soon{display:inline-block;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--sg);border:1px solid rgba(168,176,162,0.4);padding:0.3rem 0.9rem;margin-bottom:3rem}
+.notify-label{font-size:0.75rem;color:var(--sg);margin-bottom:1.5rem;letter-spacing:0.06em}
+.notify-form{display:flex;max-width:380px;margin:0 auto}
+.notify-form input{flex:1;border:1px solid rgba(34,32,28,0.2);border-right:none;background:var(--cr);padding:0.8rem 1rem;font-family:var(--sans);font-size:0.85rem;color:var(--ink);outline:none;font-weight:300}
+.notify-form input:focus{border-color:var(--am)}
+.notify-form button{background:var(--ink);color:var(--cb);border:none;padding:0.8rem 1.5rem;font-family:var(--sans);font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;font-weight:400;transition:background 0.2s;white-space:nowrap}
+.notify-form button:hover{background:var(--am)}
+
+/* À PROPOS */
+.ab{display:grid;grid-template-columns:1.3fr 1fr;gap:8vw;padding:5rem 5vw;border-bottom:1px solid rgba(34,32,28,0.08)}
+.ab h2{font-family:var(--serif);font-size:3rem;font-weight:300;line-height:1.08;margin-bottom:2.5rem}
+.ab h2 em{font-style:italic;color:var(--am)}
+.ab p{color:rgba(34,32,28,0.58);margin-bottom:1.2rem;font-size:0.93rem;line-height:1.85}
+.as .ast{border-top:1px solid rgba(34,32,28,0.1);padding:1.7rem 0}
+.ast .n{font-family:var(--serif);font-size:3rem;font-weight:300;color:var(--am);line-height:1}
+.ast .l{font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--sg);margin-top:0.35rem}
+.av{display:grid;grid-template-columns:repeat(3,1fr);gap:4rem;padding:5rem 5vw 6rem;background:var(--cb)}
+.av .n-acc{font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--am);margin-bottom:0.8rem}
+.av h3{font-family:var(--serif);font-size:1.35rem;font-weight:400;margin-bottom:0.9rem;line-height:1.2}
+.av p{font-size:0.87rem;color:rgba(34,32,28,0.53);line-height:1.85}
+.btn-a{display:inline-block;background:var(--am);color:var(--cb);padding:0.85rem 2.2rem;font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;border:none;font-family:var(--sans);font-weight:400;transition:background 0.2s;margin-top:1.5rem}
+.btn-a:hover{background:#b07e2e}
+
+/* SOUMETTRE */
+.sl{display:grid;grid-template-columns:1fr 1.5fr;gap:8vw;padding:5rem 5vw 6rem}
+.sl h2{font-family:var(--serif);font-size:2.7rem;font-weight:300;line-height:1.08;margin-bottom:1.5rem}
+.sl h2 em{font-style:italic;color:var(--am)}
+.sl .sp{font-size:0.93rem;color:rgba(34,32,28,0.53);line-height:1.85;margin-bottom:1rem}
+.steps{margin-top:2.5rem}
+.step{display:flex;gap:1.2rem;margin-bottom:1.5rem}
+.sn{width:26px;height:26px;border:1px solid var(--am);color:var(--am);display:flex;align-items:center;justify-content:center;font-size:0.7rem;flex-shrink:0;font-family:var(--serif)}
+.st{font-size:0.87rem;color:rgba(34,32,28,0.53);padding-top:3px;line-height:1.7}
+.fw{background:var(--cb);padding:2.8rem;border:1px solid rgba(34,32,28,0.07)}
+.fg{margin-bottom:1.7rem}
+.fg label{display:block;font-size:0.63rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--sg);margin-bottom:0.65rem;font-weight:400}
+.fg input,.fg textarea,.fg select{width:100%;border:none;border-bottom:1px solid rgba(34,32,28,0.14);background:none;padding:0.45rem 0;font-family:var(--sans);font-size:0.9rem;color:var(--ink);outline:none;transition:border-color 0.2s;font-weight:300;-webkit-appearance:none}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-bottom-color:var(--am)}
+.fg textarea{resize:vertical;min-height:70px}
+.fr2{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.uz{border:1px dashed rgba(34,32,28,0.16);padding:2rem;text-align:center;cursor:pointer;transition:border-color 0.2s;margin-top:0.3rem}
+.uz:hover{border-color:var(--am)}
+.uz strong{display:block;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(34,32,28,0.45);margin-bottom:0.3rem;font-weight:400}
+.uz p{font-size:0.78rem;color:rgba(34,32,28,0.3)}
+.sb{width:100%;background:var(--ink);color:var(--cb);border:none;padding:1rem;font-family:var(--sans);font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;margin-top:1.5rem;font-weight:400;transition:background 0.2s}
+.sb:hover{background:var(--am)}
+.notice{font-size:0.75rem;color:rgba(34,32,28,0.35);margin-top:1rem;line-height:1.6;text-align:center}
+
+footer{background:var(--ink);color:rgba(252,251,248,0.4);padding:2.2rem 5vw;display:flex;align-items:center;justify-content:space-between;font-size:0.7rem;letter-spacing:0.06em}
+.fl{font-family:var(--serif);font-size:1.05rem;color:rgba(252,251,248,0.65);font-weight:300;cursor:pointer}
+.fl em{color:var(--am);font-style:italic}
+
+@media(max-width:768px){
+  nav{padding:0 1.5rem}
+  .nav-links{gap:1rem}
+  .nav-links a{font-size:0.6rem;letter-spacing:0.08em}
+  .gh,.gf,.gg{padding-left:1.5rem;padding-right:1.5rem}
+  .gg{grid-template-columns:repeat(2,1fr);gap:1.5rem}
+  .ab{grid-template-columns:1fr;gap:3rem;padding:3rem 1.5rem}
+  .av{grid-template-columns:1fr;gap:2.5rem;padding:3rem 1.5rem}
+  .sl{grid-template-columns:1fr;gap:3rem;padding:3rem 1.5rem}
+  .prizes{gap:1.5rem}
+  .prize-sep{display:none}
+  footer{flex-direction:column;gap:0.8rem;text-align:center}
+}
+</style>
 </head>
-
 <body>
 
 <nav>
-  <div class="logo">La <em>Nitonnerie</em></div>
+  <div class="logo" onclick="go('g')">La <em>Nitonnerie</em></div>
+  <ul class="nav-links">
+    <li><a onclick="go('g')" id="ng">Galerie</a></li>
+    <li><a onclick="go('n')" id="nn">Le Niton d'or</a></li>
+    <li><a onclick="go('a')" id="na">À propos</a></li>
+    <li><a onclick="go('s')" id="ns">Soumettre une œuvre</a></li>
+  </ul>
 </nav>
 
-<section class="gallery">
-
-  <div class="header">
-    <h1>La Galerie</h1>
-    <div id="count-label">Chargement…</div>
+<!-- GALERIE -->
+<div id="pg-g" class="pg">
+  <div class="gh">
+    <h2>La Galerie</h2>
+    <span id="count-label"><span class="loader"></span> Chargement…</span>
   </div>
-
-  <div class="filters">
+  <div class="gf">
     <button class="fb on" data-f="all">Tout</button>
-    <button class="fb" data-f="Petits Nitons">Petit Niton</button>
-    <button class="fb" data-f="Grands Nitons">Grand Niton</button>
+    <button class="fb" data-f="Petits Nitons">Petits Nitons · 3–6 ans</button>
+    <button class="fb" data-f="Grands Nitons">Grands Nitons · 7–12 ans</button>
+    <button class="fb" data-f="Peinture">Peinture</button>
+    <button class="fb" data-f="Aquarelle">Aquarelle</button>
+    <button class="fb" data-f="Dessin">Dessin</button>
+    <button class="fb" data-f="Collage">Collage</button>
+    <button class="fb" data-f="Autre">Autre</button>
+  </div>
+  <div class="gg" id="gg">
+    <div class="state-msg"><span class="loader"></span> Chargement des œuvres…</div>
+  </div>
+  <footer>
+    <span class="fl" onclick="go('g')">La <em>Nitonnerie</em></span>
+    <span>Galerie d'art enfantin &nbsp;·&nbsp; 2025</span>
+  </footer>
+</div>
+
+<!-- NITON D'OR -->
+<div id="pg-n" class="pg">
+  <div class="niton-teaser">
+    <div class="eyebrow">Concours d'art plastique</div>
+    <div class="coming-soon">Bientôt</div>
+    <h2>Le <em>Niton d'or</em></h2>
+    <p class="sub">Le premier grand concours d'art plastique ouvert aux jeunes artistes de la Nitonnerie. Deux catégories, trois podiums, des prix exceptionnels.</p>
+    <div class="cats">
+      <div class="cat-pill">Petits Nitons<strong>3 – 6 ans</strong></div>
+      <div class="cat-pill">Grands Nitons<strong>7 – 12 ans</strong></div>
+    </div>
+    <div class="prizes">
+      <div class="prize"><div class="val">2 000 €</div><div class="rank">1er prix</div></div>
+      <div class="prize-sep"></div>
+      <div class="prize"><div class="val">1 000 €</div><div class="rank">2e prix</div></div>
+      <div class="prize-sep"></div>
+      <div class="prize"><div class="val">500 €</div><div class="rank">3e prix</div></div>
+      <div class="prize-sep"></div>
+      <div class="prize"><div class="val" style="font-size:1.4rem;line-height:1.3">Goodies<br>beaux-arts</div><div class="rank">Mentions</div></div>
+    </div>
+    <p class="notify-label">Être notifié à l'ouverture des inscriptions</p>
+    <div class="notify-form">
+      <input type="email" placeholder="votre@email.com" id="notify-email">
+      <button onclick="handleNotify()">Me prévenir</button>
+    </div>
+  </div>
+  <footer>
+    <span class="fl" onclick="go('g')">La <em>Nitonnerie</em></span>
+    <span>Galerie d'art enfantin &nbsp;·&nbsp; 2025</span>
+  </footer>
+</div>
+
+<!-- À PROPOS -->
+<div id="pg-a" class="pg">
+
+  <!-- STATS BANDE -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid rgba(34,32,28,0.08)">
+    <div style="padding:2.5rem 5vw;border-right:1px solid rgba(34,32,28,0.08)">
+      <div class="n" id="stat-oeuvres" style="font-family:var(--serif);font-size:2.8rem;font-weight:300;color:var(--am);line-height:1">—</div>
+      <div style="font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--sg);margin-top:0.35rem">Œuvres exposées</div>
+    </div>
+    <div style="padding:2.5rem 3vw;border-right:1px solid rgba(34,32,28,0.08)">
+      <div class="n" id="stat-artistes" style="font-family:var(--serif);font-size:2.8rem;font-weight:300;color:var(--am);line-height:1">—</div>
+      <div style="font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--sg);margin-top:0.35rem">Jeunes artistes</div>
+    </div>
+    <div style="padding:2.5rem 3vw;border-right:1px solid rgba(34,32,28,0.08)">
+      <div style="font-family:var(--serif);font-size:2.8rem;font-weight:300;color:var(--am);line-height:1">3 – 12</div>
+      <div style="font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--sg);margin-top:0.35rem">Ans</div>
+    </div>
+    <div style="padding:2.5rem 3vw">
+      <div style="font-family:var(--serif);font-size:2.8rem;font-weight:300;color:var(--am);line-height:1">2025</div>
+      <div style="font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--sg);margin-top:0.35rem">Année de création</div>
+    </div>
   </div>
 
-  <!-- ✔️ CONTENEUR CORRECT POUR TON JS -->
-  <div id="gg"></div>
+  <!-- MANIFESTE -->
+  <div style="max-width:780px;margin:0 auto;padding:6rem 5vw 5rem">
+    <div style="font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--sg);margin-bottom:2.5rem">Manifeste</div>
+    <h2 style="font-family:var(--serif);font-size:clamp(2.2rem,4vw,3.4rem);font-weight:300;line-height:1.08;margin-bottom:3.5rem">
+      L'art des enfants est<br><em style="font-style:italic;color:var(--am)">une grâce rare.</em>
+    </h2>
 
-</section>
+    <p style="font-family:var(--serif);font-size:1.25rem;font-weight:300;line-height:1.85;color:rgba(34,32,28,0.82);margin-bottom:2rem">
+      L'innocence, la spontanéité, la créativité sans limite des enfants sont aux antipodes de ce qui agite le monde en ce moment — les conflits, la marchandisation, la dépendance croissante à l'intelligence artificielle et aux nœuds informatiques. Les enfants n'ont pas (encore) recours à l'IA&nbsp;; leur imagination est d'une autre nature qu'un data center. Ils ont la chance inestimable de connaître cet état de transe qui caractérise l'acte créateur authentique.
+    </p>
 
-<script src="script.js"></script>
+    <p style="font-family:var(--serif);font-size:1.25rem;font-weight:300;line-height:1.85;color:rgba(34,32,28,0.82);margin-bottom:2rem">
+      Tous les enfants n'ont pas forcément un tempérament artistique, mais tous, sans exception, peuvent connaître à un moment ou à un autre une inspiration exceptionnelle et produire — sans même s'en rendre compte — une œuvre d'art inédite. Comme chez les adultes, ces circonstances sont rares, et par conséquent précieuses.
+    </p>
 
+    <p style="font-family:var(--serif);font-size:1.25rem;font-weight:300;line-height:1.85;color:rgba(34,32,28,0.82);margin-bottom:3.5rem">
+      La Nitonnerie propose un espace virtuel où partager ces créations. Les parents sont libres de soumettre ce qu'ils jugeront digne d'intérêt. Nous nous accordons la liberté de sélectionner ce qui nous semblera pertinent — et de ne pas publier les créations manquant d'originalité, inabouties, ou dépourvues de ce quelque chose qui caractérise une véritable œuvre&nbsp;: cet espèce de souffle. Cette discrimination nécessaire doit être acceptée sans susceptibilité&nbsp;: absence de publication ne veut pas dire, bien évidemment, absence de talent.
+    </p>
+
+    <div style="border-top:1px solid rgba(34,32,28,0.1);padding-top:2.5rem;display:flex;align-items:center;gap:2rem;flex-wrap:wrap">
+      <button class="btn-a" onclick="go('s')">Soumettre une œuvre</button>
+      <span style="font-size:0.75rem;color:var(--sg);letter-spacing:0.06em">La Nitonnerie, 2025</span>
+    </div>
+  </div>
+
+  <footer>
+    <span class="fl" onclick="go('g')">La <em>Nitonnerie</em></span>
+    <span>Galerie d'art enfantin &nbsp;·&nbsp; 2025</span>
+  </footer>
+</div>
+
+<!-- SOUMETTRE -->
+<div id="pg-s" class="pg">
+  <div class="sl">
+    <div>
+      <h2>Exposez l'œuvre de votre <em>enfant</em></h2>
+      <p class="sp">Toutes les créations sont les bienvenues. Remplissez le formulaire et votre œuvre sera examinée puis publiée dans la galerie sous 48 heures.</p>
+      <div class="steps">
+        <div class="step"><div class="sn">1</div><div class="st">Remplissez les informations de l'enfant et décrivez l'œuvre</div></div>
+        <div class="step"><div class="sn">2</div><div class="st">Téléchargez une photo nette de l'œuvre (jpg, png — max 10 Mo)</div></div>
+        <div class="step"><div class="sn">3</div><div class="st">Nous examinons chaque soumission avec soin sous 48 h</div></div>
+        <div class="step"><div class="sn">4</div><div class="st">L'œuvre est publiée dans la galerie, le parent notifié par email</div></div>
+      </div>
+      <p class="sp" style="margin-top:2rem;font-size:0.82rem">Les œuvres sélectionnées seront éligibles au concours <em style="font-family:var(--serif);color:var(--am)">Le Niton d'or</em>.</p>
+    </div>
+    <div class="fw">
+      <div class="fr2">
+        <div class="fg"><label>Prénom de l'enfant</label><input type="text" placeholder="Léa" id="f-prenom"></div>
+        <div class="fg"><label>Âge</label><input type="number" placeholder="7" min="3" max="12" id="f-age"></div>
+      </div>
+      <div class="fg"><label>Titre de l'œuvre</label><input type="text" placeholder="Mon chat dans le jardin" id="f-titre"></div>
+      <div class="fg"><label>Technique</label>
+        <select id="f-technique">
+          <option value="">Choisir…</option>
+          <option>Peinture</option>
+          <option>Dessin au crayon</option>
+          <option>Feutres / crayons de couleur</option>
+          <option>Collage</option>
+          <option>Aquarelle</option>
+          <option>Sculpture photographiée</option>
+          <option>Autre medium / support</option>
+        </select>
+      </div>
+      <div class="fg"><label>Photo de l'œuvre</label>
+        <div class="uz" onclick="this.querySelector('input').click()">
+          <strong>Cliquer pour télécharger</strong>
+          <p>JPG, PNG ou HEIC &nbsp;·&nbsp; max 10 Mo</p>
+          <input type="file" accept="image/*" id="f-photo" style="display:none">
+        </div>
+      </div>
+      <div class="fg"><label>Email du parent / tuteur</label><input type="email" placeholder="parent@email.com" id="f-email"></div>
+      <div class="fg"><label>Message (optionnel)</label><textarea placeholder="Un mot sur cette œuvre, l'inspiration de l'enfant…" id="f-message"></textarea></div>
+      <button class="sb" onclick="handleSubmit()">Envoyer la soumission</button>
+      <p class="notice">En soumettant, vous acceptez que l'œuvre puisse être publiée sur La Nitonnerie.<br>Aucune donnée personnelle n'est partagée à des tiers.</p>
+    </div>
+  </div>
+  <footer>
+    <span class="fl" onclick="go('g')">La <em>Nitonnerie</em></span>
+    <span>Galerie d'art enfantin &nbsp;·&nbsp; 2025</span>
+  </footer>
+</div>
+
+<script>
+const AT_TOKEN   = 'patXBTkvRqR87CFKO.92a2f3540374de1fca10cf9899844e705358fe441c5bf5d56ff2e1328db36621';
+const AT_BASE    = 'appCRGgKOrUSJYWJ8';
+const TBL_OEUVRES  = 'tbl9J6znXf0FuiW7n';
+const TBL_ARTISTES = 'tblAG4Zi0pW6ZxR3a';
+
+let ALL_WORKS  = [];
+let ARTISTES   = {};
+let curFilter  = 'all';
+
+const HEADERS = { Authorization: 'Bearer ' + AT_TOKEN };
+
+async function fetchAll(tableId, fieldNames) {
+  let records = [];
+  let offset = '';
+  do {
+    const params = fieldNames.map(f => 'fields[]=' + encodeURIComponent(f)).join('&');
+    const url = 'https://api.airtable.com/v0/' + AT_BASE + '/' + tableId + '?' + params + (offset ? '&offset=' + offset : '');
+    const res = await fetch(url, { headers: HEADERS });
+    if (!res.ok) throw new Error('Airtable error ' + res.status);
+    const data = await res.json();
+    records = records.concat(data.records);
+    offset = data.offset || '';
+  } while (offset);
+  return records;
+}
+
+async function loadData() {
+  try {
+    // 1. Charger les artistes (enfants) → dictionnaire id → {prénom, âge}
+    const artRecs = await fetchAll(TBL_ARTISTES, ['Prénom', 'Âge']);
+    artRecs.forEach(r => {
+      ARTISTES[r.id] = {
+        prenom: r.fields['Prénom'] || '',
+        age:    r.fields['Âge']    || ''
+      };
+    });
+
+    // 2. Charger toutes les oeuvres, filtrer cote JS sur Publier
+    const PHOTO_FIELD = "Photo de l'œuvre";
+    const oeuvreRecs = await fetchAll(TBL_OEUVRES, ["Titre","Technique","Catégorie","Publier","Artistes",PHOTO_FIELD]);
+
+    ALL_WORKS = oeuvreRecs
+      .filter(r => r.fields['Publier'] === true)
+      .map(r => {
+      const f = r.fields;
+      // Lien vers artiste (champ lié — tableau d'IDs)
+      const artisteId = f['Artistes'] ? f['Artistes'][0] : null;
+      const artiste   = artisteId ? ARTISTES[artisteId] : null;
+      return {
+        id:        r.id,
+        titre:     f['Titre']              || 'Sans titre',
+        technique: f['Technique']          || '',
+        categorie: f['Catégorie']          || '',
+        photo:     f[PHOTO_FIELD] ? f[PHOTO_FIELD][0].url : null,
+        prenom:    artiste ? artiste.prenom : '',
+        age:       artiste ? artiste.age    : ''
+      };
+    });
+
+    renderGal(curFilter);
+    updateStats();
+
+  } catch(e) {
+    console.error(e);
+    document.getElementById('gg').innerHTML =
+      '<div class="state-msg">Impossible de charger les œuvres.<br><small style="opacity:0.5">' + e.message + '</small></div>';
+    document.getElementById('count-label').textContent = '';
+  }
+}
+
+function card(w) {
+  const isPetit = w.categorie === 'Petits Nitons';
+  const img = w.photo
+    ? `<img src="${w.photo}" alt="${w.titre}" loading="lazy">`
+    : `<div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>`;
+  const badge = w.categorie
+    ? `<span class="cat-badge ${isPetit ? 'badge-p' : 'badge-g'}">${w.categorie}</span>` : '';
+  const meta  = [w.prenom, w.technique].filter(Boolean).join(' · ');
+  return `<div class="ac">
+    <div class="ai">${img}<div class="ao"></div>${badge}</div>
+    <div class="at">
+      <h4>${w.titre}</h4>
+      ${meta ? `<div class="by">${meta}</div>` : ''}
+      ${w.age ? `<span class="ag">${w.age} ans</span>` : ''}
+    </div>
+  </div>`;
+}
+
+function renderGal(f) {
+  curFilter = f;
+  const list = f === 'all' ? ALL_WORKS
+    : ALL_WORKS.filter(w => w.categorie === f || w.technique === f);
+  if (!list.length) {
+    document.getElementById('gg').innerHTML =
+      '<div class="state-msg">Aucune œuvre dans cette catégorie pour le moment.</div>';
+  } else {
+    document.getElementById('gg').innerHTML = list.map(card).join('');
+  }
+  const n = list.length;
+  document.getElementById('count-label').textContent =
+    n + ' œuvre' + (n > 1 ? 's' : '') + ' exposée' + (n > 1 ? 's' : '');
+}
+
+function updateStats() {
+  document.getElementById('stat-oeuvres').textContent  = ALL_WORKS.length;
+  const prenoms = new Set(ALL_WORKS.map(w => w.prenom).filter(Boolean));
+  document.getElementById('stat-artistes').textContent = prenoms.size;
+}
+
+document.querySelectorAll('.fb').forEach(b => {
+  b.addEventListener('click', function() {
+    document.querySelectorAll('.fb').forEach(x => x.classList.remove('on'));
+    this.classList.add('on');
+    renderGal(this.dataset.f);
+  });
+});
+
+function go(p) {
+  document.querySelectorAll('.pg').forEach(x => x.classList.remove('on'));
+  document.querySelectorAll('.nav-links a').forEach(x => x.classList.remove('on'));
+  document.getElementById('pg-' + p).classList.add('on');
+  document.getElementById('n'  + p).classList.add('on');
+  window.scrollTo(0, 0);
+}
+
+function handleNotify() {
+  const v = document.getElementById('notify-email').value;
+  if (v && v.includes('@')) {
+    alert('Merci\u00a0! Vous serez notifié(e) dès l\'ouverture des inscriptions au Niton d\'or.');
+    document.getElementById('notify-email').value = '';
+  } else {
+    alert('Merci d\'entrer une adresse email valide.');
+  }
+}
+
+function handleSubmit() {
+  const prenom = document.getElementById('f-prenom').value.trim();
+  const age    = document.getElementById('f-age').value;
+  const titre  = document.getElementById('f-titre').value.trim();
+  const tech   = document.getElementById('f-technique').value;
+  const email  = document.getElementById('f-email').value.trim();
+  if (!prenom || !age || !titre || !tech || !email) {
+    alert('Merci de remplir tous les champs obligatoires.');
+    return;
+  }
+  alert('Merci\u00a0! La soumission de « ' + titre + ' » a bien été envoyée. Nous la traiterons sous 48\u00a0h.');
+}
+
+go('g');
+loadData();
+</script>
 </body>
 </html>
