@@ -1,189 +1,39 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>La Nitonnerie — Galerie d'art enfantin</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta charset="UTF-8">
+  <title>La Nitonnerie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <nav>
-    <div class="logo" onclick="go('g')">La <em>Nitonnerie</em></div>
-    <ul class="nav-links">
-      <li><a onclick="go('g')" id="ng" class="on">Galerie</a></li>
-      <li><a onclick="go('n')" id="nn">Le Niton d'or</a></li>
-      <li><a onclick="go('a')" id="na">À propos</a></li>
-      <li><a onclick="go('s')" id="ns">Soumettre une œuvre</a></li>
-    </ul>
-  </nav>
 
-  <!-- GALERIE -->
-  <section id="pg-g" class="pg on">
-    <div class="gh">
-      <h2>La Galerie</h2>
-      <span id="count-label">Chargement…</span>
-    </div>
+<nav>
+  <div class="logo">La <em>Nitonnerie</em></div>
+</nav>
 
-    <div class="gf">
-      <button class="fb on" data-f="all">Tout</button>
-      <button class="fb" data-f="Petits Nitons">">Petit Niton · 3–6 ans</button>
-      <button class="fb" data-f="Grands Nitons">">Grand Niton · 7–12 ans</button>
-      <button class="fb" data-f="Peinture">Peinture</button>
-      <button class="fb" data-f="Aquarelle">Aquarelle</button>
-      <button class="fb" data-f="Dessin">Dessin</button>
-      <button class="fb" data-f="Collage">Collage</button>
-      <button class="fb" data-f="Autre">Autre</button>
-    </div>
+<section class="gallery">
 
-      <div class="gg" id="gg"></div>
-      <div class="state-msg">Chargement des œuvres…</div>
-    </div>
+  <div class="header">
+    <h1>La Galerie</h1>
+    <div id="count">Chargement…</div>
+  </div>
 
-    <footer>
-      <span class="fl" onclick="go('g')">La <em>Nitonnerie</em></span>
-      <span>Galerie d'art enfantin · 2025</span>
-    </footer>
-  </section>
+  <div class="filters">
+    <button data-f="all" class="active">Tout</button>
+    <button data-f="Petits Nitons">Petit Niton</button>
+    <button data-f="Grands Nitons">Grand Niton</button>
+  </div>
 
-  <!-- NITON D'OR -->
-  <section id="pg-n" class="pg">
-    <div class="niton-teaser">
-      <div class="eyebrow">Concours d'art plastique</div>
-      <div class="coming-soon">Bientôt</div>
-      <h2>Le <em>Niton d'or</em></h2>
-      <p class="sub">
-        Le premier grand concours d'art plastique ouvert aux jeunes artistes de la Nitonnerie.
-      </p>
+  <div id="gallery"></div>
 
-      <div class="cats">
-        <div class="cat-pill">Petit Niton<strong>3 – 6 ans</strong></div>
-        <div class="cat-pill">Grand Niton<strong>7 – 12 ans</strong></div>
-      </div>
+</section>
 
-      <div class="prizes">
-        <div class="prize"><div class="val">2 000 €</div><div class="rank">1er prix</div></div>
-        <div class="prize-sep"></div>
-        <div class="prize"><div class="val">1 000 €</div><div class="rank">2e prix</div></div>
-        <div class="prize-sep"></div>
-        <div class="prize"><div class="val">500 €</div><div class="rank">3e prix</div></div>
-      </div>
-    </div>
+<script src="script.js"></script>
 
-    <footer>
-      <span class="fl" onclick="go('g')">La <em>Nitonnerie</em></span>
-      <span>Galerie d'art enfantin · 2025</span>
-    </footer>
-  </section>
-
-  <!-- À PROPOS -->
-  <section id="pg-a" class="pg">
-    <div class="stats-band">
-      <div class="stat-box">
-        <div class="stat-n" id="stat-oeuvres">—</div>
-        <div class="stat-l">Œuvres exposées</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-n" id="stat-artistes">—</div>
-        <div class="stat-l">Jeunes artistes</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-n">3 – 12</div>
-        <div class="stat-l">Ans</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-n">2025</div>
-        <div class="stat-l">Année de création</div>
-      </div>
-    </div>
-
-    <div class="manifesto">
-      <div class="eyebrow">Manifeste</div>
-      <h2>L'art des enfants est <em>une grâce rare.</em></h2>
-
-      <p>
-        La Nitonnerie accueille les créations d’enfants comme des œuvres à part entière :
-        avec attention, exigence et douceur.
-      </p>
-      <p>
-        Toutes les soumissions ne sont pas publiées. Cette sélection fait partie du projet :
-        elle donne à la galerie sa cohérence, sa tenue et sa valeur.
-      </p>
-
-      <div class="manifesto-cta">
-        <button class="btn-a" onclick="go('s')">Soumettre une œuvre</button>
-      </div>
-    </div>
-
-    <footer>
-      <span class="fl" onclick="go('g')">La <em>Nitonnerie</em></span>
-      <span>Galerie d'art enfantin · 2025</span>
-    </footer>
-  </section>
-
-  <!-- SOUMETTRE -->
-  <section id="pg-s" class="pg">
-    <div class="sl">
-      <div>
-        <h2>Exposez l'œuvre de votre <em>enfant</em></h2>
-        <p class="sp">
-          Remplissez le formulaire et votre œuvre sera examinée avant publication.
-        </p>
-
-        <div class="steps">
-          <div class="step"><div class="sn">1</div><div class="st">Informations sur l’enfant et l’œuvre</div></div>
-          <div class="step"><div class="sn">2</div><div class="st">Téléchargement d’une photo nette</div></div>
-          <div class="step"><div class="sn">3</div><div class="st">Examen éditorial</div></div>
-          <div class="step"><div class="sn">4</div><div class="st">Publication si sélectionnée</div></div>
-        </div>
-      </div>
-
-      <div class="fw">
-        <div class="fr2">
-          <div class="fg">
-            <label>Prénom de l'enfant</label>
-            <input type="text" placeholder="Léa">
-          </div>
-          <div class="fg">
-            <label>Âge</label>
-            <input type="number" placeholder="7" min="3" max="12">
-          </div>
-        </div>
-
-        <div class="fg">
-          <label>Titre de l'œuvre</label>
-          <input type="text" placeholder="Mon chat dans le jardin">
-        </div>
-
-        <div class="fg">
-          <label>Technique</label>
-          <select>
-            <option>Choisir…</option>
-            <option>Peinture</option>
-            <option>Aquarelle</option>
-            <option>Dessin</option>
-            <option>Collage</option>
-            <option>Autre</option>
-          </select>
-        </div>
-
-        <div class="fg">
-          <label>Email du parent / tuteur</label>
-          <input type="email" placeholder="parent@email.com">
-        </div>
-
-        <button class="sb" type="button">Envoyer la soumission</button>
-      </div>
-    </div>
-
-    <footer>
-      <span class="fl" onclick="go('g')">La <em>Nitonnerie</em></span>
-      <span>Galerie d'art enfantin · 2025</span>
-    </footer>
-  </section>
-
-  <script src="script.js"></script>
 </body>
 </html>
