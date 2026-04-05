@@ -1,21 +1,39 @@
+const AIRTABLE_TOKEN = "patXBTkvRqR87CFKO";
+const AIRTABLE_BASE_ID = "appCRGgKOrUSJYWJ8";
+const AIRTABLE_TABLE_OEUVRES = "tbl9J6znXf0FuiW7n";
+
 let ALL_WORKS = [];
 let curFilter = "all";
 
 async function loadData() {
   try {
-    const res = await fetch("/.netlify/functions/get-works");
-    if (!res.ok) throw new Error("Impossible de charger les œuvres");
+    const params = new URLSearchParams();
+    ["Titre", "Technique", "Photo de l'œuvre", "Catégorie", "Publier"].forEach((f) =>
+      params.append("fields[]", f)
+    );
+    params.append("filterByFormula", "{Publier}=1");
+
+    const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(AIRTABLE_TABLE_OEUVRES)}?${params.toString()}`;
+
+    const res = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${AIRTABLE_TOKEN}`,
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Erreur Airtable ${res.status}`);
+    }
 
     const data = await res.json();
 
     ALL_WORKS = (data.records || []).map((item) => {
       const f = item.fields || {};
-
       return {
         titre: f["Titre"] || "Sans titre",
         technique: f["Technique"] || "",
         categorie: f["Catégorie"] || "",
-        photo: f["Photo de l'œuvre"]?.[0]?.url || ""
+        photo: f["Photo de l'œuvre"]?.[0]?.url || "",
       };
     });
 
@@ -35,7 +53,7 @@ function card(w) {
   const isPetit = w.categorie === "Petits Nitons";
 
   const badge = w.categorie
-    ? `<span class="cat-badge ${isPetit ? "badge-p" : "badge-g"}">${w.categorie}</span>`
+    ? `<span class="cat-badge ${isPetit ? "badge-p" : "badge-g"}">${escapeHtml(w.categorie)}</span>`
     : "";
 
   const photo = w.photo
@@ -60,13 +78,14 @@ function card(w) {
 function renderGal(filter) {
   curFilter = filter;
 
-  const list = filter === "all"
-    ? ALL_WORKS
-    : ALL_WORKS.filter((w) => {
-        const technique = (w.technique || "").toLowerCase();
-        const target = String(filter).toLowerCase();
-        return w.categorie === filter || technique === target;
-      });
+  const list =
+    filter === "all"
+      ? ALL_WORKS
+      : ALL_WORKS.filter((w) => {
+          const technique = (w.technique || "").toLowerCase();
+          const target = String(filter).toLowerCase();
+          return w.categorie === filter || technique === target;
+        });
 
   document.getElementById("gg").innerHTML = list.length
     ? list.map(card).join("")
@@ -78,10 +97,7 @@ function renderGal(filter) {
 
 function updateStats() {
   document.getElementById("stat-oeuvres").textContent = ALL_WORKS.length;
-
-  const petits = ALL_WORKS.filter((w) => w.categorie === "Petits Nitons").length;
-  const grands = ALL_WORKS.filter((w) => w.categorie === "Grands Nitons").length;
-  document.getElementById("stat-artistes").textContent = `${petits + grands}`;
+  document.getElementById("stat-artistes").textContent = "—";
 }
 
 document.addEventListener("click", (e) => {
