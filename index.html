@@ -23,7 +23,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--cb);border-
 .pg{display:none;padding-top:64px;min-height:100vh}
 .pg.on{display:block}
 
-/* GALERIE */
 .gh{padding:4rem 5vw 2rem;display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid rgba(34,32,28,0.08)}
 .gh h2{font-family:var(--serif);font-size:2.6rem;font-weight:300}
 .gh span{font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--sg)}
@@ -50,7 +49,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--cb);border-
 .loader{display:inline-block;width:18px;height:18px;border:1px solid rgba(34,32,28,0.12);border-top-color:var(--am);border-radius:50%;animation:spin 0.8s linear infinite;vertical-align:middle;margin-right:0.5rem}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* NITON D'OR */
 .niton-teaser{min-height:calc(100vh - 64px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:5rem 5vw;background:var(--cb)}
 .eyebrow{font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--sg);margin-bottom:2.5rem}
 .niton-teaser h2{font-family:var(--serif);font-size:clamp(3rem,6vw,5.5rem);font-weight:300;line-height:1.05;margin-bottom:1rem;max-width:700px}
@@ -71,22 +69,20 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--cb);border-
 .notify-form button{background:var(--ink);color:var(--cb);border:none;padding:0.8rem 1.5rem;font-family:var(--sans);font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;font-weight:400;transition:background 0.2s;white-space:nowrap}
 .notify-form button:hover{background:var(--am)}
 
-/* À PROPOS */
-.ab{display:grid;grid-template-columns:1.3fr 1fr;gap:8vw;padding:5rem 5vw;border-bottom:1px solid rgba(34,32,28,0.08)}
-.ab h2{font-family:var(--serif);font-size:3rem;font-weight:300;line-height:1.08;margin-bottom:2.5rem}
-.ab h2 em{font-style:italic;color:var(--am)}
-.ab p{color:rgba(34,32,28,0.58);margin-bottom:1.2rem;font-size:0.93rem;line-height:1.85}
-.as .ast{border-top:1px solid rgba(34,32,28,0.1);padding:1.7rem 0}
-.ast .n{font-family:var(--serif);font-size:3rem;font-weight:300;color:var(--am);line-height:1}
-.ast .l{font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--sg);margin-top:0.35rem}
-.av{display:grid;grid-template-columns:repeat(3,1fr);gap:4rem;padding:5rem 5vw 6rem;background:var(--cb)}
-.av .n-acc{font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--am);margin-bottom:0.8rem}
-.av h3{font-family:var(--serif);font-size:1.35rem;font-weight:400;margin-bottom:0.9rem;line-height:1.2}
-.av p{font-size:0.87rem;color:rgba(34,32,28,0.53);line-height:1.85}
-.btn-a{display:inline-block;background:var(--am);color:var(--cb);padding:0.85rem 2.2rem;font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;border:none;font-family:var(--sans);font-weight:400;transition:background 0.2s;margin-top:1.5rem}
+.manifeste-stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid rgba(34,32,28,0.08)}
+.stat-cell{padding:2.5rem 3vw;border-right:1px solid rgba(34,32,28,0.08)}
+.stat-cell:last-child{border-right:none}
+.stat-n{font-family:var(--serif);font-size:2.8rem;font-weight:300;color:var(--am);line-height:1}
+.stat-l{font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--sg);margin-top:0.35rem}
+.manifeste-body{max-width:780px;margin:0 auto;padding:6rem 5vw 5rem}
+.manifeste-body .eyebrow{margin-bottom:2.5rem}
+.manifeste-h{font-family:var(--serif);font-size:clamp(2.2rem,4vw,3.4rem);font-weight:300;line-height:1.08;margin-bottom:3.5rem}
+.manifeste-h em{font-style:italic;color:var(--am)}
+.manifeste-p{font-family:var(--serif);font-size:1.2rem;font-weight:300;line-height:1.85;color:rgba(34,32,28,0.82);margin-bottom:2rem}
+.manifeste-footer{border-top:1px solid rgba(34,32,28,0.1);padding-top:2.5rem;display:flex;align-items:center;gap:2rem;flex-wrap:wrap}
+.btn-a{display:inline-block;background:var(--am);color:var(--cb);padding:0.85rem 2.2rem;font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;border:none;font-family:var(--sans);font-weight:400;transition:background 0.2s}
 .btn-a:hover{background:#b07e2e}
 
-/* SOUMETTRE */
 .sl{display:grid;grid-template-columns:1fr 1.5fr;gap:8vw;padding:5rem 5vw 6rem}
 .sl h2{font-family:var(--serif);font-size:2.7rem;font-weight:300;line-height:1.08;margin-bottom:1.5rem}
 .sl h2 em{font-style:italic;color:var(--am)}
@@ -117,11 +113,10 @@ footer{background:var(--ink);color:rgba(252,251,248,0.4);padding:2.2rem 5vw;disp
 @media(max-width:768px){
   nav{padding:0 1.5rem}
   .nav-links{gap:1rem}
-  .nav-links a{font-size:0.6rem;letter-spacing:0.08em}
+  .nav-links a{font-size:0.58rem;letter-spacing:0.08em}
   .gh,.gf,.gg{padding-left:1.5rem;padding-right:1.5rem}
-  .gg{grid-template-columns:repeat(2,1fr);gap:1.5rem}
-  .ab{grid-template-columns:1fr;gap:3rem;padding:3rem 1.5rem}
-  .av{grid-template-columns:1fr;gap:2.5rem;padding:3rem 1.5rem}
+  .gg{grid-template-columns:repeat(2,1fr);gap:1.2rem}
+  .manifeste-stats{grid-template-columns:repeat(2,1fr)}
   .sl{grid-template-columns:1fr;gap:3rem;padding:3rem 1.5rem}
   .prizes{gap:1.5rem}
   .prize-sep{display:none}
@@ -145,7 +140,7 @@ footer{background:var(--ink);color:rgba(252,251,248,0.4);padding:2.2rem 5vw;disp
 <div id="pg-g" class="pg">
   <div class="gh">
     <h2>La Galerie</h2>
-    <span id="count-label"><span class="loader"></span> Chargement…</span>
+    <span id="count-label"><span class="loader"></span></span>
   </div>
   <div class="gf">
     <button class="fb on" data-f="all">Tout</button>
@@ -165,6 +160,7 @@ footer{background:var(--ink);color:rgba(252,251,248,0.4);padding:2.2rem 5vw;disp
     <span>Galerie d'art enfantin &nbsp;·&nbsp; 2025</span>
   </footer>
 </div>
+
 
 <!-- NITON D'OR -->
 <div id="pg-n" class="pg">
@@ -200,52 +196,23 @@ footer{background:var(--ink);color:rgba(252,251,248,0.4);padding:2.2rem 5vw;disp
 
 <!-- À PROPOS -->
 <div id="pg-a" class="pg">
-
-  <!-- STATS BANDE -->
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid rgba(34,32,28,0.08)">
-    <div style="padding:2.5rem 5vw;border-right:1px solid rgba(34,32,28,0.08)">
-      <div class="n" id="stat-oeuvres" style="font-family:var(--serif);font-size:2.8rem;font-weight:300;color:var(--am);line-height:1">—</div>
-      <div style="font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--sg);margin-top:0.35rem">Œuvres exposées</div>
-    </div>
-    <div style="padding:2.5rem 3vw;border-right:1px solid rgba(34,32,28,0.08)">
-      <div class="n" id="stat-artistes" style="font-family:var(--serif);font-size:2.8rem;font-weight:300;color:var(--am);line-height:1">—</div>
-      <div style="font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--sg);margin-top:0.35rem">Jeunes artistes</div>
-    </div>
-    <div style="padding:2.5rem 3vw;border-right:1px solid rgba(34,32,28,0.08)">
-      <div style="font-family:var(--serif);font-size:2.8rem;font-weight:300;color:var(--am);line-height:1">3 – 12</div>
-      <div style="font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--sg);margin-top:0.35rem">Ans</div>
-    </div>
-    <div style="padding:2.5rem 3vw">
-      <div style="font-family:var(--serif);font-size:2.8rem;font-weight:300;color:var(--am);line-height:1">2025</div>
-      <div style="font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--sg);margin-top:0.35rem">Année de création</div>
-    </div>
+  <div class="manifeste-stats">
+    <div class="stat-cell"><div class="stat-n" id="stat-oeuvres">—</div><div class="stat-l">Œuvres exposées</div></div>
+    <div class="stat-cell"><div class="stat-n" id="stat-artistes">—</div><div class="stat-l">Jeunes artistes</div></div>
+    <div class="stat-cell"><div class="stat-n">3 – 12</div><div class="stat-l">Ans</div></div>
+    <div class="stat-cell"><div class="stat-n">2025</div><div class="stat-l">Année de création</div></div>
   </div>
-
-  <!-- MANIFESTE -->
-  <div style="max-width:780px;margin:0 auto;padding:6rem 5vw 5rem">
-    <div style="font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--sg);margin-bottom:2.5rem">Manifeste</div>
-    <h2 style="font-family:var(--serif);font-size:clamp(2.2rem,4vw,3.4rem);font-weight:300;line-height:1.08;margin-bottom:3.5rem">
-      L'art des enfants est<br><em style="font-style:italic;color:var(--am)">une grâce rare.</em>
-    </h2>
-
-    <p style="font-family:var(--serif);font-size:1.25rem;font-weight:300;line-height:1.85;color:rgba(34,32,28,0.82);margin-bottom:2rem">
-      L'innocence, la spontanéité, la créativité sans limite des enfants sont aux antipodes de ce qui agite le monde en ce moment — les conflits, la marchandisation, la dépendance croissante à l'intelligence artificielle et aux nœuds informatiques. Les enfants n'ont pas (encore) recours à l'IA&nbsp;; leur imagination est d'une autre nature qu'un data center. Ils ont la chance inestimable de connaître cet état de transe qui caractérise l'acte créateur authentique.
-    </p>
-
-    <p style="font-family:var(--serif);font-size:1.25rem;font-weight:300;line-height:1.85;color:rgba(34,32,28,0.82);margin-bottom:2rem">
-      Tous les enfants n'ont pas forcément un tempérament artistique, mais tous, sans exception, peuvent connaître à un moment ou à un autre une inspiration exceptionnelle et produire — sans même s'en rendre compte — une œuvre d'art inédite. Comme chez les adultes, ces circonstances sont rares, et par conséquent précieuses.
-    </p>
-
-    <p style="font-family:var(--serif);font-size:1.25rem;font-weight:300;line-height:1.85;color:rgba(34,32,28,0.82);margin-bottom:3.5rem">
-      La Nitonnerie propose un espace virtuel où partager ces créations. Les parents sont libres de soumettre ce qu'ils jugeront digne d'intérêt. Nous nous accordons la liberté de sélectionner ce qui nous semblera pertinent — et de ne pas publier les créations manquant d'originalité, inabouties, ou dépourvues de ce quelque chose qui caractérise une véritable œuvre&nbsp;: cet espèce de souffle. Cette discrimination nécessaire doit être acceptée sans susceptibilité&nbsp;: absence de publication ne veut pas dire, bien évidemment, absence de talent.
-    </p>
-
-    <div style="border-top:1px solid rgba(34,32,28,0.1);padding-top:2.5rem;display:flex;align-items:center;gap:2rem;flex-wrap:wrap">
+  <div class="manifeste-body">
+    <div class="eyebrow">Manifeste</div>
+    <h2 class="manifeste-h">L'art des enfants est<br><em>une grâce rare.</em></h2>
+    <p class="manifeste-p">L'innocence, la spontanéité, la créativité sans limite des enfants sont aux antipodes de ce qui agite le monde en ce moment — les conflits, la marchandisation, la dépendance croissante à l'intelligence artificielle et aux nœuds informatiques. Les enfants n'ont pas (encore) recours à l'IA&nbsp;; leur imagination est d'une autre nature qu'un data center. Ils ont la chance inestimable de connaître cet état de transe qui caractérise l'acte créateur authentique.</p>
+    <p class="manifeste-p">Tous les enfants n'ont pas forcément un tempérament artistique, mais tous, sans exception, peuvent connaître à un moment ou à un autre une inspiration exceptionnelle et produire — sans même s'en rendre compte — une œuvre d'art inédite. Comme chez les adultes, ces circonstances sont rares, et par conséquent précieuses.</p>
+    <p class="manifeste-p">La Nitonnerie propose un espace virtuel où partager ces créations. Les parents sont libres de soumettre ce qu'ils jugeront digne d'intérêt. Nous nous accordons la liberté de sélectionner ce qui nous semblera pertinent — et de ne pas publier les créations manquant d'originalité, inabouties, ou dépourvues de ce quelque chose qui caractérise une véritable œuvre&nbsp;: cette espèce de souffle. Cette discrimination nécessaire doit être acceptée sans susceptibilité&nbsp;: absence de publication ne veut pas dire, bien évidemment, absence de talent.</p>
+    <div class="manifeste-footer">
       <button class="btn-a" onclick="go('s')">Soumettre une œuvre</button>
       <span style="font-size:0.75rem;color:var(--sg);letter-spacing:0.06em">La Nitonnerie, 2025</span>
     </div>
   </div>
-
   <footer>
     <span class="fl" onclick="go('g')">La <em>Nitonnerie</em></span>
     <span>Galerie d'art enfantin &nbsp;·&nbsp; 2025</span>
@@ -304,64 +271,41 @@ footer{background:var(--ink);color:rgba(252,251,248,0.4);padding:2.2rem 5vw;disp
 </div>
 
 <script>
-const AT_TOKEN   = 'patXBTkvRqR87CFKO.92a2f3540374de1fca10cf9899844e705358fe441c5bf5d56ff2e1328db36621';
-const AT_BASE    = 'appCRGgKOrUSJYWJ8';
-const TBL_OEUVRES  = 'tbl9J6znXf0FuiW7n';
-const TBL_ARTISTES = 'tblAG4Zi0pW6ZxR3a';
+var AT_TOKEN = 'patWXe5ZKY4RBZUB8.b86b66205056ad697144e2b1bb92ce346258c7a09cfc6c6f9145f7383f448eef';
+var AT_BASE  = 'appCRGgKOrUSJYWJ8';
+var AT_TABLE = 'tbl9J6znXf0FuiW7n';
 
-let ALL_WORKS  = [];
-let ARTISTES   = {};
-let curFilter  = 'all';
-
-const HEADERS = { Authorization: 'Bearer ' + AT_TOKEN };
-
-async function fetchAll(tableId, fieldNames) {
-  let records = [];
-  let offset = '';
-  do {
-    const params = fieldNames.map(f => 'fields[]=' + encodeURIComponent(f)).join('&');
-    const url = 'https://api.airtable.com/v0/' + AT_BASE + '/' + tableId + '?' + params + (offset ? '&offset=' + offset : '');
-    const res = await fetch(url, { headers: HEADERS });
-    if (!res.ok) throw new Error('Airtable error ' + res.status);
-    const data = await res.json();
-    records = records.concat(data.records);
-    offset = data.offset || '';
-  } while (offset);
-  return records;
-}
+var ALL_WORKS = [];
+var curFilter = 'all';
 
 async function loadData() {
   try {
-    // 1. Charger les artistes (enfants) → dictionnaire id → {prénom, âge}
-    const artRecs = await fetchAll(TBL_ARTISTES, ['Prénom', 'Âge']);
-    artRecs.forEach(r => {
-      ARTISTES[r.id] = {
-        prenom: r.fields['Prénom'] || '',
-        age:    r.fields['Âge']    || ''
-      };
-    });
+    var fields = ['Titre','Technique','Categorie','Publier','Prenom','Age','Photo'];
+    var params = fields.map(function(f){ return 'fields[]=' + encodeURIComponent(f); }).join('&');
+    var url = 'https://api.airtable.com/v0/' + AT_BASE + '/' + AT_TABLE + '?' + params;
+    var res = await fetch(url, { headers: { 'Authorization': 'Bearer ' + AT_TOKEN } });
+    if (!res.ok) {
+      var err = await res.json();
+      throw new Error('Airtable ' + res.status + ' : ' + JSON.stringify(err));
+    }
+    var data = await res.json();
 
-    // 2. Charger toutes les oeuvres, filtrer cote JS sur Publier
-    const PHOTO_FIELD = "Photo de l'œuvre";
-    const oeuvreRecs = await fetchAll(TBL_OEUVRES, ["Titre","Technique","Catégorie","Publier","Artistes",PHOTO_FIELD]);
-
-    ALL_WORKS = oeuvreRecs
-      .filter(r => r.fields['Publier'] === true)
-      .map(r => {
-      const f = r.fields;
-      // Lien vers artiste (champ lié — tableau d'IDs)
-      const artisteId = f['Artistes'] ? f['Artistes'][0] : null;
-      const artiste   = artisteId ? ARTISTES[artisteId] : null;
-      return {
-        id:        r.id,
-        titre:     f['Titre']              || 'Sans titre',
-        technique: f['Technique']          || '',
-        categorie: f['Catégorie']          || '',
-        photo:     f[PHOTO_FIELD] ? f[PHOTO_FIELD][0].url : null,
-        prenom:    artiste ? artiste.prenom : '',
-        age:       artiste ? artiste.age    : ''
-      };
-    });
+    ALL_WORKS = data.records
+      .filter(function(r){ return r.fields['Publier'] === true; })
+      .map(function(r){
+        var f = r.fields;
+        var photo = null;
+        if (f['Photo'] && f['Photo'].length > 0) photo = f['Photo'][0].url;
+        return {
+          id:        r.id,
+          titre:     f['Titre']     || 'Sans titre',
+          technique: f['Technique'] || '',
+          categorie: f['Categorie'] || '',
+          prenom:    f['Prenom']    || '',
+          age:       f['Age']       || '',
+          photo:     photo
+        };
+      });
 
     renderGal(curFilter);
     updateStats();
@@ -369,70 +313,72 @@ async function loadData() {
   } catch(e) {
     console.error(e);
     document.getElementById('gg').innerHTML =
-      '<div class="state-msg">Impossible de charger les œuvres.<br><small style="opacity:0.5">' + e.message + '</small></div>';
+      '<div class="state-msg">Impossible de charger les \u0153uvres.<br><small style="opacity:0.5">' + e.message + '</small></div>';
     document.getElementById('count-label').textContent = '';
   }
 }
 
 function card(w) {
-  const isPetit = w.categorie === 'Petits Nitons';
-  const img = w.photo
-    ? `<img src="${w.photo}" alt="${w.titre}" loading="lazy">`
-    : `<div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>`;
-  const badge = w.categorie
-    ? `<span class="cat-badge ${isPetit ? 'badge-p' : 'badge-g'}">${w.categorie}</span>` : '';
-  const meta  = [w.prenom, w.technique].filter(Boolean).join(' · ');
-  return `<div class="ac">
-    <div class="ai">${img}<div class="ao"></div>${badge}</div>
-    <div class="at">
-      <h4>${w.titre}</h4>
-      ${meta ? `<div class="by">${meta}</div>` : ''}
-      ${w.age ? `<span class="ag">${w.age} ans</span>` : ''}
-    </div>
-  </div>`;
+  var isPetit = w.categorie === 'Petits Nitons';
+  var img = w.photo
+    ? '<img src="' + w.photo + '" alt="' + w.titre + '" loading="lazy">'
+    : '<div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>';
+  var badge = w.categorie
+    ? '<span class="cat-badge ' + (isPetit ? 'badge-p' : 'badge-g') + '">' + w.categorie + '</span>'
+    : '';
+  var meta = [w.prenom, w.technique].filter(Boolean).join(' \u00b7 ');
+  return '<div class="ac">'
+    + '<div class="ai">' + img + '<div class="ao"></div>' + badge + '</div>'
+    + '<div class="at">'
+    + '<h4>' + w.titre + '</h4>'
+    + (meta ? '<div class="by">' + meta + '</div>' : '')
+    + (w.age ? '<span class="ag">' + w.age + ' ans</span>' : '')
+    + '</div></div>';
 }
 
 function renderGal(f) {
   curFilter = f;
-  const list = f === 'all' ? ALL_WORKS
-    : ALL_WORKS.filter(w => w.categorie === f || w.technique === f);
+  var list = f === 'all' ? ALL_WORKS : ALL_WORKS.filter(function(w){
+    return w.categorie === f || w.technique === f;
+  });
   if (!list.length) {
     document.getElementById('gg').innerHTML =
-      '<div class="state-msg">Aucune œuvre dans cette catégorie pour le moment.</div>';
+      '<div class="state-msg">Aucune \u0153uvre dans cette cat\u00e9gorie pour le moment.</div>';
   } else {
     document.getElementById('gg').innerHTML = list.map(card).join('');
   }
-  const n = list.length;
+  var n = list.length;
   document.getElementById('count-label').textContent =
-    n + ' œuvre' + (n > 1 ? 's' : '') + ' exposée' + (n > 1 ? 's' : '');
+    n + ' \u0153uvre' + (n > 1 ? 's' : '') + ' expos\u00e9e' + (n > 1 ? 's' : '');
 }
 
 function updateStats() {
-  document.getElementById('stat-oeuvres').textContent  = ALL_WORKS.length;
-  const prenoms = new Set(ALL_WORKS.map(w => w.prenom).filter(Boolean));
-  document.getElementById('stat-artistes').textContent = prenoms.size;
+  document.getElementById('stat-oeuvres').textContent = ALL_WORKS.length;
+  var prenoms = {};
+  ALL_WORKS.forEach(function(w){ if(w.prenom) prenoms[w.prenom] = 1; });
+  document.getElementById('stat-artistes').textContent = Object.keys(prenoms).length;
 }
 
-document.querySelectorAll('.fb').forEach(b => {
-  b.addEventListener('click', function() {
-    document.querySelectorAll('.fb').forEach(x => x.classList.remove('on'));
+document.querySelectorAll('.fb').forEach(function(b){
+  b.addEventListener('click', function(){
+    document.querySelectorAll('.fb').forEach(function(x){ x.classList.remove('on'); });
     this.classList.add('on');
-    renderGal(this.dataset.f);
+    renderGal(this.getAttribute('data-f'));
   });
 });
 
 function go(p) {
-  document.querySelectorAll('.pg').forEach(x => x.classList.remove('on'));
-  document.querySelectorAll('.nav-links a').forEach(x => x.classList.remove('on'));
+  document.querySelectorAll('.pg').forEach(function(x){ x.classList.remove('on'); });
+  document.querySelectorAll('.nav-links a').forEach(function(x){ x.classList.remove('on'); });
   document.getElementById('pg-' + p).classList.add('on');
-  document.getElementById('n'  + p).classList.add('on');
+  document.getElementById('n' + p).classList.add('on');
   window.scrollTo(0, 0);
 }
 
 function handleNotify() {
-  const v = document.getElementById('notify-email').value;
-  if (v && v.includes('@')) {
-    alert('Merci\u00a0! Vous serez notifié(e) dès l\'ouverture des inscriptions au Niton d\'or.');
+  var v = document.getElementById('notify-email').value;
+  if (v && v.indexOf('@') > -1) {
+    alert('Merci\u00a0! Vous serez notifi\u00e9(e) d\u00e8s l\'ouverture des inscriptions au Niton d\'or.');
     document.getElementById('notify-email').value = '';
   } else {
     alert('Merci d\'entrer une adresse email valide.');
@@ -440,16 +386,16 @@ function handleNotify() {
 }
 
 function handleSubmit() {
-  const prenom = document.getElementById('f-prenom').value.trim();
-  const age    = document.getElementById('f-age').value;
-  const titre  = document.getElementById('f-titre').value.trim();
-  const tech   = document.getElementById('f-technique').value;
-  const email  = document.getElementById('f-email').value.trim();
+  var prenom = document.getElementById('f-prenom').value.trim();
+  var age    = document.getElementById('f-age').value;
+  var titre  = document.getElementById('f-titre').value.trim();
+  var tech   = document.getElementById('f-technique').value;
+  var email  = document.getElementById('f-email').value.trim();
   if (!prenom || !age || !titre || !tech || !email) {
     alert('Merci de remplir tous les champs obligatoires.');
     return;
   }
-  alert('Merci\u00a0! La soumission de « ' + titre + ' » a bien été envoyée. Nous la traiterons sous 48\u00a0h.');
+  alert('Merci\u00a0! La soumission de \u00ab\u00a0' + titre + '\u00a0\u00bb a bien \u00e9t\u00e9 envoy\u00e9e. Nous la traiterons sous 48\u00a0h.');
 }
 
 go('g');
