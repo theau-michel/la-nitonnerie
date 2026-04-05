@@ -1,6 +1,6 @@
 const AIRTABLE_TOKEN = "patXBTkvRqR87CFKO.92a2f3540374de1fca10cf9899844e705358fe441c5bf5d56ff2e1328db36621";
 const AIRTABLE_BASE_ID = "appCRGgKOrUSJYWJ8";
-const AIRTABLE_TABLE_OEUVRES = "tbl9J6znXf0FuiW7n";
+const AIRTABLE_TABLE_OEUVRES = "Œuvres";
 
 let ALL_WORKS = [];
 let curFilter = "all";
