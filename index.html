@@ -10,7 +10,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --cr:#F4EEE3;--cb:#FBF8F2;--ink:#1C1A16;--am:#C8923B;--sg:#A5AD9E;--gg:#4A6440;
+  --cr:#F4EEE3;--cb:#FBF8F2;--ink:#1C1A16;--am:#C8923B;--sg:#A5AD9E;--pp:#A0277A;--pb:#FDE8F5;--pbo:#F0B0D8;--gp:#2E7A28;--gb:#EAF3E8;--gbo:#A8D4A4;
   --serif:'Cormorant Garamond',Georgia,serif;--sans:'Inter',sans-serif;
 }
 body{background:var(--cr);color:var(--ink);font-family:var(--sans);font-weight:300;font-size:15px;line-height:1.65}
@@ -31,6 +31,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(251,248,242,
 .fb{padding:0.3rem 0.95rem;border:1px solid rgba(28,26,22,0.13);background:none;font-family:var(--sans);font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;color:var(--ink);font-weight:400;transition:all 0.2s}
 .fb:hover{border-color:var(--am);color:var(--am)}
 .fb.on{background:var(--am);color:var(--cb);border-color:var(--am)}
+.fb[data-f="Petits Nitons"].on{background:#A0277A;color:#FDE8F5;border-color:#A0277A}
+.fb[data-f="Grands Nitons"].on{background:#2E7A28;color:#EAF3E8;border-color:#2E7A28}
+.fb[data-f="Petits Nitons"]:hover{border-color:#A0277A;color:#A0277A}
+.fb[data-f="Grands Nitons"]:hover{border-color:#2E7A28;color:#2E7A28}
 .gg{padding:3rem 5vw 6rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:2.5rem}
 .ac{cursor:pointer}
 .ai{aspect-ratio:3/4;margin-bottom:1rem;overflow:hidden;position:relative;background:var(--cb);box-shadow:0 2px 14px rgba(28,26,22,0.07)}
@@ -41,8 +45,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(251,248,242,
 .ao{position:absolute;inset:0;background:rgba(28,26,22,0);transition:background 0.3s}
 .ac:hover .ao{background:rgba(28,26,22,0.04)}
 .cat-badge{position:absolute;bottom:0.75rem;left:0.75rem;display:flex;align-items:center;gap:0.32rem;font-size:0.57rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.23rem 0.6rem 0.23rem 0.45rem;font-weight:400;backdrop-filter:blur(6px)}
-.badge-p{background:rgba(251,248,242,0.92);color:var(--am);border:1px solid rgba(200,146,59,0.28)}
-.badge-g{background:rgba(251,248,242,0.92);color:var(--gg);border:1px solid rgba(74,100,64,0.28)}
+.badge-p{background:var(--pb);color:var(--pp);border:1px solid var(--pbo)}
+.badge-g{background:var(--gb);color:var(--gp);border:1px solid var(--gbo)}
 .badge-icon{width:13px;height:13px;flex-shrink:0}
 .at h4{font-family:var(--serif);font-size:1.1rem;font-weight:400;margin-bottom:0.12rem}
 .at .by{font-size:0.68rem;color:var(--sg);letter-spacing:0.05em}
@@ -165,8 +169,8 @@ footer{background:var(--ink);color:rgba(251,248,242,0.38);padding:2.2rem 5vw;dis
   <div class="gh"><h2>La Galerie</h2><span id="count-label"><span class="loader"></span></span></div>
   <div class="gf">
     <button class="fb on" data-f="all">Tout</button>
-    <button class="fb" data-f="Petits Nitons">Petits Nitons · 3–6 ans</button>
-    <button class="fb" data-f="Grands Nitons">Grands Nitons · 7–12 ans</button>
+    <button class="fb" data-f="Petits Nitons" style="--cat-c:#A0277A;--cat-b:#FDE8F5;--cat-bo:#F0B0D8">Petits Nitons · 3–6 ans</button>
+    <button class="fb" data-f="Grands Nitons" style="--cat-c:#2E7A28;--cat-b:#EAF3E8;--cat-bo:#A8D4A4">Grands Nitons · 7–12 ans</button>
     <button class="fb" data-f="Peinture">Peinture</button>
     <button class="fb" data-f="Aquarelle">Aquarelle</button>
     <button class="fb" data-f="Dessin">Dessin</button>
@@ -188,23 +192,23 @@ footer{background:var(--ink);color:rgba(251,248,242,0.38);padding:2.2rem 5vw;dis
 
       <div class="niton-cats">
         <svg viewBox="0 0 118 128" width="105" height="114" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="59" cy="57" r="50" fill="none" stroke="rgba(200,146,59,0.18)" stroke-width="1.2" stroke-dasharray="3.5 2.8"/>
-          <g stroke="#C8923B" stroke-width="1.2" opacity="0.28">
+          <circle cx="59" cy="57" r="50" fill="none" stroke="rgba(160,39,122,0.2)" stroke-width="1.2" stroke-dasharray="3.5 2.8"/>
+          <g stroke="#A0277A" stroke-width="1.2" opacity="0.28">
             <line x1="59" y1="5" x2="59" y2="13"/><line x1="59" y1="101" x2="59" y2="109"/>
             <line x1="7" y1="57" x2="15" y2="57"/><line x1="103" y1="57" x2="111" y2="57"/>
             <line x1="22" y1="20" x2="28" y2="26"/><line x1="90" y1="20" x2="96" y2="26"/>
             <line x1="22" y1="94" x2="28" y2="88"/><line x1="90" y1="94" x2="96" y2="88"/>
           </g>
           <circle cx="59" cy="57" r="40" fill="rgba(200,146,59,0.05)" stroke="rgba(200,146,59,0.3)" stroke-width="1.4"/>
-          <text x="59" y="49" text-anchor="middle" dominant-baseline="middle" font-family="Cormorant Garamond,Georgia,serif" font-size="21" fill="rgba(200,146,59,0.82)">✦</text>
-          <text x="59" y="67" text-anchor="middle" font-family="Inter,sans-serif" font-size="7" letter-spacing="2.2" fill="#C8923B">PETITS NITONS</text>
-          <text x="59" y="79" text-anchor="middle" font-family="Inter,sans-serif" font-size="6.5" letter-spacing="1" fill="rgba(200,146,59,0.55)">3 – 6 ans</text>
-          <text x="59" y="116" text-anchor="middle" font-family="Cormorant Garamond,Georgia,serif" font-size="8.5" fill="rgba(200,146,59,0.42)" font-style="italic">Toutes techniques</text>
+          <text x="59" y="49" text-anchor="middle" dominant-baseline="middle" font-family="Cormorant Garamond,Georgia,serif" font-size="21" fill="rgba(160,39,122,0.82)">✦</text>
+          <text x="59" y="67" text-anchor="middle" font-family="Inter,sans-serif" font-size="7" letter-spacing="2.2" fill="#A0277A">PETITS NITONS</text>
+          <text x="59" y="79" text-anchor="middle" font-family="Inter,sans-serif" font-size="6.5" letter-spacing="1" fill="rgba(160,39,122,0.55)">3 – 6 ans</text>
+          <text x="59" y="116" text-anchor="middle" font-family="Cormorant Garamond,Georgia,serif" font-size="8.5" fill="rgba(160,39,122,0.42)" font-style="italic">Toutes techniques</text>
         </svg>
 
         <svg viewBox="0 0 118 128" width="105" height="114" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="59" cy="57" r="50" fill="none" stroke="rgba(74,100,64,0.2)" stroke-width="1.5"/>
-          <g fill="rgba(74,100,64,0.2)">
+          <circle cx="59" cy="57" r="50" fill="none" stroke="rgba(46,122,40,0.22)" stroke-width="1.5"/>
+          <g fill="rgba(46,122,40,0.22)">
             <ellipse cx="14" cy="40" rx="6.5" ry="3.5" transform="rotate(-38 14 40)"/>
             <ellipse cx="10" cy="53" rx="6.5" ry="3.5" transform="rotate(-18 10 53)"/>
             <ellipse cx="12" cy="66" rx="6.5" ry="3.5" transform="rotate(10 12 66)"/>
@@ -214,11 +218,11 @@ footer{background:var(--ink);color:rgba(251,248,242,0.38);padding:2.2rem 5vw;dis
             <ellipse cx="106" cy="66" rx="6.5" ry="3.5" transform="rotate(-10 106 66)"/>
             <ellipse cx="100" cy="77" rx="6.5" ry="3.5" transform="rotate(-28 100 77)"/>
           </g>
-          <circle cx="59" cy="57" r="40" fill="rgba(74,100,64,0.04)" stroke="rgba(74,100,64,0.28)" stroke-width="1.5"/>
-          <text x="59" y="49" text-anchor="middle" dominant-baseline="middle" font-family="Georgia,serif" font-size="19" fill="rgba(74,100,64,0.78)">♛</text>
-          <text x="59" y="67" text-anchor="middle" font-family="Inter,sans-serif" font-size="7" letter-spacing="2.2" fill="#4A6440">GRANDS NITONS</text>
-          <text x="59" y="79" text-anchor="middle" font-family="Inter,sans-serif" font-size="6.5" letter-spacing="1" fill="rgba(74,100,64,0.55)">7 – 12 ans</text>
-          <text x="59" y="116" text-anchor="middle" font-family="Cormorant Garamond,Georgia,serif" font-size="8.5" fill="rgba(74,100,64,0.42)" font-style="italic">Toutes techniques</text>
+          <circle cx="59" cy="57" r="40" fill="rgba(46,122,40,0.06)" stroke="rgba(46,122,40,0.3)" stroke-width="1.5"/>
+          <text x="59" y="49" text-anchor="middle" dominant-baseline="middle" font-family="Georgia,serif" font-size="19" fill="rgba(46,122,40,0.82)">♛</text>
+          <text x="59" y="67" text-anchor="middle" font-family="Inter,sans-serif" font-size="7" letter-spacing="2.2" fill="#2E7A28">GRANDS NITONS</text>
+          <text x="59" y="79" text-anchor="middle" font-family="Inter,sans-serif" font-size="6.5" letter-spacing="1" fill="rgba(46,122,40,0.55)">7 – 12 ans</text>
+          <text x="59" y="116" text-anchor="middle" font-family="Cormorant Garamond,Georgia,serif" font-size="8.5" fill="rgba(46,122,40,0.42)" font-style="italic">Toutes techniques</text>
         </svg>
       </div>
 
@@ -317,8 +321,8 @@ var CONTACT_EMAIL = 'lanitonnerie@gmail.com';
 var ALL_WORKS = [];
 var curFilter = 'all';
 
-var ICON_P = '<svg class="badge-icon" viewBox="0 0 13 13" xmlns="http://www.w3.org/2000/svg"><path d="M6.5 0.5L7.9 4.8H12.4L8.75 7.35L10.15 11.65L6.5 9.1L2.85 11.65L4.25 7.35L0.6 4.8H5.1Z" fill="#C8923B" opacity="0.82"/></svg>';
-var ICON_G = '<svg class="badge-icon" viewBox="0 0 13 13" xmlns="http://www.w3.org/2000/svg"><path d="M1.5 10.5h10M2.5 10.5V7.5s.5 1 2 1 1.5-1 2-1 .5 1 2 1 1.5-1 1.5-1v3M4.5 7.5V5M8.5 7.5V5M5 5s0-2 1.5-2S8 5 8 5" stroke="#4A6440" stroke-width="1.05" stroke-linecap="round" fill="none"/></svg>';
+var ICON_P = '<svg class="badge-icon" viewBox="0 0 13 13" xmlns="http://www.w3.org/2000/svg"><path d="M6.5 0.5L7.9 4.8H12.4L8.75 7.35L10.15 11.65L6.5 9.1L2.85 11.65L4.25 7.35L0.6 4.8H5.1Z" fill="#A0277A" opacity="0.82"/></svg>';
+var ICON_G = '<svg class="badge-icon" viewBox="0 0 13 13" xmlns="http://www.w3.org/2000/svg"><path d="M1.5 10.5h10M2.5 10.5V7.5s.5 1 2 1 1.5-1 2-1 .5 1 2 1 1.5-1 1.5-1v3M4.5 7.5V5M8.5 7.5V5M5 5s0-2 1.5-2S8 5 8 5" stroke="#2E7A28" stroke-width="1.05" stroke-linecap="round" fill="none"/></svg>';
 
 async function loadData() {
   try {
@@ -411,66 +415,157 @@ function handleNotify() {
 // ── TROPHÉE 3D ───────────────────────────────────────────────────────────────
 var trophyInited = false;
 function initTrophy() {
-  if (trophyInited||typeof THREE==='undefined') return;
+  if (trophyInited || typeof THREE === 'undefined') return;
   var canvas = document.getElementById('trophy-canvas');
   if (!canvas) return;
   trophyInited = true;
 
-  var W=canvas.offsetWidth||500, H=canvas.offsetHeight||560;
-  var renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:true});
-  renderer.setSize(W,H); renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-  renderer.toneMapping=THREE.ACESFilmicToneMapping; renderer.toneMappingExposure=1.3;
+  var W = canvas.offsetWidth || 500, H = canvas.offsetHeight || 560;
+  var renderer = new THREE.WebGLRenderer({ canvas:canvas, antialias:true, alpha:true });
+  renderer.setSize(W, H);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.45;
+  renderer.outputEncoding = THREE.sRGBEncoding;
 
-  var scene=new THREE.Scene();
-  var camera=new THREE.PerspectiveCamera(40,W/H,0.1,100);
-  camera.position.set(0,0.5,5.2); camera.lookAt(0,0.2,0);
+  var scene  = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(38, W/H, 0.1, 100);
+  camera.position.set(0, 0.55, 5.6);
+  camera.lookAt(0, 0.25, 0);
 
-  scene.add(new THREE.AmbientLight(0xFFF5E0,0.45));
-  var sun=new THREE.DirectionalLight(0xFFEDD0,1.55); sun.position.set(3,6,4); scene.add(sun);
-  var fill=new THREE.PointLight(0xC8923B,1.15,22); fill.position.set(-4,2,3); scene.add(fill);
-  var back=new THREE.PointLight(0xE8D0A0,0.4,14); back.position.set(0,-3,-4); scene.add(back);
-  var top=new THREE.PointLight(0xFFFFFF,0.28,12); top.position.set(0,6,2); scene.add(top);
+  // ── Environment map procédurale (donne les vrais reflets dorés) ──
+  var eW = 512, eH = 256;
+  var eData = new Float32Array(3 * eW * eH);
+  for (var ey = 0; ey < eH; ey++) {
+    for (var ex = 0; ex < eW; ex++) {
+      var ei = ey * eW + ex;
+      var phi   = (ey / eH) * Math.PI;
+      var theta = (ex / eW) * Math.PI * 2;
+      var sinPhi = Math.sin(phi), cosPhi = Math.cos(phi);
+      var sinT = Math.sin(theta), cosT = Math.cos(theta);
+      var r = 0.05, g = 0.04, b = 0.03;
+      // Lumière principale : or chaud, haut-avant-gauche
+      var kd = Math.max(0, 0.55*sinT*sinPhi + 0.80*cosPhi + 0.15*cosT*sinPhi);
+      kd = Math.pow(kd, 2.8) * 2.4;
+      r += kd*1.0; g += kd*0.72; b += kd*0.14;
+      // Fill : ambre doux, droite
+      var fd = Math.max(0, -cosT * sinPhi) * 0.55;
+      r += fd*0.45; g += fd*0.28; b += fd*0.04;
+      // Rim : blanc froid, derrière
+      var rd = Math.max(0, cosT * sinPhi) * 0.38;
+      r += rd*0.22; g += rd*0.22; b += rd*0.28;
+      // Zénith doux
+      var td = Math.max(0, cosPhi) * 0.25;
+      r += td*0.12; g += td*0.10; b += td*0.04;
+      eData[3*ei]=r; eData[3*ei+1]=g; eData[3*ei+2]=b;
+    }
+  }
+  var envTex = new THREE.DataTexture(eData, eW, eH, THREE.RGBFormat, THREE.FloatType);
+  envTex.needsUpdate = true;
+  var pmrem = new THREE.PMREMGenerator(renderer);
+  pmrem.compileEquirectangularShader();
+  var envMap = pmrem.fromEquirectangular(envTex).texture;
+  scene.environment = envMap;
+  envTex.dispose(); pmrem.dispose();
 
-  var gold=new THREE.MeshStandardMaterial({color:0xD4A030,metalness:0.90,roughness:0.10});
-  var goldD=new THREE.MeshStandardMaterial({color:0xB8860B,metalness:0.92,roughness:0.08});
+  // ── Lumières complémentaires ──
+  scene.add(new THREE.AmbientLight(0xFFF5E0, 0.12));
+  var sun = new THREE.DirectionalLight(0xFFEDD0, 0.7); sun.position.set(3,6,4); scene.add(sun);
+  var rim = new THREE.PointLight(0xCCDDFF, 0.45, 16); rim.position.set(0,3,-5); scene.add(rim);
 
-  var grp=new THREE.Group();
+  // ── Matériaux or ──
+  var mk = function(c,r){ return new THREE.MeshStandardMaterial({color:c,metalness:1.0,roughness:r,envMapIntensity:1.3}); };
+  var gold  = mk(0xD4A030, 0.08);
+  var goldD = mk(0xB07818, 0.06);
+  var goldB = mk(0xF0C848, 0.12);
 
-  // Corps de la coupe
-  var pts=[
-    new THREE.Vector2(0.07,0.00),new THREE.Vector2(0.10,0.07),new THREE.Vector2(0.13,0.18),
-    new THREE.Vector2(0.19,0.33),new THREE.Vector2(0.30,0.54),new THREE.Vector2(0.42,0.75),
-    new THREE.Vector2(0.50,0.91),new THREE.Vector2(0.54,1.02),new THREE.Vector2(0.53,1.10),
-    new THREE.Vector2(0.48,1.15),
+  var grp = new THREE.Group();
+
+  // ── Corps de la coupe (LatheGeometry, 80 segments) ──
+  var pts = [
+    new THREE.Vector2(0.09,0.00), new THREE.Vector2(0.11,0.05),
+    new THREE.Vector2(0.14,0.14), new THREE.Vector2(0.21,0.29),
+    new THREE.Vector2(0.33,0.51), new THREE.Vector2(0.44,0.73),
+    new THREE.Vector2(0.52,0.90), new THREE.Vector2(0.56,1.02),
+    new THREE.Vector2(0.57,1.09), new THREE.Vector2(0.55,1.13),
+    new THREE.Vector2(0.51,1.16), new THREE.Vector2(0.49,1.18),
   ];
-  var cup=new THREE.Mesh(new THREE.LatheGeometry(pts,56),gold); cup.position.y=0.28; grp.add(cup);
+  var cup = new THREE.Mesh(new THREE.LatheGeometry(pts, 80), gold);
+  cup.position.y = 0.3; grp.add(cup);
 
-  // Anses
+  // Fond intérieur de la coupe (profondeur visuelle)
+  var innerPts = [
+    new THREE.Vector2(0.00,1.18), new THREE.Vector2(0.40,1.18),
+    new THREE.Vector2(0.48,1.14), new THREE.Vector2(0.48,1.10),
+  ];
+  var inner = new THREE.Mesh(new THREE.LatheGeometry(innerPts, 80), goldD);
+  inner.position.y = 0.3; grp.add(inner);
+
+  // Bague décorative sur le corps
+  var eng = new THREE.Mesh(new THREE.TorusGeometry(0.490, 0.014, 6, 64), goldD);
+  eng.position.y = 0.3 + 0.54; eng.rotation.x = Math.PI/2; grp.add(eng);
+
+  // ── Anses ──
   [-1,1].forEach(function(s){
-    var hPts=[
-      new THREE.Vector3(s*0.52,1.30,0),new THREE.Vector3(s*0.76,1.22,0),
-      new THREE.Vector3(s*0.87,1.05,0),new THREE.Vector3(s*0.76,0.88,0),
-      new THREE.Vector3(s*0.40,0.82,0),
+    var hPts = [
+      new THREE.Vector3(s*0.54, 1.42, 0), new THREE.Vector3(s*0.80, 1.33, 0),
+      new THREE.Vector3(s*0.94, 1.13, 0), new THREE.Vector3(s*0.92, 0.93, 0),
+      new THREE.Vector3(s*0.76, 0.78, 0), new THREE.Vector3(s*0.47, 0.73, 0),
     ];
-    grp.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(hPts),24,0.033,8,false),gold));
+    var curve = new THREE.CatmullRomCurve3(hPts);
+    grp.add(new THREE.Mesh(new THREE.TubeGeometry(curve, 36, 0.036, 10, false), gold));
+    // Petites bagues de raccord
+    [hPts[0], hPts[hPts.length-1]].forEach(function(p){
+      var rg = new THREE.Mesh(new THREE.TorusGeometry(0.036, 0.016, 6, 16), goldD);
+      rg.position.copy(p); rg.rotation.x = Math.PI/2; grp.add(rg);
+    });
   });
 
-  // Tige
-  var stem=new THREE.Mesh(new THREE.CylinderGeometry(0.058,0.095,0.40,24),goldD); stem.position.y=-0.14; grp.add(stem);
+  // ── Tige profilée (LatheGeometry, plus élégante) ──
+  var stemPts = [
+    new THREE.Vector2(0.09,0.00), new THREE.Vector2(0.068,0.12),
+    new THREE.Vector2(0.060,0.22), new THREE.Vector2(0.068,0.32),
+    new THREE.Vector2(0.09,0.40),
+  ];
+  var stem = new THREE.Mesh(new THREE.LatheGeometry(stemPts, 32), goldD);
+  stem.position.y = -0.20; grp.add(stem);
 
-  // Socle 3 niveaux
-  var b1=new THREE.Mesh(new THREE.CylinderGeometry(0.44,0.50,0.10,40),gold); b1.position.y=-0.39; grp.add(b1);
-  var b2=new THREE.Mesh(new THREE.CylinderGeometry(0.30,0.44,0.07,40),goldD); b2.position.y=-0.31; grp.add(b2);
-  var b3=new THREE.Mesh(new THREE.CylinderGeometry(0.18,0.30,0.06,40),gold); b3.position.y=-0.255; grp.add(b3);
+  // ── Socle 3 niveaux ──
+  var b1=new THREE.Mesh(new THREE.CylinderGeometry(0.47,0.53,0.12,48),gold); b1.position.y=-0.67; grp.add(b1);
+  var b2=new THREE.Mesh(new THREE.CylinderGeometry(0.33,0.47,0.09,48),goldD); b2.position.y=-0.57; grp.add(b2);
+  var b3=new THREE.Mesh(new THREE.CylinderGeometry(0.20,0.33,0.07,48),gold); b3.position.y=-0.49; grp.add(b3);
+  // Bague haut du socle
+  var brim=new THREE.Mesh(new THREE.TorusGeometry(0.33,0.018,6,48),goldB); brim.position.y=-0.488; brim.rotation.x=Math.PI/2; grp.add(brim);
 
-  // Finial + anneau
-  var fin=new THREE.Mesh(new THREE.SphereGeometry(0.095,20,20),gold); fin.position.y=0.28+1.15+0.095; grp.add(fin);
-  var ring=new THREE.Mesh(new THREE.TorusGeometry(0.085,0.018,8,24),goldD); ring.position.y=0.28+1.15+0.095; ring.rotation.x=Math.PI/2; grp.add(ring);
+  // ── Finial (orbe + bague) ──
+  var fin=new THREE.Mesh(new THREE.SphereGeometry(0.105,24,24),goldB);
+  fin.position.y=0.3+1.18+0.105; grp.add(fin);
+  var fring=new THREE.Mesh(new THREE.TorusGeometry(0.105,0.020,8,28),goldD);
+  fring.position.y=0.3+1.18; fring.rotation.x=Math.PI/2; grp.add(fring);
 
-  grp.position.y=-0.15; scene.add(grp);
+  // ── Étoiles/particules dorées ──
+  var N=90, sP=new Float32Array(N*3);
+  for(var i=0;i<N;i++){
+    var sr=0.9+Math.random()*2.0, sa=Math.random()*Math.PI*2;
+    sP[3*i]=Math.cos(sa)*sr; sP[3*i+1]=-1.0+Math.random()*3.4; sP[3*i+2]=Math.sin(sa)*sr;
+  }
+  var sGeo=new THREE.BufferGeometry(); sGeo.setAttribute('position',new THREE.BufferAttribute(sP,3));
+  var sMat=new THREE.PointsMaterial({color:0xFFD870,size:0.042,transparent:true,opacity:0.55,sizeAttenuation:true});
+  var stars=new THREE.Points(sGeo,sMat); scene.add(stars);
 
+  grp.position.y = -0.08; scene.add(grp);
+
+  // ── Animation ──
   var t=0;
-  (function animate(){ requestAnimationFrame(animate); t+=0.007; grp.rotation.y=t; grp.position.y=-0.15+Math.sin(t*0.55)*0.07; renderer.render(scene,camera); })();
+  (function anim(){
+    requestAnimationFrame(anim);
+    t+=0.0065;
+    grp.rotation.y=t;
+    grp.position.y=-0.08+Math.sin(t*0.52)*0.09;
+    stars.rotation.y=-t*0.18;
+    sMat.opacity=0.4+Math.sin(t*2.8)*0.2;
+    renderer.render(scene,camera);
+  })();
 
   window.addEventListener('resize',function(){
     var w=canvas.offsetWidth,h=canvas.offsetHeight; if(!w||!h)return;
