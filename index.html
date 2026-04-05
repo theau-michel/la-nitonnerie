@@ -23,6 +23,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--cb);border-
 .pg{display:none;padding-top:64px;min-height:100vh}
 .pg.on{display:block}
 
+/* GALERIE */
 .gh{padding:4rem 5vw 2rem;display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid rgba(34,32,28,0.08)}
 .gh h2{font-family:var(--serif);font-size:2.6rem;font-weight:300}
 .gh span{font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--sg)}
@@ -49,6 +50,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--cb);border-
 .loader{display:inline-block;width:18px;height:18px;border:1px solid rgba(34,32,28,0.12);border-top-color:var(--am);border-radius:50%;animation:spin 0.8s linear infinite;vertical-align:middle;margin-right:0.5rem}
 @keyframes spin{to{transform:rotate(360deg)}}
 
+/* NITON D'OR */
 .niton-teaser{min-height:calc(100vh - 64px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:5rem 5vw;background:var(--cb)}
 .eyebrow{font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--sg);margin-bottom:2.5rem}
 .niton-teaser h2{font-family:var(--serif);font-size:clamp(3rem,6vw,5.5rem);font-weight:300;line-height:1.05;margin-bottom:1rem;max-width:700px}
@@ -69,6 +71,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--cb);border-
 .notify-form button{background:var(--ink);color:var(--cb);border:none;padding:0.8rem 1.5rem;font-family:var(--sans);font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;font-weight:400;transition:background 0.2s;white-space:nowrap}
 .notify-form button:hover{background:var(--am)}
 
+/* À PROPOS */
 .manifeste-stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid rgba(34,32,28,0.08)}
 .stat-cell{padding:2.5rem 3vw;border-right:1px solid rgba(34,32,28,0.08)}
 .stat-cell:last-child{border-right:none}
@@ -83,6 +86,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--cb);border-
 .btn-a{display:inline-block;background:var(--am);color:var(--cb);padding:0.85rem 2.2rem;font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;border:none;font-family:var(--sans);font-weight:400;transition:background 0.2s}
 .btn-a:hover{background:#b07e2e}
 
+/* SOUMETTRE */
 .sl{display:grid;grid-template-columns:1fr 1.5fr;gap:8vw;padding:5rem 5vw 6rem}
 .sl h2{font-family:var(--serif);font-size:2.7rem;font-weight:300;line-height:1.08;margin-bottom:1.5rem}
 .sl h2 em{font-style:italic;color:var(--am)}
@@ -98,13 +102,35 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--cb);border-
 .fg input:focus,.fg textarea:focus,.fg select:focus{border-bottom-color:var(--am)}
 .fg textarea{resize:vertical;min-height:70px}
 .fr2{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
-.uz{border:1px dashed rgba(34,32,28,0.16);padding:2rem;text-align:center;cursor:pointer;transition:border-color 0.2s;margin-top:0.3rem}
+
+/* Upload zone avec preview */
+.uz{border:1px dashed rgba(34,32,28,0.16);cursor:pointer;transition:border-color 0.2s;margin-top:0.3rem;overflow:hidden;position:relative}
 .uz:hover{border-color:var(--am)}
+.uz-inner{padding:2rem;text-align:center}
 .uz strong{display:block;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(34,32,28,0.45);margin-bottom:0.3rem;font-weight:400}
 .uz p{font-size:0.78rem;color:rgba(34,32,28,0.3)}
-.sb{width:100%;background:var(--ink);color:var(--cb);border:none;padding:1rem;font-family:var(--sans);font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;margin-top:1.5rem;font-weight:400;transition:background 0.2s}
-.sb:hover{background:var(--am)}
+.uz-preview{width:100%;display:none;position:relative}
+.uz-preview img{width:100%;max-height:240px;object-fit:contain;display:block;background:rgba(34,32,28,0.03)}
+.uz-preview-label{position:absolute;bottom:0;left:0;right:0;background:rgba(34,32,28,0.55);color:rgba(252,251,248,0.8);font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.4rem 0.8rem;text-align:center}
+.uz-change{display:block;text-align:center;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--sg);padding:0.6rem;border-top:1px dashed rgba(34,32,28,0.1);background:none}
+
+.sb{width:100%;background:var(--ink);color:var(--cb);border:none;padding:1rem;font-family:var(--sans);font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;margin-top:1.5rem;font-weight:400;transition:background 0.2s;display:flex;align-items:center;justify-content:center;gap:0.5rem}
+.sb:hover:not(:disabled){background:var(--am)}
+.sb:disabled{opacity:0.6;cursor:not-allowed}
 .notice{font-size:0.75rem;color:rgba(34,32,28,0.35);margin-top:1rem;line-height:1.6;text-align:center}
+
+/* Success state */
+.success-card{text-align:center;padding:3rem 1.5rem}
+.success-icon{width:52px;height:52px;border:1px solid rgba(200,146,59,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.8rem;color:var(--am);font-size:1.3rem}
+.success-card h3{font-family:var(--serif);font-weight:300;font-size:1.7rem;margin-bottom:1rem}
+.success-card p{color:var(--sg);font-size:0.87rem;line-height:1.85;max-width:320px;margin:0 auto 1.5rem}
+.success-card .email-hint{display:inline-block;background:rgba(200,146,59,0.08);border:1px solid rgba(200,146,59,0.2);padding:0.6rem 1.2rem;font-size:0.8rem;color:var(--am);font-family:var(--serif);font-style:italic;margin-bottom:1.5rem}
+.success-card .btn-outline{border:1px solid rgba(34,32,28,0.15);background:none;padding:0.6rem 1.5rem;font-size:0.63rem;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;font-family:var(--sans);color:var(--ink);transition:all 0.2s}
+.success-card .btn-outline:hover{border-color:var(--am);color:var(--am)}
+
+/* Indicateur catégorie auto */
+.cat-hint{font-size:0.7rem;color:var(--am);margin-top:0.4rem;opacity:0;transition:opacity 0.3s;font-style:italic;font-family:var(--serif)}
+.cat-hint.show{opacity:1}
 
 footer{background:var(--ink);color:rgba(252,251,248,0.4);padding:2.2rem 5vw;display:flex;align-items:center;justify-content:space-between;font-size:0.7rem;letter-spacing:0.06em}
 .fl{font-family:var(--serif);font-size:1.05rem;color:rgba(252,251,248,0.65);font-weight:300;cursor:pointer}
@@ -160,7 +186,6 @@ footer{background:var(--ink);color:rgba(252,251,248,0.4);padding:2.2rem 5vw;disp
     <span>Galerie d'art enfantin &nbsp;·&nbsp; 2025</span>
   </footer>
 </div>
-
 
 <!-- NITON D'OR -->
 <div id="pg-n" class="pg">
@@ -224,22 +249,34 @@ footer{background:var(--ink);color:rgba(252,251,248,0.4);padding:2.2rem 5vw;disp
   <div class="sl">
     <div>
       <h2>Exposez l'œuvre de votre <em>enfant</em></h2>
-      <p class="sp">Toutes les créations sont les bienvenues. Remplissez le formulaire et votre œuvre sera examinée puis publiée dans la galerie sous 48 heures.</p>
+      <p class="sp">Toutes les créations sont les bienvenues. Remplissez le formulaire ci-contre&nbsp;; votre soumission sera examinée et vous serez notifié par email sous 48 heures.</p>
       <div class="steps">
         <div class="step"><div class="sn">1</div><div class="st">Remplissez les informations de l'enfant et décrivez l'œuvre</div></div>
-        <div class="step"><div class="sn">2</div><div class="st">Téléchargez une photo nette de l'œuvre (jpg, png — max 10 Mo)</div></div>
+        <div class="step"><div class="sn">2</div><div class="st">Joignez ou envoyez une photo nette de l'œuvre par email</div></div>
         <div class="step"><div class="sn">3</div><div class="st">Nous examinons chaque soumission avec soin sous 48 h</div></div>
         <div class="step"><div class="sn">4</div><div class="st">L'œuvre est publiée dans la galerie, le parent notifié par email</div></div>
       </div>
       <p class="sp" style="margin-top:2rem;font-size:0.82rem">Les œuvres sélectionnées seront éligibles au concours <em style="font-family:var(--serif);color:var(--am)">Le Niton d'or</em>.</p>
     </div>
-    <div class="fw">
+
+    <div class="fw" id="form-wrapper">
       <div class="fr2">
-        <div class="fg"><label>Prénom de l'enfant</label><input type="text" placeholder="Léa" id="f-prenom"></div>
-        <div class="fg"><label>Âge</label><input type="number" placeholder="7" min="3" max="12" id="f-age"></div>
+        <div class="fg">
+          <label>Prénom de l'enfant <span style="color:var(--am)">*</span></label>
+          <input type="text" placeholder="Léa" id="f-prenom">
+        </div>
+        <div class="fg">
+          <label>Âge <span style="color:var(--am)">*</span></label>
+          <input type="number" placeholder="7" min="3" max="12" id="f-age" oninput="updateCatHint()">
+          <div class="cat-hint" id="cat-hint"></div>
+        </div>
       </div>
-      <div class="fg"><label>Titre de l'œuvre</label><input type="text" placeholder="Mon chat dans le jardin" id="f-titre"></div>
-      <div class="fg"><label>Technique</label>
+      <div class="fg">
+        <label>Titre de l'œuvre <span style="color:var(--am)">*</span></label>
+        <input type="text" placeholder="Mon chat dans le jardin" id="f-titre">
+      </div>
+      <div class="fg">
+        <label>Technique <span style="color:var(--am)">*</span></label>
         <select id="f-technique">
           <option value="">Choisir…</option>
           <option>Peinture</option>
@@ -251,16 +288,34 @@ footer{background:var(--ink);color:rgba(252,251,248,0.4);padding:2.2rem 5vw;disp
           <option>Autre medium / support</option>
         </select>
       </div>
-      <div class="fg"><label>Photo de l'œuvre</label>
-        <div class="uz" onclick="this.querySelector('input').click()">
-          <strong>Cliquer pour télécharger</strong>
-          <p>JPG, PNG ou HEIC &nbsp;·&nbsp; max 10 Mo</p>
-          <input type="file" accept="image/*" id="f-photo" style="display:none">
+      <div class="fg">
+        <label>Photo de l'œuvre</label>
+        <div class="uz" id="uz-zone" onclick="document.getElementById('f-photo').click()">
+          <div class="uz-inner" id="uz-inner">
+            <strong>Cliquer pour ajouter</strong>
+            <p>JPG, PNG ou HEIC &nbsp;·&nbsp; max 10 Mo</p>
+          </div>
+          <div class="uz-preview" id="uz-preview">
+            <img id="uz-img" src="" alt="Aperçu">
+            <div class="uz-preview-label">Cliquer pour changer</div>
+          </div>
+          <input type="file" accept="image/*" id="f-photo" style="display:none" onchange="handlePhotoChange(this)">
         </div>
+        <p style="font-size:0.72rem;color:var(--sg);margin-top:0.5rem;line-height:1.6">
+          Vous pouvez aussi envoyer la photo par email après soumission du formulaire.
+        </p>
       </div>
-      <div class="fg"><label>Email du parent / tuteur</label><input type="email" placeholder="parent@email.com" id="f-email"></div>
-      <div class="fg"><label>Message (optionnel)</label><textarea placeholder="Un mot sur cette œuvre, l'inspiration de l'enfant…" id="f-message"></textarea></div>
-      <button class="sb" onclick="handleSubmit()">Envoyer la soumission</button>
+      <div class="fg">
+        <label>Email du parent / tuteur <span style="color:var(--am)">*</span></label>
+        <input type="email" placeholder="parent@email.com" id="f-email">
+      </div>
+      <div class="fg">
+        <label>Message (optionnel)</label>
+        <textarea placeholder="Un mot sur cette œuvre, l'inspiration de l'enfant…" id="f-message"></textarea>
+      </div>
+      <button class="sb" id="submit-btn" onclick="handleSubmit()">
+        <span id="submit-label">Envoyer la soumission</span>
+      </button>
       <p class="notice">En soumettant, vous acceptez que l'œuvre puisse être publiée sur La Nitonnerie.<br>Aucune donnée personnelle n'est partagée à des tiers.</p>
     </div>
   </div>
@@ -271,13 +326,20 @@ footer{background:var(--ink);color:rgba(252,251,248,0.4);padding:2.2rem 5vw;disp
 </div>
 
 <script>
+// ── CONFIG ──────────────────────────────────────────────────────────────────
+// ⚠️  Remplacez ce token par un token dédié avec scopes :
+//     data.records:read  +  data.records:write  (sur cette base uniquement)
 var AT_TOKEN = 'patWXe5ZKY4RBZUB8.b86b66205056ad697144e2b1bb92ce346258c7a09cfc6c6f9145f7383f448eef';
 var AT_BASE  = 'appCRGgKOrUSJYWJ8';
 var AT_TABLE = 'tbl9J6znXf0FuiW7n';
+// Adresse email affichée dans le message de succès (pour envoi de la photo)
+var CONTACT_EMAIL = 'lanitonnerie@gmail.com';
+// ────────────────────────────────────────────────────────────────────────────
 
 var ALL_WORKS = [];
 var curFilter = 'all';
 
+// ── LECTURE GALERIE ──────────────────────────────────────────────────────────
 async function loadData() {
   try {
     var fields = ['Titre','Technique','Categorie','Publier','Prenom','Age','Photo'];
@@ -367,6 +429,139 @@ document.querySelectorAll('.fb').forEach(function(b){
   });
 });
 
+// ── FORMULAIRE ───────────────────────────────────────────────────────────────
+
+// Aperçu photo local
+function handlePhotoChange(input) {
+  if (!input.files || !input.files[0]) return;
+  var file = input.files[0];
+  if (file.size > 10 * 1024 * 1024) {
+    alert('L\'image dépasse 10 Mo. Merci de la compresser avant de l\'envoyer.');
+    input.value = '';
+    return;
+  }
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    document.getElementById('uz-img').src = e.target.result;
+    document.getElementById('uz-inner').style.display = 'none';
+    document.getElementById('uz-preview').style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+}
+
+// Indication catégorie selon l'âge
+function updateCatHint() {
+  var age = parseInt(document.getElementById('f-age').value);
+  var hint = document.getElementById('cat-hint');
+  if (age >= 3 && age <= 6) {
+    hint.textContent = '→ Catégorie Petits Nitons (3–6 ans)';
+    hint.classList.add('show');
+  } else if (age >= 7 && age <= 12) {
+    hint.textContent = '→ Catégorie Grands Nitons (7–12 ans)';
+    hint.classList.add('show');
+  } else {
+    hint.classList.remove('show');
+  }
+}
+
+// Soumission vers Airtable
+async function handleSubmit() {
+  var prenom = document.getElementById('f-prenom').value.trim();
+  var age    = parseInt(document.getElementById('f-age').value);
+  var titre  = document.getElementById('f-titre').value.trim();
+  var tech   = document.getElementById('f-technique').value;
+  var email  = document.getElementById('f-email').value.trim();
+  var msg    = document.getElementById('f-message').value.trim();
+
+  if (!prenom || !age || !titre || !tech || !email) {
+    // Mettre en évidence les champs manquants
+    ['f-prenom','f-age','f-titre','f-technique','f-email'].forEach(function(id){
+      var el = document.getElementById(id);
+      if (!el.value || el.value === '') {
+        el.style.borderBottomColor = 'rgba(200,80,60,0.6)';
+        el.addEventListener('input', function(){ el.style.borderBottomColor = ''; }, { once: true });
+      }
+    });
+    return;
+  }
+  if (!email.includes('@')) {
+    document.getElementById('f-email').style.borderBottomColor = 'rgba(200,80,60,0.6)';
+    return;
+  }
+
+  // Catégorie auto selon l'âge
+  var categorie = age >= 3 && age <= 6 ? 'Petits Nitons' : 'Grands Nitons';
+
+  // Date ISO
+  var now = new Date().toISOString().split('T')[0];
+
+  var btn = document.getElementById('submit-btn');
+  var lbl = document.getElementById('submit-label');
+  btn.disabled = true;
+  lbl.innerHTML = '<span class="loader" style="border-top-color:#fff"></span> Envoi en cours…';
+
+  try {
+    // Construire les champs — ajoutez Email et Message à votre table Airtable si nécessaire
+    var fields = {
+      'Prenom':         prenom,
+      'Age':            age,
+      'Titre':          titre,
+      'Technique':      tech,
+      'Categorie':      categorie,
+      'Publier':        false,
+      'DateSoumission': now
+    };
+    // Champs optionnels (nécessitent les colonnes dans Airtable)
+    if (email) fields['Email']   = email;
+    if (msg)   fields['Message'] = msg;
+
+    var res = await fetch('https://api.airtable.com/v0/' + AT_BASE + '/' + AT_TABLE, {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + AT_TOKEN,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ records: [{ fields: fields }] })
+    });
+
+    if (!res.ok) {
+      var errData = await res.json();
+      // Cas fréquent : le token n'a pas les droits d'écriture
+      var msg2 = errData && errData.error && errData.error.message
+        ? errData.error.message
+        : 'Erreur ' + res.status;
+      throw new Error(msg2);
+    }
+
+    // Succès
+    showSuccess(titre, prenom);
+
+  } catch(e) {
+    btn.disabled = false;
+    lbl.textContent = 'Envoyer la soumission';
+    var friendly = e.message.includes('NOT_AUTHORIZED') || e.message.includes('AUTHENTICATION')
+      ? 'Token Airtable non autorisé en écriture. Vérifiez les scopes dans votre compte Airtable.'
+      : 'Erreur : ' + e.message;
+    alert(friendly);
+    console.error(e);
+  }
+}
+
+function showSuccess(titre, prenom) {
+  document.getElementById('form-wrapper').innerHTML =
+    '<div class="success-card">'
+    + '<div class="success-icon">✓</div>'
+    + '<h3>Soumission reçue\u00a0!</h3>'
+    + '<p>Merci pour <em style="font-family:var(--serif);color:var(--am)">\u00ab\u00a0' + titre + '\u00a0\u00bb</em> de ' + prenom + '.<br><br>'
+    + 'Pour que votre œuvre soit complète, envoyez-nous la photo par email\u00a0:'
+    + '</p>'
+    + '<div class="email-hint">' + CONTACT_EMAIL + '</div>'
+    + '<p style="margin-bottom:1.5rem">Mentionnez le titre \u00ab\u00a0' + titre + '\u00a0\u00bb dans l\'objet.<br>Nous examinerons la soumission sous <strong>48 h</strong>.</p>'
+    + '<button class="btn-outline" onclick="go(\'g\')">Voir la galerie</button>'
+    + '</div>';
+}
+
+// ── NAVIGATION ───────────────────────────────────────────────────────────────
 function go(p) {
   document.querySelectorAll('.pg').forEach(function(x){ x.classList.remove('on'); });
   document.querySelectorAll('.nav-links a').forEach(function(x){ x.classList.remove('on'); });
@@ -383,19 +578,6 @@ function handleNotify() {
   } else {
     alert('Merci d\'entrer une adresse email valide.');
   }
-}
-
-function handleSubmit() {
-  var prenom = document.getElementById('f-prenom').value.trim();
-  var age    = document.getElementById('f-age').value;
-  var titre  = document.getElementById('f-titre').value.trim();
-  var tech   = document.getElementById('f-technique').value;
-  var email  = document.getElementById('f-email').value.trim();
-  if (!prenom || !age || !titre || !tech || !email) {
-    alert('Merci de remplir tous les champs obligatoires.');
-    return;
-  }
-  alert('Merci\u00a0! La soumission de \u00ab\u00a0' + titre + '\u00a0\u00bb a bien \u00e9t\u00e9 envoy\u00e9e. Nous la traiterons sous 48\u00a0h.');
 }
 
 go('g');
