@@ -323,7 +323,7 @@ var AT_HEADERS = {'Authorization':'Bearer '+AT_TOKEN,'Content-Type':'application
 // ── GALERIE ───────────────────────────────────────────────────────────────────
 async function loadData() {
   try {
-    var fields = ['Titre','Technique','Photo','Publier','Prenom','Age','Categorie','Region'];
+    var fields = ['Titre','Technique','Photo','Publier','Prenom (from Artistes)','Age (from Artistes)','Categorie (from Artistes)','Region (from Artistes)'];
     var params = fields.map(function(f){ return 'fields[]='+encodeURIComponent(f); }).join('&');
     var res = await fetch('https://api.airtable.com/v0/'+AT_BASE+'/'+AT_OEUVRES+'?'+params,
       {headers:{'Authorization':'Bearer '+AT_TOKEN}});
@@ -332,11 +332,11 @@ async function loadData() {
     ALL_WORKS = data.records.filter(function(r){ return r.fields['Publier']===true; }).map(function(r){
       var f = r.fields;
       // Prenom/Age/Categorie/Region sont des lookup arrays
-      var prenom = Array.isArray(f['Prenom']) ? f['Prenom'][0] : (f['Prenom']||'');
-      var age    = Array.isArray(f['Age'])    ? f['Age'][0]    : (f['Age']||'');
-      var catRaw = Array.isArray(f['Categorie']) ? f['Categorie'][0] : (f['Categorie']||'');
+      var prenom = Array.isArray(f['Prenom (from Artistes)']) ? f['Prenom (from Artistes)'][0] : (f['Prenom (from Artistes)']||'');
+      var age    = Array.isArray(f['Age (from Artistes)'])    ? f['Age (from Artistes)'][0]    : (f['Age (from Artistes)']||'');
+      var catRaw = Array.isArray(f['Categorie (from Artistes)']) ? f['Categorie (from Artistes)'][0] : (f['Categorie (from Artistes)']||'');
       var cat = catRaw.indexOf('Petit')!==-1 ? 'Petits Nitons' : catRaw.indexOf('Grand')!==-1 ? 'Grands Nitons' : catRaw;
-      var region = Array.isArray(f['Region']) ? f['Region'][0] : (f['Region']||'');
+      var region = Array.isArray(f['Region (from Artistes)']) ? f['Region (from Artistes)'][0] : (f['Region (from Artistes)']||'');
       return {
         id:r.id, titre:f['Titre']||'Sans titre', technique:f['Technique']||'',
         categorie:cat, prenom:prenom, age:age, region:region,
