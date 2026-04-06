@@ -10,12 +10,17 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --cr:#F4EEE3;--cb:#FBF8F2;--ink:#1C1A16;--am:#C8923B;--sg:#A5AD9E;--pp:#A0277A;--pb:#FDE8F5;--pbo:#F0B0D8;--gp:#2E7A28;--gb:#EAF3E8;--gbo:#A8D4A4;
+  --cr:#F4EEE3;--cb:#FBF8F2;--ink:#1C1A16;--am:#C8923B;--sg:#A5AD9E;
+  --pp:#A0277A;--pb:#FDE8F5;--pbo:#E8A0CC;
+  --gp:#2E7A28;--gb:#EAF3E8;--gbo:#90C88A;
+  --mat:#EDE4D0;--frame:rgba(100,80,40,0.38);
   --serif:'Cormorant Garamond',Georgia,serif;--sans:'Inter',sans-serif;
 }
 body{background:var(--cr);color:var(--ink);font-family:var(--sans);font-weight:300;font-size:15px;line-height:1.65}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(251,248,242,0.93);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(28,26,22,0.07);padding:0 5vw;display:flex;align-items:center;justify-content:space-between;height:64px}
-.logo{font-family:var(--serif);font-size:1.35rem;font-weight:400;letter-spacing:0.03em;color:var(--ink);cursor:pointer}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(251,248,242,0.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(28,26,22,0.07);padding:0 5vw;display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:var(--serif);font-size:1.7rem;font-weight:400;letter-spacing:0.03em;color:var(--ink);cursor:pointer;line-height:1}
 .logo em{font-style:italic;color:var(--am)}
 .nav-links{display:flex;gap:2.5rem;list-style:none}
 .nav-links a{font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;color:var(--ink);opacity:0.4;cursor:pointer;transition:opacity 0.2s,color 0.2s;font-weight:400;white-space:nowrap}
@@ -24,62 +29,91 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(251,248,242,
 .pg{display:none;padding-top:64px;min-height:100vh}
 .pg.on{display:block}
 
+/* GALERIE */
 .gh{padding:3.8rem 5vw 2rem;display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid rgba(28,26,22,0.07)}
-.gh h2{font-family:var(--serif);font-size:2.6rem;font-weight:300}
+.gh h2{font-family:var(--serif);font-size:2.8rem;font-weight:300}
 .gh span{font-size:0.67rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--sg)}
 .gf{padding:1.3rem 5vw;display:flex;gap:0.6rem;flex-wrap:wrap;border-bottom:1px solid rgba(28,26,22,0.05)}
 .fb{padding:0.3rem 0.95rem;border:1px solid rgba(28,26,22,0.13);background:none;font-family:var(--sans);font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;color:var(--ink);font-weight:400;transition:all 0.2s}
 .fb:hover{border-color:var(--am);color:var(--am)}
 .fb.on{background:var(--am);color:var(--cb);border-color:var(--am)}
-.fb[data-f="Petits Nitons"].on{background:#A0277A;color:#FDE8F5;border-color:#A0277A}
-.fb[data-f="Grands Nitons"].on{background:#2E7A28;color:#EAF3E8;border-color:#2E7A28}
-.fb[data-f="Petits Nitons"]:hover{border-color:#A0277A;color:#A0277A}
-.fb[data-f="Grands Nitons"]:hover{border-color:#2E7A28;color:#2E7A28}
-.gg{padding:3rem 5vw 6rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:2.5rem}
+.fb[data-f="Petits Nitons"]:hover{border-color:var(--pp);color:var(--pp)}
+.fb[data-f="Petits Nitons"].on{background:var(--pp);color:var(--pb);border-color:var(--pp)}
+.fb[data-f="Grands Nitons"]:hover{border-color:var(--gp);color:var(--gp)}
+.fb[data-f="Grands Nitons"].on{background:var(--gp);color:var(--gb);border-color:var(--gp)}
+.gg{padding:3rem 5vw 6rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:2.8rem}
 .ac{cursor:pointer}
-.ai{aspect-ratio:3/4;margin-bottom:1rem;overflow:hidden;position:relative;background:var(--cb);box-shadow:0 2px 14px rgba(28,26,22,0.07)}
+
+/* Cadre galerie */
+.ai{
+  aspect-ratio:3/4;margin-bottom:1rem;overflow:hidden;position:relative;
+  background:var(--mat);
+  border:8px solid var(--mat);
+  box-shadow:0 0 0 1.5px var(--frame),0 8px 32px rgba(28,26,22,0.13);
+  transition:box-shadow 0.3s;
+}
+.ac:hover .ai{box-shadow:0 0 0 1.5px var(--frame),0 14px 40px rgba(28,26,22,0.18)}
 .ai img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s cubic-bezier(0.25,0,0,1)}
 .ac:hover .ai img{transform:scale(1.04)}
-.ai .placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
-.ai .placeholder svg{width:30px;height:30px;opacity:0.1}
+.ai .placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--cb)}
+.ai .placeholder svg{width:28px;height:28px;opacity:0.1}
 .ao{position:absolute;inset:0;background:rgba(28,26,22,0);transition:background 0.3s}
-.ac:hover .ao{background:rgba(28,26,22,0.04)}
-.cat-badge{position:absolute;bottom:0.75rem;left:0.75rem;display:flex;align-items:center;gap:0.32rem;font-size:0.57rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.23rem 0.6rem 0.23rem 0.45rem;font-weight:400;backdrop-filter:blur(6px)}
-.badge-p{background:var(--pb);color:var(--pp);border:1px solid var(--pbo)}
-.badge-g{background:var(--gb);color:var(--gp);border:1px solid var(--gbo)}
-.badge-icon{width:13px;height:13px;flex-shrink:0}
-.at h4{font-family:var(--serif);font-size:1.1rem;font-weight:400;margin-bottom:0.12rem}
-.at .by{font-size:0.68rem;color:var(--sg);letter-spacing:0.05em}
+.ac:hover .ao{background:rgba(28,26,22,0.03)}
+
+/* Badge cercle */
+.cat-badge{
+  position:absolute;bottom:0.8rem;left:0.8rem;
+  width:50px;height:50px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.47rem;letter-spacing:0.09em;text-transform:uppercase;
+  text-align:center;line-height:1.35;font-weight:500;
+  font-family:var(--sans);backdrop-filter:blur(4px);
+}
+.badge-p{background:rgba(253,232,245,0.92);color:var(--pp);border:1.5px solid var(--pbo)}
+.badge-g{background:rgba(234,243,232,0.92);color:var(--gp);border:1.5px solid var(--gbo)}
+
+.at h4{font-family:var(--serif);font-size:1.12rem;font-weight:400;margin-bottom:0.18rem}
+.at .by{font-size:0.7rem;color:var(--sg);letter-spacing:0.03em;line-height:1.5}
 .at .ag{display:inline-block;margin-top:0.4rem;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--am);border-bottom:1px solid rgba(200,146,59,0.22);padding-bottom:1px}
 .state-msg{padding:5rem 0;text-align:center;color:var(--sg);font-size:0.85rem;letter-spacing:0.05em;grid-column:1/-1;line-height:2.2}
 .loader{display:inline-block;width:16px;height:16px;border:1px solid rgba(28,26,22,0.1);border-top-color:var(--am);border-radius:50%;animation:spin 0.8s linear infinite;vertical-align:middle;margin-right:0.4rem}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* NITON D'OR */
-.niton-wrap{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 64px)}
-.niton-left{padding:6rem 5vw 6rem 6vw;display:flex;flex-direction:column;justify-content:center}
-.niton-right{background:var(--ink);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.niton-right::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 42%,rgba(200,146,59,0.15) 0%,rgba(28,26,22,0) 62%);pointer-events:none;z-index:1}
-#trophy-canvas{width:100%;height:100%;position:absolute;inset:0;display:block;z-index:0}
-.trophy-label{position:absolute;bottom:2.2rem;left:50%;transform:translateX(-50%);font-family:var(--serif);font-size:0.85rem;font-style:italic;color:rgba(200,146,59,0.4);letter-spacing:0.14em;white-space:nowrap;pointer-events:none;z-index:2}
-.eyebrow{font-size:0.64rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--sg);margin-bottom:1.5rem}
-.niton-left h2{font-family:var(--serif);font-size:clamp(2.5rem,3.8vw,4.0rem);font-weight:300;line-height:1.06;margin-bottom:1rem}
-.niton-left h2 em{font-style:italic;color:var(--am)}
-.niton-left .sub{font-size:0.91rem;color:rgba(28,26,22,0.48);max-width:390px;line-height:1.95;margin-bottom:2.6rem}
+/* NITON D'OR — vertical */
+.nd-hero{padding:7rem 5vw 5rem;text-align:center;max-width:680px;margin:0 auto}
+.eyebrow{font-size:0.64rem;letter-spacing:0.26em;text-transform:uppercase;color:var(--sg);margin-bottom:1.4rem}
 .coming-tag{display:inline-flex;align-items:center;gap:0.5rem;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--sg);border:1px solid rgba(165,173,158,0.32);padding:0.27rem 0.8rem;margin-bottom:2rem}
-.coming-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:rgba(200,146,59,0.45);flex-shrink:0;animation:pulse 2.2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:0.35;transform:scale(1)}50%{opacity:1;transform:scale(1.35)}}
-.niton-cats{display:flex;gap:1.8rem;margin-bottom:2.8rem;flex-wrap:wrap}
-.prizes-row{display:flex;gap:2rem;margin-bottom:2.8rem;flex-wrap:wrap;align-items:center}
-.prize .val{font-family:var(--serif);font-size:2.2rem;font-weight:300;color:var(--am);line-height:1}
-.prize .rank{font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--sg);margin-top:0.28rem}
-.prize-sep{width:1px;height:42px;background:rgba(28,26,22,0.1)}
-.notify-label{font-size:0.7rem;color:var(--sg);margin-bottom:1rem;letter-spacing:0.04em}
-.notify-form{display:flex;max-width:350px}
-.notify-form input{flex:1;border:1px solid rgba(28,26,22,0.16);border-right:none;background:var(--cr);padding:0.7rem 1rem;font-family:var(--sans);font-size:0.85rem;color:var(--ink);outline:none;font-weight:300}
+.coming-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:rgba(200,146,59,0.5);flex-shrink:0;animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:0.35;transform:scale(1)}50%{opacity:1;transform:scale(1.4)}}
+.nd-hero h2{font-family:var(--serif);font-size:clamp(3rem,6vw,5.2rem);font-weight:300;line-height:1.04;margin-bottom:1.2rem}
+.nd-hero h2 em{font-style:italic;color:var(--am)}
+.nd-hero .sub{font-size:1rem;color:rgba(28,26,22,0.5);line-height:1.95;margin:0 auto}
+
+.nd-cats{padding:4rem 5vw;display:flex;justify-content:center;gap:4rem;flex-wrap:wrap;border-top:1px solid rgba(28,26,22,0.06)}
+.nd-cat{text-align:center}
+.nd-cat-circle{width:110px;height:110px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;flex-direction:column;gap:0.2rem}
+.nd-cat-circle span{font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;font-family:var(--sans);line-height:1.4;text-align:center;padding:0 8px}
+.nd-cat-circle .age{font-size:0.58rem;letter-spacing:0.08em;opacity:0.7;font-weight:300}
+.nd-cat-circle-p{background:var(--pb);border:2px solid var(--pbo);color:var(--pp)}
+.nd-cat-circle-g{background:var(--gb);border:2px solid var(--gbo);color:var(--gp)}
+
+.nd-prizes{padding:4rem 5vw;border-top:1px solid rgba(28,26,22,0.06);display:flex;justify-content:center;gap:3.5rem;flex-wrap:wrap;align-items:center;background:var(--cb)}
+.prize .val{font-family:var(--serif);font-size:2.6rem;font-weight:300;color:var(--am);line-height:1;text-align:center}
+.prize .rank{font-size:0.61rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--sg);margin-top:0.3rem;text-align:center}
+.prize-sep{width:1px;height:50px;background:rgba(28,26,22,0.1)}
+
+.nd-notify{padding:5rem 5vw;text-align:center;border-top:1px solid rgba(28,26,22,0.06)}
+.notify-label{font-size:0.75rem;color:var(--sg);margin-bottom:1.2rem;letter-spacing:0.05em}
+.notify-form{display:flex;max-width:360px;margin:0 auto}
+.notify-form input{flex:1;border:1px solid rgba(28,26,22,0.16);border-right:none;background:var(--cr);padding:0.75rem 1rem;font-family:var(--sans);font-size:0.85rem;color:var(--ink);outline:none;font-weight:300}
 .notify-form input:focus{border-color:var(--am)}
-.notify-form button{background:var(--ink);color:var(--cb);border:none;padding:0.7rem 1.3rem;font-family:var(--sans);font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;font-weight:400;transition:background 0.2s;white-space:nowrap}
+.notify-form button{background:var(--ink);color:var(--cb);border:none;padding:0.75rem 1.4rem;font-family:var(--sans);font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;font-weight:400;transition:background 0.2s;white-space:nowrap}
 .notify-form button:hover{background:var(--am)}
+
+.nd-trophy-section{background:var(--ink);position:relative;overflow:hidden}
+.nd-trophy-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 38%,rgba(200,146,59,0.18) 0%,transparent 60%);pointer-events:none;z-index:1}
+#trophy-canvas{width:100%;height:75vh;min-height:520px;display:block}
+.trophy-label{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);font-family:var(--serif);font-size:1rem;font-style:italic;color:rgba(200,146,59,0.42);letter-spacing:0.16em;white-space:nowrap;pointer-events:none;z-index:2}
 
 /* À PROPOS */
 .manifeste-stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid rgba(28,26,22,0.07)}
@@ -112,6 +146,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(251,248,242,
 .fg input:focus,.fg textarea:focus,.fg select:focus{border-bottom-color:var(--am)}
 .fg textarea{resize:vertical;min-height:70px}
 .fr2{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.fr3{display:grid;grid-template-columns:1fr 1fr 1.5fr;gap:1.5rem}
 .uz{border:1px dashed rgba(28,26,22,0.13);cursor:pointer;transition:border-color 0.2s;margin-top:0.3rem;overflow:hidden}
 .uz:hover{border-color:var(--am)}
 .uz-inner{padding:2rem;text-align:center}
@@ -135,24 +170,25 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(251,248,242,
 .success-card .btn-outline:hover{border-color:var(--am);color:var(--am)}
 
 footer{background:var(--ink);color:rgba(251,248,242,0.38);padding:2.2rem 5vw;display:flex;align-items:center;justify-content:space-between;font-size:0.68rem;letter-spacing:0.06em}
-.fl{font-family:var(--serif);font-size:1.05rem;color:rgba(251,248,242,0.6);font-weight:300;cursor:pointer}
+.fl{font-family:var(--serif);font-size:1.1rem;color:rgba(251,248,242,0.6);font-weight:300;cursor:pointer}
 .fl em{color:var(--am);font-style:italic}
 
-@media(max-width:900px){.niton-wrap{grid-template-columns:1fr}.niton-right{height:360px}.niton-left{padding:4rem 5vw}}
 @media(max-width:768px){
   nav{padding:0 1.5rem}.nav-links{gap:1rem}.nav-links a{font-size:0.57rem;letter-spacing:0.08em}
   .gh,.gf,.gg{padding-left:1.5rem;padding-right:1.5rem}
-  .gg{grid-template-columns:repeat(2,1fr);gap:1.2rem}
+  .gg{grid-template-columns:repeat(2,1fr);gap:1.4rem}
   .manifeste-stats{grid-template-columns:repeat(2,1fr)}
   .sl{grid-template-columns:1fr;gap:3rem;padding:3rem 1.5rem}
-  .prizes-row{gap:1.5rem}.prize-sep{display:none}
+  .fr3{grid-template-columns:1fr 1fr}
+  .nd-prizes{gap:2rem}.prize-sep{display:none}
   footer{flex-direction:column;gap:0.8rem;text-align:center}
 }
 </style>
 </head>
 <body>
 
-<div style="position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:0.03;background-image:url('data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%20256%20256%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cfilter%20id%3D%22n%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%220.88%22%20numOctaves%3D%224%22%20stitchTiles%3D%22stitch%22%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20filter%3D%22url(%23n)%22%2F%3E%3C%2Fsvg%3E');background-size:256px"></div>
+<!-- Grain papier subtil -->
+<div style="position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:0.028;background-image:url('data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%20256%20256%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cfilter%20id%3D%22n%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%220.88%22%20numOctaves%3D%224%22%20stitchTiles%3D%22stitch%22%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20filter%3D%22url(%23n)%22%2F%3E%3C%2Fsvg%3E');background-size:256px"></div>
 
 <nav>
   <div class="logo" onclick="go('g')">La <em>Nitonnerie</em></div>
@@ -169,8 +205,8 @@ footer{background:var(--ink);color:rgba(251,248,242,0.38);padding:2.2rem 5vw;dis
   <div class="gh"><h2>La Galerie</h2><span id="count-label"><span class="loader"></span></span></div>
   <div class="gf">
     <button class="fb on" data-f="all">Tout</button>
-    <button class="fb" data-f="Petits Nitons" style="--cat-c:#A0277A;--cat-b:#FDE8F5;--cat-bo:#F0B0D8">Petits Nitons · 3–6 ans</button>
-    <button class="fb" data-f="Grands Nitons" style="--cat-c:#2E7A28;--cat-b:#EAF3E8;--cat-bo:#A8D4A4">Grands Nitons · 7–12 ans</button>
+    <button class="fb" data-f="Petits Nitons">Petits Nitons · 3–6 ans</button>
+    <button class="fb" data-f="Grands Nitons">Grands Nitons · 7–12 ans</button>
     <button class="fb" data-f="Peinture">Peinture</button>
     <button class="fb" data-f="Aquarelle">Aquarelle</button>
     <button class="fb" data-f="Dessin">Dessin</button>
@@ -183,71 +219,51 @@ footer{background:var(--ink);color:rgba(251,248,242,0.38);padding:2.2rem 5vw;dis
 
 <!-- NITON D'OR -->
 <div id="pg-n" class="pg">
-  <div class="niton-wrap">
-    <div class="niton-left">
-      <div class="eyebrow">Concours d'art plastique</div>
-      <div class="coming-tag">Bientôt</div>
-      <h2>Le <em>Niton d'or</em></h2>
-      <p class="sub">Le premier grand concours d'art plastique ouvert aux jeunes artistes de la Nitonnerie. Deux catégories, trois podiums, des prix exceptionnels.</p>
+  <div class="nd-hero">
+    <div class="eyebrow">Concours d'art plastique</div>
+    <div class="coming-tag">Bientôt</div>
+    <h2>Le <em>Niton d'or</em></h2>
+    <p class="sub">Le premier grand concours d'art plastique ouvert aux très jeunes artistes de France. Deux catégories, trois podiums, des prix exceptionnels.</p>
+  </div>
 
-      <div class="niton-cats">
-        <svg viewBox="0 0 118 128" width="105" height="114" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="59" cy="57" r="50" fill="none" stroke="rgba(160,39,122,0.2)" stroke-width="1.2" stroke-dasharray="3.5 2.8"/>
-          <g stroke="#A0277A" stroke-width="1.2" opacity="0.28">
-            <line x1="59" y1="5" x2="59" y2="13"/><line x1="59" y1="101" x2="59" y2="109"/>
-            <line x1="7" y1="57" x2="15" y2="57"/><line x1="103" y1="57" x2="111" y2="57"/>
-            <line x1="22" y1="20" x2="28" y2="26"/><line x1="90" y1="20" x2="96" y2="26"/>
-            <line x1="22" y1="94" x2="28" y2="88"/><line x1="90" y1="94" x2="96" y2="88"/>
-          </g>
-          <circle cx="59" cy="57" r="40" fill="rgba(200,146,59,0.05)" stroke="rgba(200,146,59,0.3)" stroke-width="1.4"/>
-          <text x="59" y="49" text-anchor="middle" dominant-baseline="middle" font-family="Cormorant Garamond,Georgia,serif" font-size="21" fill="rgba(160,39,122,0.82)">✦</text>
-          <text x="59" y="67" text-anchor="middle" font-family="Inter,sans-serif" font-size="7" letter-spacing="2.2" fill="#A0277A">PETITS NITONS</text>
-          <text x="59" y="79" text-anchor="middle" font-family="Inter,sans-serif" font-size="6.5" letter-spacing="1" fill="rgba(160,39,122,0.55)">3 – 6 ans</text>
-          <text x="59" y="116" text-anchor="middle" font-family="Cormorant Garamond,Georgia,serif" font-size="8.5" fill="rgba(160,39,122,0.42)" font-style="italic">Toutes techniques</text>
-        </svg>
-
-        <svg viewBox="0 0 118 128" width="105" height="114" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="59" cy="57" r="50" fill="none" stroke="rgba(46,122,40,0.22)" stroke-width="1.5"/>
-          <g fill="rgba(46,122,40,0.22)">
-            <ellipse cx="14" cy="40" rx="6.5" ry="3.5" transform="rotate(-38 14 40)"/>
-            <ellipse cx="10" cy="53" rx="6.5" ry="3.5" transform="rotate(-18 10 53)"/>
-            <ellipse cx="12" cy="66" rx="6.5" ry="3.5" transform="rotate(10 12 66)"/>
-            <ellipse cx="18" cy="77" rx="6.5" ry="3.5" transform="rotate(28 18 77)"/>
-            <ellipse cx="104" cy="40" rx="6.5" ry="3.5" transform="rotate(38 104 40)"/>
-            <ellipse cx="108" cy="53" rx="6.5" ry="3.5" transform="rotate(18 108 53)"/>
-            <ellipse cx="106" cy="66" rx="6.5" ry="3.5" transform="rotate(-10 106 66)"/>
-            <ellipse cx="100" cy="77" rx="6.5" ry="3.5" transform="rotate(-28 100 77)"/>
-          </g>
-          <circle cx="59" cy="57" r="40" fill="rgba(46,122,40,0.06)" stroke="rgba(46,122,40,0.3)" stroke-width="1.5"/>
-          <text x="59" y="49" text-anchor="middle" dominant-baseline="middle" font-family="Georgia,serif" font-size="19" fill="rgba(46,122,40,0.82)">♛</text>
-          <text x="59" y="67" text-anchor="middle" font-family="Inter,sans-serif" font-size="7" letter-spacing="2.2" fill="#2E7A28">GRANDS NITONS</text>
-          <text x="59" y="79" text-anchor="middle" font-family="Inter,sans-serif" font-size="6.5" letter-spacing="1" fill="rgba(46,122,40,0.55)">7 – 12 ans</text>
-          <text x="59" y="116" text-anchor="middle" font-family="Cormorant Garamond,Georgia,serif" font-size="8.5" fill="rgba(46,122,40,0.42)" font-style="italic">Toutes techniques</text>
-        </svg>
-      </div>
-
-      <div class="prizes-row">
-        <div class="prize"><div class="val">2 000 €</div><div class="rank">1er prix</div></div>
-        <div class="prize-sep"></div>
-        <div class="prize"><div class="val">1 000 €</div><div class="rank">2e prix</div></div>
-        <div class="prize-sep"></div>
-        <div class="prize"><div class="val">500 €</div><div class="rank">3e prix</div></div>
-        <div class="prize-sep"></div>
-        <div class="prize"><div class="val" style="font-size:1.25rem;line-height:1.4">Goodies<br>beaux-arts</div><div class="rank">Mentions</div></div>
-      </div>
-
-      <p class="notify-label">Être notifié à l'ouverture des inscriptions</p>
-      <div class="notify-form">
-        <input type="email" placeholder="votre@email.com" id="notify-email">
-        <button onclick="handleNotify()">Me prévenir</button>
+  <div class="nd-cats">
+    <div class="nd-cat">
+      <div class="nd-cat-circle nd-cat-circle-p">
+        <span>Petits<br>Nitons</span>
+        <span class="age">3 – 6 ans</span>
       </div>
     </div>
-
-    <div class="niton-right">
-      <canvas id="trophy-canvas"></canvas>
-      <div class="trophy-label">Le Niton d'or</div>
+    <div class="nd-cat">
+      <div class="nd-cat-circle nd-cat-circle-g">
+        <span>Grands<br>Nitons</span>
+        <span class="age">7 – 12 ans</span>
+      </div>
     </div>
   </div>
+
+  <div class="nd-prizes">
+    <div class="prize"><div class="val">2 000 €</div><div class="rank">1er prix</div></div>
+    <div class="prize-sep"></div>
+    <div class="prize"><div class="val">1 000 €</div><div class="rank">2e prix</div></div>
+    <div class="prize-sep"></div>
+    <div class="prize"><div class="val">500 €</div><div class="rank">3e prix</div></div>
+    <div class="prize-sep"></div>
+    <div class="prize"><div class="val" style="font-size:1.3rem;line-height:1.5">Goodies<br>beaux-arts</div><div class="rank">Mentions</div></div>
+  </div>
+
+  <div class="nd-notify">
+    <p class="notify-label">Être notifié à l'ouverture des inscriptions</p>
+    <div class="notify-form">
+      <input type="email" placeholder="votre@email.com" id="notify-email">
+      <button onclick="handleNotify()">Me prévenir</button>
+    </div>
+  </div>
+
+  <div class="nd-trophy-section">
+    <canvas id="trophy-canvas"></canvas>
+    <div class="trophy-label">Le Niton d'or</div>
+  </div>
+
   <footer><span class="fl" onclick="go('g')">La <em>Nitonnerie</em></span><span>Galerie d'art enfantin &nbsp;·&nbsp; 2025</span></footer>
 </div>
 
@@ -264,7 +280,7 @@ footer{background:var(--ink);color:rgba(251,248,242,0.38);padding:2.2rem 5vw;dis
     <h2 class="manifeste-h">L'art des enfants est<br><em>une grâce rare.</em></h2>
     <p class="manifeste-p">L'innocence, la spontanéité, la créativité sans limite des enfants sont aux antipodes de ce qui agite le monde en ce moment — les conflits, la marchandisation, la dépendance croissante à l'intelligence artificielle et aux nœuds informatiques. Les enfants n'ont pas (encore) recours à l'IA&nbsp;; leur imagination est d'une autre nature qu'un data center. Ils ont la chance inestimable de connaître cet état de transe qui caractérise l'acte créateur authentique.</p>
     <p class="manifeste-p">Tous les enfants n'ont pas forcément un tempérament artistique, mais tous, sans exception, peuvent connaître à un moment ou à un autre une inspiration exceptionnelle et produire — sans même s'en rendre compte — une œuvre d'art inédite. Comme chez les adultes, ces circonstances sont rares, et par conséquent précieuses.</p>
-    <p class="manifeste-p">La Nitonnerie propose un espace virtuel où partager ces créations. Les parents sont libres de soumettre ce qu'ils jugeront digne d'intérêt. Nous nous accordons la liberté de sélectionner ce qui nous semblera pertinent — et de ne pas publier les créations manquant d'originalité, inabouties, ou dépourvues de ce quelque chose qui caractérise une véritable œuvre&nbsp;: cette espèce de souffle. Cette discrimination nécessaire doit être acceptée sans susceptibilité&nbsp;: absence de publication ne veut pas dire, bien évidemment, absence de talent.</p>
+    <p class="manifeste-p">La Nitonnerie propose un espace virtuel où partager ces créations. Les parents sont libres de soumettre ce qu'ils jugeront digne d'intérêt. Nous nous accordons la liberté de sélectionner ce qui nous semblera pertinent — et de ne pas publier les créations manquant d'originalité, inabouties, ou dépourvues de ce quelque chose qui caractérise une véritable œuvre&nbsp;: cette espèce de souffle.</p>
     <div class="manifeste-footer">
       <button class="btn-a" onclick="go('s')">Soumettre une œuvre</button>
       <span style="font-size:0.73rem;color:var(--sg);letter-spacing:0.05em">La Nitonnerie, 2025</span>
@@ -288,13 +304,39 @@ footer{background:var(--ink);color:rgba(251,248,242,0.38);padding:2.2rem 5vw;dis
       <p class="sp" style="margin-top:2rem;font-size:0.82rem">Les œuvres sélectionnées seront éligibles au concours <em style="font-family:var(--serif);color:var(--am)">Le Niton d'or</em>.</p>
     </div>
     <div class="fw" id="form-wrapper">
-      <div class="fr2">
-        <div class="fg"><label>Prénom de l'enfant <span style="color:var(--am)">*</span></label><input type="text" placeholder="Léa" id="f-prenom"></div>
+      <div class="fr3">
+        <div class="fg"><label>Prénom <span style="color:var(--am)">*</span></label><input type="text" placeholder="Léa" id="f-prenom"></div>
         <div class="fg"><label>Âge <span style="color:var(--am)">*</span></label><input type="number" placeholder="7" min="3" max="12" id="f-age" oninput="updateCatHint()"><div class="cat-hint" id="cat-hint"></div></div>
+        <div class="fg">
+          <label>Région <span style="color:var(--am)">*</span></label>
+          <select id="f-region">
+            <option value="">Choisir…</option>
+            <optgroup label="Métropole">
+              <option>Auvergne-Rhône-Alpes</option><option>Bourgogne-Franche-Comté</option>
+              <option>Bretagne</option><option>Centre-Val de Loire</option><option>Corse</option>
+              <option>Grand Est</option><option>Hauts-de-France</option><option>Île-de-France</option>
+              <option>Normandie</option><option>Nouvelle-Aquitaine</option><option>Occitanie</option>
+              <option>Pays de la Loire</option><option>Provence-Alpes-Côte d'Azur</option>
+            </optgroup>
+            <optgroup label="DOM-TOM">
+              <option>Guadeloupe</option><option>Martinique</option><option>Guyane</option>
+              <option>La Réunion</option><option>Mayotte</option><option>Saint-Pierre-et-Miquelon</option>
+              <option>Saint-Barthélemy</option><option>Saint-Martin</option>
+              <option>Wallis-et-Futuna</option><option>Polynésie française</option>
+              <option>Nouvelle-Calédonie</option>
+            </optgroup>
+          </select>
+        </div>
       </div>
       <div class="fg"><label>Titre de l'œuvre <span style="color:var(--am)">*</span></label><input type="text" placeholder="Mon chat dans le jardin" id="f-titre"></div>
       <div class="fg"><label>Technique <span style="color:var(--am)">*</span></label>
-        <select id="f-technique"><option value="">Choisir…</option><option>Peinture</option><option>Dessin au crayon</option><option>Feutres / crayons de couleur</option><option>Collage</option><option>Aquarelle</option><option>Sculpture photographiée</option><option>Autre medium / support</option></select>
+        <select id="f-technique">
+          <option value="">Choisir…</option>
+          <option>Peinture</option><option>Dessin au crayon</option>
+          <option>Feutres / crayons de couleur</option><option>Collage</option>
+          <option>Aquarelle</option><option>Sculpture photographiée</option>
+          <option>Autre medium / support</option>
+        </select>
       </div>
       <div class="fg"><label>Photo de l'œuvre</label>
         <div class="uz" onclick="document.getElementById('f-photo').click()">
@@ -314,26 +356,28 @@ footer{background:var(--ink);color:rgba(251,248,242,0.38);padding:2.2rem 5vw;dis
 </div>
 
 <script>
+// ── CONFIG ────────────────────────────────────────────────────────────────────
 var AT_TOKEN = 'patXBTkvRqR87CFKO.92a2f3540374de1fca10cf9899844e705358fe441c5bf5d56ff2e1328db36621';
 var AT_BASE  = 'appCRGgKOrUSJYWJ8';
 var AT_TABLE = 'tbl9J6znXf0FuiW7n';
 var CONTACT_EMAIL = 'lanitonnerie@gmail.com';
-var ALL_WORKS = [];
-var curFilter = 'all';
+var ALL_WORKS = [], curFilter = 'all';
 
-var ICON_P = '<svg class="badge-icon" viewBox="0 0 13 13" xmlns="http://www.w3.org/2000/svg"><path d="M6.5 0.5L7.9 4.8H12.4L8.75 7.35L10.15 11.65L6.5 9.1L2.85 11.65L4.25 7.35L0.6 4.8H5.1Z" fill="#A0277A" opacity="0.82"/></svg>';
-var ICON_G = '<svg class="badge-icon" viewBox="0 0 13 13" xmlns="http://www.w3.org/2000/svg"><path d="M1.5 10.5h10M2.5 10.5V7.5s.5 1 2 1 1.5-1 2-1 .5 1 2 1 1.5-1 1.5-1v3M4.5 7.5V5M8.5 7.5V5M5 5s0-2 1.5-2S8 5 8 5" stroke="#2E7A28" stroke-width="1.05" stroke-linecap="round" fill="none"/></svg>';
-
+// ── GALERIE ───────────────────────────────────────────────────────────────────
 async function loadData() {
   try {
-    var fields = ['Titre','Technique','Categorie','Publier','Prenom','Age','Photo'];
+    var fields = ['Titre','Technique','Categorie','Publier','Prenom','Age','Photo','Region'];
     var params = fields.map(function(f){ return 'fields[]='+encodeURIComponent(f); }).join('&');
     var res = await fetch('https://api.airtable.com/v0/'+AT_BASE+'/'+AT_TABLE+'?'+params, {headers:{'Authorization':'Bearer '+AT_TOKEN}});
     if (!res.ok) throw new Error('Airtable '+res.status);
     var data = await res.json();
     ALL_WORKS = data.records.filter(function(r){ return r.fields['Publier']===true; }).map(function(r){
       var f = r.fields;
-      return {id:r.id, titre:f['Titre']||'Sans titre', technique:f['Technique']||'', categorie:f['Categorie']||'', prenom:f['Prenom']||'', age:f['Age']||'', photo:f['Photo']&&f['Photo'].length?f['Photo'][0].url:null};
+      return {
+        id:r.id, titre:f['Titre']||'Sans titre', technique:f['Technique']||'',
+        categorie:f['Categorie']||'', prenom:f['Prenom']||'', age:f['Age']||'',
+        region:f['Region']||'', photo:f['Photo']&&f['Photo'].length?f['Photo'][0].url:null
+      };
     });
     renderGal(curFilter); updateStats();
   } catch(e) {
@@ -344,231 +388,304 @@ async function loadData() {
 
 function card(w) {
   var ip = w.categorie==='Petits Nitons';
-  var img = w.photo?'<img src="'+w.photo+'" alt="'+w.titre+'" loading="lazy">':'<div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>';
-  var badge = w.categorie?'<span class="cat-badge '+(ip?'badge-p':'badge-g')+'">'+(ip?ICON_P:ICON_G)+w.categorie+'</span>':'';
-  var meta = [w.prenom,w.technique].filter(Boolean).join(' \u00b7 ');
-  return '<div class="ac"><div class="ai">'+img+'<div class="ao"></div>'+badge+'</div><div class="at"><h4>'+w.titre+'</h4>'+(meta?'<div class="by">'+meta+'</div>':'')+(w.age?'<span class="ag">'+w.age+' ans</span>':'')+'</div></div>';
+  var img = w.photo
+    ? '<img src="'+w.photo+'" alt="'+w.titre+'" loading="lazy">'
+    : '<div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>';
+  var badge = w.categorie ? '<div class="cat-badge '+(ip?'badge-p':'badge-g')+'">'+(ip?'Petits<br>Nitons':'Grands<br>Nitons')+'</div>' : '';
+
+  // Ligne auteur : "par Prénom, Région"
+  var authorParts = [];
+  if (w.prenom) {
+    var who = 'par '+w.prenom;
+    if (w.region) who += ', '+w.region;
+    authorParts.push(who);
+  }
+  if (w.technique) authorParts.push(w.technique);
+  var byLine = authorParts.join(' \u00b7 ');
+
+  return '<div class="ac"><div class="ai">'+img+'<div class="ao"></div>'+badge+'</div>'
+    +'<div class="at"><h4>'+w.titre+'</h4>'
+    +(byLine?'<div class="by">'+byLine+'</div>':'')
+    +(w.age?'<span class="ag">'+w.age+' ans</span>':'')
+    +'</div></div>';
 }
 
 function renderGal(f) {
   curFilter = f;
-  var list = f==='all'?ALL_WORKS:ALL_WORKS.filter(function(w){ return w.categorie===f||w.technique===f; });
-  document.getElementById('gg').innerHTML = list.length?list.map(card).join(''):'<div class="state-msg">Aucune \u0153uvre dans cette cat\u00e9gorie pour le moment.</div>';
-  var n=list.length; document.getElementById('count-label').textContent=n+' \u0153uvre'+(n>1?'s':'')+' expos\u00e9e'+(n>1?'s':'');
+  var list = f==='all' ? ALL_WORKS : ALL_WORKS.filter(function(w){ return w.categorie===f||w.technique===f; });
+  document.getElementById('gg').innerHTML = list.length ? list.map(card).join('') : '<div class="state-msg">Aucune \u0153uvre dans cette cat\u00e9gorie pour le moment.</div>';
+  var n = list.length;
+  document.getElementById('count-label').textContent = n+' \u0153uvre'+(n>1?'s':'')+' expos\u00e9e'+(n>1?'s':'');
 }
 
 function updateStats() {
-  document.getElementById('stat-oeuvres').textContent=ALL_WORKS.length;
-  var p={}; ALL_WORKS.forEach(function(w){ if(w.prenom)p[w.prenom]=1; });
-  document.getElementById('stat-artistes').textContent=Object.keys(p).length;
+  document.getElementById('stat-oeuvres').textContent = ALL_WORKS.length;
+  var p = {}; ALL_WORKS.forEach(function(w){ if(w.prenom) p[w.prenom]=1; });
+  document.getElementById('stat-artistes').textContent = Object.keys(p).length;
 }
 
 document.querySelectorAll('.fb').forEach(function(b){
-  b.addEventListener('click',function(){ document.querySelectorAll('.fb').forEach(function(x){x.classList.remove('on');}); this.classList.add('on'); renderGal(this.getAttribute('data-f')); });
+  b.addEventListener('click', function(){
+    document.querySelectorAll('.fb').forEach(function(x){ x.classList.remove('on'); });
+    this.classList.add('on'); renderGal(this.getAttribute('data-f'));
+  });
 });
 
+// ── FORMULAIRE ────────────────────────────────────────────────────────────────
 function handlePhotoChange(input) {
-  if(!input.files||!input.files[0]) return;
-  if(input.files[0].size>10*1024*1024){alert('L\'image dépasse 10 Mo.');input.value='';return;}
-  var r=new FileReader(); r.onload=function(e){ document.getElementById('uz-img').src=e.target.result; document.getElementById('uz-inner').style.display='none'; document.getElementById('uz-preview').style.display='block'; }; r.readAsDataURL(input.files[0]);
+  if (!input.files||!input.files[0]) return;
+  if (input.files[0].size>10*1024*1024) { alert("L'image dépasse 10 Mo."); input.value=''; return; }
+  var r = new FileReader();
+  r.onload = function(e) {
+    document.getElementById('uz-img').src = e.target.result;
+    document.getElementById('uz-inner').style.display = 'none';
+    document.getElementById('uz-preview').style.display = 'block';
+  };
+  r.readAsDataURL(input.files[0]);
 }
 
 function updateCatHint() {
-  var age=parseInt(document.getElementById('f-age').value), h=document.getElementById('cat-hint');
-  if(age>=3&&age<=6){h.textContent='→ Catégorie Petits Nitons (3–6 ans)';h.classList.add('show');}
-  else if(age>=7&&age<=12){h.textContent='→ Catégorie Grands Nitons (7–12 ans)';h.classList.add('show');}
-  else{h.classList.remove('show');}
+  var age = parseInt(document.getElementById('f-age').value), h = document.getElementById('cat-hint');
+  if (age>=3&&age<=6) { h.textContent='→ Catégorie Petits Nitons (3–6 ans)'; h.classList.add('show'); }
+  else if (age>=7&&age<=12) { h.textContent='→ Catégorie Grands Nitons (7–12 ans)'; h.classList.add('show'); }
+  else { h.classList.remove('show'); }
 }
 
 async function handleSubmit() {
-  var prenom=document.getElementById('f-prenom').value.trim(), age=parseInt(document.getElementById('f-age').value);
-  var titre=document.getElementById('f-titre').value.trim(), tech=document.getElementById('f-technique').value;
-  var email=document.getElementById('f-email').value.trim(), msg=document.getElementById('f-message').value.trim();
-  if(!prenom||!age||!titre||!tech||!email){alert('Merci de remplir tous les champs obligatoires.');return;}
-  var cat=age>=3&&age<=6?'Petits Nitons':'Grands Nitons';
-  var btn=document.getElementById('submit-btn'), lbl=document.getElementById('submit-label');
+  var prenom  = document.getElementById('f-prenom').value.trim();
+  var age     = parseInt(document.getElementById('f-age').value);
+  var region  = document.getElementById('f-region').value;
+  var titre   = document.getElementById('f-titre').value.trim();
+  var tech    = document.getElementById('f-technique').value;
+  var email   = document.getElementById('f-email').value.trim();
+  var msg     = document.getElementById('f-message').value.trim();
+  if (!prenom||!age||!region||!titre||!tech||!email) { alert('Merci de remplir tous les champs obligatoires.'); return; }
+  var cat = age>=3&&age<=6?'Petits Nitons':'Grands Nitons';
+  var btn = document.getElementById('submit-btn'), lbl = document.getElementById('submit-label');
   btn.disabled=true; lbl.innerHTML='<span class="loader" style="border-top-color:#fff"></span> Envoi…';
   try {
-    var fields={'Prenom':prenom,'Age':age,'Titre':titre,'Technique':tech,'Categorie':cat,'Publier':false,'DateSoumission':new Date().toISOString().split('T')[0]};
-    if(email) fields['Email']=email; if(msg) fields['Message']=msg;
-    var res=await fetch('https://api.airtable.com/v0/'+AT_BASE+'/'+AT_TABLE,{method:'POST',headers:{'Authorization':'Bearer '+AT_TOKEN,'Content-Type':'application/json'},body:JSON.stringify({records:[{fields:fields}]})});
-    if(!res.ok){var e=await res.json(); throw new Error(e&&e.error&&e.error.message?e.error.message:'Erreur '+res.status);}
-    document.getElementById('form-wrapper').innerHTML='<div class="success-card"><div class="success-icon">✓</div><h3>Soumission reçue\u00a0!</h3><p>Merci pour <em style="font-family:var(--serif);color:var(--am)">\u00ab\u00a0'+titre+'\u00a0\u00bb</em> de '+prenom+'.<br><br>Envoyez-nous la photo par email\u00a0:</p><div class="email-hint">'+CONTACT_EMAIL+'</div><p>Objet\u00a0: \u00ab\u00a0'+titre+'\u00a0\u00bb \u2014 Réponse sous <strong>48 h</strong>.</p><button class="btn-outline" onclick="go(\'g\')">Voir la galerie</button></div>';
-  } catch(e){btn.disabled=false;lbl.textContent='Envoyer la soumission';alert('Erreur\u00a0: '+e.message);}
+    var fields = {'Prenom':prenom,'Age':age,'Region':region,'Titre':titre,'Technique':tech,'Categorie':cat,'Publier':false,'DateSoumission':new Date().toISOString().split('T')[0]};
+    if (email) fields['Email']=email;
+    if (msg)   fields['Message']=msg;
+    var res = await fetch('https://api.airtable.com/v0/'+AT_BASE+'/'+AT_TABLE, {
+      method:'POST', headers:{'Authorization':'Bearer '+AT_TOKEN,'Content-Type':'application/json'},
+      body: JSON.stringify({records:[{fields:fields}]})
+    });
+    if (!res.ok) { var e=await res.json(); throw new Error(e&&e.error&&e.error.message?e.error.message:'Erreur '+res.status); }
+    document.getElementById('form-wrapper').innerHTML =
+      '<div class="success-card"><div class="success-icon">✓</div>'
+      +'<h3>Soumission reçue\u00a0!</h3>'
+      +'<p>Merci pour <em style="font-family:var(--serif);color:var(--am)">\u00ab\u00a0'+titre+'\u00a0\u00bb</em> de '+prenom+'.<br><br>Envoyez-nous la photo par email\u00a0:</p>'
+      +'<div class="email-hint">'+CONTACT_EMAIL+'</div>'
+      +'<p>Objet\u00a0: \u00ab\u00a0'+titre+'\u00a0\u00bb \u2014 Réponse sous <strong>48 h</strong>.</p>'
+      +'<button class="btn-outline" onclick="go(\'g\')">Voir la galerie</button></div>';
+  } catch(e) { btn.disabled=false; lbl.textContent='Envoyer la soumission'; alert('Erreur\u00a0: '+e.message); }
 }
 
+// ── NAVIGATION ────────────────────────────────────────────────────────────────
 function go(p) {
-  document.querySelectorAll('.pg').forEach(function(x){x.classList.remove('on');});
-  document.querySelectorAll('.nav-links a').forEach(function(x){x.classList.remove('on');});
+  document.querySelectorAll('.pg').forEach(function(x){ x.classList.remove('on'); });
+  document.querySelectorAll('.nav-links a').forEach(function(x){ x.classList.remove('on'); });
   document.getElementById('pg-'+p).classList.add('on');
   document.getElementById('n'+p).classList.add('on');
   window.scrollTo(0,0);
-  if(p==='n') setTimeout(initTrophy,80);
+  if (p==='n') setTimeout(initTrophy, 120);
 }
 
 function handleNotify() {
-  var v=document.getElementById('notify-email').value;
-  if(v&&v.indexOf('@')>-1){alert('Merci\u00a0! Vous serez notifi\u00e9(e) \u00e0 l\'ouverture des inscriptions.');document.getElementById('notify-email').value='';}
+  var v = document.getElementById('notify-email').value;
+  if (v&&v.indexOf('@')>-1) { alert('Merci\u00a0! Vous serez notifi\u00e9(e) \u00e0 l\'ouverture des inscriptions.'); document.getElementById('notify-email').value=''; }
   else alert('Merci d\'entrer une adresse email valide.');
 }
 
-// ── TROPHÉE 3D ───────────────────────────────────────────────────────────────
+// ── TROPHÉE 3D — Petit enfant doré ───────────────────────────────────────────
 var trophyInited = false;
 function initTrophy() {
-  if (trophyInited || typeof THREE === 'undefined') return;
+  if (trophyInited || typeof THREE==='undefined') return;
   var canvas = document.getElementById('trophy-canvas');
   if (!canvas) return;
   trophyInited = true;
 
-  var W = canvas.offsetWidth || 500, H = canvas.offsetHeight || 560;
-  var renderer = new THREE.WebGLRenderer({ canvas:canvas, antialias:true, alpha:true });
+  var W = canvas.offsetWidth||600, H = canvas.offsetHeight||520;
+  var renderer = new THREE.WebGLRenderer({canvas:canvas, antialias:true, alpha:true});
   renderer.setSize(W, H);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.45;
+  renderer.toneMappingExposure = 1.5;
   renderer.outputEncoding = THREE.sRGBEncoding;
 
   var scene  = new THREE.Scene();
-  var camera = new THREE.PerspectiveCamera(38, W/H, 0.1, 100);
-  camera.position.set(0, 0.55, 5.6);
-  camera.lookAt(0, 0.25, 0);
+  var camera = new THREE.PerspectiveCamera(36, W/H, 0.1, 100);
+  camera.position.set(0, 1.05, 6.2);
+  camera.lookAt(0, 0.85, 0);
 
-  // ── Environment map procédurale (donne les vrais reflets dorés) ──
-  var eW = 512, eH = 256;
-  var eData = new Float32Array(3 * eW * eH);
-  for (var ey = 0; ey < eH; ey++) {
-    for (var ex = 0; ex < eW; ex++) {
-      var ei = ey * eW + ex;
-      var phi   = (ey / eH) * Math.PI;
-      var theta = (ex / eW) * Math.PI * 2;
-      var sinPhi = Math.sin(phi), cosPhi = Math.cos(phi);
-      var sinT = Math.sin(theta), cosT = Math.cos(theta);
-      var r = 0.05, g = 0.04, b = 0.03;
-      // Lumière principale : or chaud, haut-avant-gauche
-      var kd = Math.max(0, 0.55*sinT*sinPhi + 0.80*cosPhi + 0.15*cosT*sinPhi);
-      kd = Math.pow(kd, 2.8) * 2.4;
-      r += kd*1.0; g += kd*0.72; b += kd*0.14;
-      // Fill : ambre doux, droite
-      var fd = Math.max(0, -cosT * sinPhi) * 0.55;
-      r += fd*0.45; g += fd*0.28; b += fd*0.04;
-      // Rim : blanc froid, derrière
-      var rd = Math.max(0, cosT * sinPhi) * 0.38;
-      r += rd*0.22; g += rd*0.22; b += rd*0.28;
-      // Zénith doux
-      var td = Math.max(0, cosPhi) * 0.25;
-      r += td*0.12; g += td*0.10; b += td*0.04;
-      eData[3*ei]=r; eData[3*ei+1]=g; eData[3*ei+2]=b;
-    }
+  // ── Environment map → vrais reflets dorés ──
+  var eW=512, eH=256, eD=new Float32Array(3*eW*eH);
+  for (var ey=0;ey<eH;ey++) for (var ex=0;ex<eW;ex++) {
+    var ei=ey*eW+ex, phi=(ey/eH)*Math.PI, theta=(ex/eW)*Math.PI*2;
+    var sp=Math.sin(phi),cp=Math.cos(phi),st=Math.sin(theta),ct=Math.cos(theta);
+    var r=0.04,g=0.03,b=0.02;
+    var kd=Math.pow(Math.max(0,0.6*st*sp+0.82*cp+0.18*ct*sp),2.6)*2.2;
+    r+=kd*1.0;g+=kd*0.70;b+=kd*0.12;
+    var fd=Math.max(0,-ct*sp)*0.5; r+=fd*0.44;g+=fd*0.26;b+=fd*0.03;
+    var rd=Math.max(0,ct*sp)*0.32; r+=rd*0.20;g+=rd*0.20;b+=rd*0.26;
+    var td=Math.max(0,cp)*0.22; r+=td*0.10;g+=td*0.08;b+=td*0.03;
+    eD[3*ei]=r;eD[3*ei+1]=g;eD[3*ei+2]=b;
   }
-  var envTex = new THREE.DataTexture(eData, eW, eH, THREE.RGBFormat, THREE.FloatType);
-  envTex.needsUpdate = true;
-  var pmrem = new THREE.PMREMGenerator(renderer);
+  var envTex=new THREE.DataTexture(eD,eW,eH,THREE.RGBFormat,THREE.FloatType);
+  envTex.needsUpdate=true;
+  var pmrem=new THREE.PMREMGenerator(renderer);
   pmrem.compileEquirectangularShader();
-  var envMap = pmrem.fromEquirectangular(envTex).texture;
-  scene.environment = envMap;
-  envTex.dispose(); pmrem.dispose();
+  var envMap=pmrem.fromEquirectangular(envTex).texture;
+  scene.environment=envMap; envTex.dispose(); pmrem.dispose();
 
-  // ── Lumières complémentaires ──
-  scene.add(new THREE.AmbientLight(0xFFF5E0, 0.12));
-  var sun = new THREE.DirectionalLight(0xFFEDD0, 0.7); sun.position.set(3,6,4); scene.add(sun);
-  var rim = new THREE.PointLight(0xCCDDFF, 0.45, 16); rim.position.set(0,3,-5); scene.add(rim);
+  // Lumières d'appoint
+  scene.add(new THREE.AmbientLight(0xFFF5E0, 0.10));
+  var sun=new THREE.DirectionalLight(0xFFEDD0,0.65); sun.position.set(3,6,4); scene.add(sun);
+  var rim=new THREE.PointLight(0xCCDDFF,0.40,18); rim.position.set(0,4,-6); scene.add(rim);
 
-  // ── Matériaux or ──
-  var mk = function(c,r){ return new THREE.MeshStandardMaterial({color:c,metalness:1.0,roughness:r,envMapIntensity:1.3}); };
-  var gold  = mk(0xD4A030, 0.08);
-  var goldD = mk(0xB07818, 0.06);
-  var goldB = mk(0xF0C848, 0.12);
+  // ── Matériaux ──
+  var mk=function(c,r){ return new THREE.MeshStandardMaterial({color:c,metalness:1.0,roughness:r,envMapIntensity:1.4}); };
+  var gold  = mk(0xD4A030,0.07);
+  var goldD = mk(0xA07010,0.06);
+  var goldB = mk(0xF0C848,0.10);
+  var dark  = new THREE.MeshStandardMaterial({color:0x1A1A1A,metalness:0.5,roughness:0.3,envMapIntensity:0.8});
+  var dark2 = new THREE.MeshStandardMaterial({color:0x111111,metalness:0.3,roughness:0.5});
+  var eyeM  = new THREE.MeshStandardMaterial({color:0x1C1A16,metalness:0,roughness:1});
 
   var grp = new THREE.Group();
 
-  // ── Corps de la coupe (LatheGeometry, 80 segments) ──
-  var pts = [
-    new THREE.Vector2(0.09,0.00), new THREE.Vector2(0.11,0.05),
-    new THREE.Vector2(0.14,0.14), new THREE.Vector2(0.21,0.29),
-    new THREE.Vector2(0.33,0.51), new THREE.Vector2(0.44,0.73),
-    new THREE.Vector2(0.52,0.90), new THREE.Vector2(0.56,1.02),
-    new THREE.Vector2(0.57,1.09), new THREE.Vector2(0.55,1.13),
-    new THREE.Vector2(0.51,1.16), new THREE.Vector2(0.49,1.18),
-  ];
-  var cup = new THREE.Mesh(new THREE.LatheGeometry(pts, 80), gold);
-  cup.position.y = 0.3; grp.add(cup);
+  // ── TÊTE ──
+  var head = new THREE.Mesh(new THREE.SphereGeometry(0.30,40,40), gold);
+  head.position.y = 1.85; grp.add(head);
 
-  // Fond intérieur de la coupe (profondeur visuelle)
-  var innerPts = [
-    new THREE.Vector2(0.00,1.18), new THREE.Vector2(0.40,1.18),
-    new THREE.Vector2(0.48,1.14), new THREE.Vector2(0.48,1.10),
-  ];
-  var inner = new THREE.Mesh(new THREE.LatheGeometry(innerPts, 80), goldD);
-  inner.position.y = 0.3; grp.add(inner);
-
-  // Bague décorative sur le corps
-  var eng = new THREE.Mesh(new THREE.TorusGeometry(0.490, 0.014, 6, 64), goldD);
-  eng.position.y = 0.3 + 0.54; eng.rotation.x = Math.PI/2; grp.add(eng);
-
-  // ── Anses ──
+  // Oreilles
   [-1,1].forEach(function(s){
-    var hPts = [
-      new THREE.Vector3(s*0.54, 1.42, 0), new THREE.Vector3(s*0.80, 1.33, 0),
-      new THREE.Vector3(s*0.94, 1.13, 0), new THREE.Vector3(s*0.92, 0.93, 0),
-      new THREE.Vector3(s*0.76, 0.78, 0), new THREE.Vector3(s*0.47, 0.73, 0),
-    ];
-    var curve = new THREE.CatmullRomCurve3(hPts);
-    grp.add(new THREE.Mesh(new THREE.TubeGeometry(curve, 36, 0.036, 10, false), gold));
-    // Petites bagues de raccord
-    [hPts[0], hPts[hPts.length-1]].forEach(function(p){
-      var rg = new THREE.Mesh(new THREE.TorusGeometry(0.036, 0.016, 6, 16), goldD);
-      rg.position.copy(p); rg.rotation.x = Math.PI/2; grp.add(rg);
-    });
+    var ear = new THREE.Mesh(new THREE.SphereGeometry(0.082,16,16), gold);
+    ear.position.set(s*0.295,1.84,0); ear.scale.z=0.55; grp.add(ear);
   });
 
-  // ── Tige profilée (LatheGeometry, plus élégante) ──
-  var stemPts = [
-    new THREE.Vector2(0.09,0.00), new THREE.Vector2(0.068,0.12),
-    new THREE.Vector2(0.060,0.22), new THREE.Vector2(0.068,0.32),
-    new THREE.Vector2(0.09,0.40),
+  // Cheveux (3 touffes dorées brillantes)
+  [{x:-0.10,y:2.12,z:0.04,sx:0.9,sy:1.3,sz:0.75},
+   {x: 0.04,y:2.18,z:0.02,sx:0.85,sy:1.4,sz:0.70},
+   {x: 0.16,y:2.10,z:-0.03,sx:0.8,sy:1.2,sz:0.70}
+  ].forEach(function(t){
+    var tu = new THREE.Mesh(new THREE.SphereGeometry(0.092,14,14), goldB);
+    tu.position.set(t.x,t.y,t.z); tu.scale.set(t.sx,t.sy,t.sz); grp.add(tu);
+  });
+
+  // Yeux
+  [-0.11,0.11].forEach(function(x){
+    var eye = new THREE.Mesh(new THREE.SphereGeometry(0.032,10,10), eyeM);
+    eye.position.set(x,1.87,0.275); grp.add(eye);
+  });
+
+  // Sourire (3 petits points en arc)
+  [{x:-0.09,y:1.67,z:0.275},{x:0,y:1.63,z:0.285},{x:0.09,y:1.67,z:0.275}].forEach(function(p){
+    var sp = new THREE.Mesh(new THREE.SphereGeometry(0.021,8,8), eyeM);
+    sp.position.set(p.x,p.y,p.z); grp.add(sp);
+  });
+
+  // ── COU ──
+  var neck = new THREE.Mesh(new THREE.CylinderGeometry(0.095,0.115,0.14,18), gold);
+  neck.position.y = 1.54; grp.add(neck);
+
+  // ── CORPS arrondi ──
+  var bodyPts = [
+    new THREE.Vector2(0.01,0.00), new THREE.Vector2(0.17,0.06),
+    new THREE.Vector2(0.22,0.22), new THREE.Vector2(0.23,0.40),
+    new THREE.Vector2(0.21,0.56), new THREE.Vector2(0.16,0.66),
+    new THREE.Vector2(0.11,0.70),
   ];
-  var stem = new THREE.Mesh(new THREE.LatheGeometry(stemPts, 32), goldD);
-  stem.position.y = -0.20; grp.add(stem);
+  var body = new THREE.Mesh(new THREE.LatheGeometry(bodyPts,36), gold);
+  body.position.y = 0.80; grp.add(body);
 
-  // ── Socle 3 niveaux ──
-  var b1=new THREE.Mesh(new THREE.CylinderGeometry(0.47,0.53,0.12,48),gold); b1.position.y=-0.67; grp.add(b1);
-  var b2=new THREE.Mesh(new THREE.CylinderGeometry(0.33,0.47,0.09,48),goldD); b2.position.y=-0.57; grp.add(b2);
-  var b3=new THREE.Mesh(new THREE.CylinderGeometry(0.20,0.33,0.07,48),gold); b3.position.y=-0.49; grp.add(b3);
-  // Bague haut du socle
-  var brim=new THREE.Mesh(new THREE.TorusGeometry(0.33,0.018,6,48),goldB); brim.position.y=-0.488; brim.rotation.x=Math.PI/2; grp.add(brim);
+  // ── BRAS GAUCHE — tient la palette ──
+  var armL = new THREE.Mesh(new THREE.CylinderGeometry(0.055,0.048,0.44,14), gold);
+  armL.position.set(-0.25,1.17,0.02); armL.rotation.z = Math.PI*0.18; grp.add(armL);
+  var handL = new THREE.Mesh(new THREE.SphereGeometry(0.068,12,12), gold);
+  handL.position.set(-0.37,0.96,0.03); grp.add(handL);
 
-  // ── Finial (orbe + bague) ──
-  var fin=new THREE.Mesh(new THREE.SphereGeometry(0.105,24,24),goldB);
-  fin.position.y=0.3+1.18+0.105; grp.add(fin);
-  var fring=new THREE.Mesh(new THREE.TorusGeometry(0.105,0.020,8,28),goldD);
-  fring.position.y=0.3+1.18; fring.rotation.x=Math.PI/2; grp.add(fring);
+  // Palette (disque aplati, incliné)
+  var palette = new THREE.Mesh(new THREE.CylinderGeometry(0.175,0.175,0.04,28), gold);
+  palette.position.set(-0.48,0.84,0.06); palette.rotation.x=Math.PI*0.22; palette.rotation.z=-Math.PI*0.12; grp.add(palette);
+  // Trou de palette (disque plus sombre)
+  var pHole = new THREE.Mesh(new THREE.CylinderGeometry(0.042,0.042,0.05,14), goldD);
+  pHole.position.set(-0.54,0.93,0.10); pHole.rotation.x=Math.PI*0.22; pHole.rotation.z=-Math.PI*0.12; grp.add(pHole);
+  // Touches de peinture (petites sphères dorées foncées)
+  [{x:-0.36,y:0.78,z:0.10},{x:-0.50,y:0.74,z:0.14},{x:-0.60,y:0.82,z:0.12},{x:-0.44,y:0.88,z:0.06}].forEach(function(p){
+    var sp = new THREE.Mesh(new THREE.SphereGeometry(0.028,8,8), goldD);
+    sp.position.set(p.x,p.y,p.z); grp.add(sp);
+  });
 
-  // ── Étoiles/particules dorées ──
-  var N=90, sP=new Float32Array(N*3);
-  for(var i=0;i<N;i++){
-    var sr=0.9+Math.random()*2.0, sa=Math.random()*Math.PI*2;
-    sP[3*i]=Math.cos(sa)*sr; sP[3*i+1]=-1.0+Math.random()*3.4; sP[3*i+2]=Math.sin(sa)*sr;
+  // ── BRAS DROIT — tient le pinceau levé ──
+  var armR = new THREE.Mesh(new THREE.CylinderGeometry(0.055,0.048,0.44,14), gold);
+  armR.position.set(0.26,1.22,0.02); armR.rotation.z=-Math.PI*0.30; grp.add(armR);
+  var handR = new THREE.Mesh(new THREE.SphereGeometry(0.068,12,12), gold);
+  handR.position.set(0.41,1.42,0.03); grp.add(handR);
+
+  // Pinceau (manche + pointe)
+  var brushH = new THREE.Mesh(new THREE.CylinderGeometry(0.014,0.014,0.46,8), goldD);
+  brushH.position.set(0.46,1.68,0.02); brushH.rotation.z=-Math.PI*0.06; grp.add(brushH);
+  var brushT = new THREE.Mesh(new THREE.CylinderGeometry(0.022,0.004,0.10,8), goldD);
+  brushT.position.set(0.48,1.95,0.02); brushT.rotation.z=-Math.PI*0.06; grp.add(brushT);
+  // Virole (jonction manche/poils)
+  var virole = new THREE.Mesh(new THREE.CylinderGeometry(0.020,0.020,0.035,10), goldB);
+  virole.position.set(0.472,1.88,0.02); virole.rotation.z=-Math.PI*0.06; grp.add(virole);
+
+  // ── JAMBES ──
+  [-0.115,0.115].forEach(function(x){
+    var leg = new THREE.Mesh(new THREE.CylinderGeometry(0.090,0.082,0.50,18), gold);
+    leg.position.set(x,0.42,0); grp.add(leg);
+    // Pieds arrondis
+    var foot = new THREE.Mesh(new THREE.SphereGeometry(0.10,18,12), gold);
+    foot.position.set(x*1.1,0.17,0.05); foot.scale.set(1.0,0.62,1.35); grp.add(foot);
+  });
+
+  // ── SOCLE NOIR ──
+  var base1 = new THREE.Mesh(new THREE.CylinderGeometry(0.54,0.64,0.30,56), dark);
+  base1.position.y=-0.29; grp.add(base1);
+  var base2 = new THREE.Mesh(new THREE.CylinderGeometry(0.64,0.68,0.08,56), dark2);
+  base2.position.y=-0.48; grp.add(base2);
+
+  // Bague or (sommet du socle)
+  var bRim = new THREE.Mesh(new THREE.TorusGeometry(0.54,0.024,8,56), goldB);
+  bRim.position.y=-0.14; bRim.rotation.x=Math.PI/2; grp.add(bRim);
+
+  // ── PLAQUE "Niton d'or" ──
+  var plaque = new THREE.Mesh(new THREE.BoxGeometry(0.56,0.115,0.045), gold);
+  plaque.position.set(0,-0.30,0.645); grp.add(plaque);
+  // Rivets
+  [[-0.24,-0.30,0.668],[0.24,-0.30,0.668]].forEach(function(p){
+    var rv = new THREE.Mesh(new THREE.SphereGeometry(0.014,8,8), goldD);
+    rv.position.set(p[0],p[1],p[2]); grp.add(rv);
+  });
+
+  // ── Particules dorées ──
+  var N=70, sPts=new Float32Array(N*3);
+  for (var i=0;i<N;i++){
+    var sr=0.8+Math.random()*2.2, sa=Math.random()*Math.PI*2;
+    sPts[3*i]=Math.cos(sa)*sr; sPts[3*i+1]=-0.6+Math.random()*3.8; sPts[3*i+2]=Math.sin(sa)*sr;
   }
-  var sGeo=new THREE.BufferGeometry(); sGeo.setAttribute('position',new THREE.BufferAttribute(sP,3));
-  var sMat=new THREE.PointsMaterial({color:0xFFD870,size:0.042,transparent:true,opacity:0.55,sizeAttenuation:true});
-  var stars=new THREE.Points(sGeo,sMat); scene.add(stars);
+  var sGeo=new THREE.BufferGeometry(); sGeo.setAttribute('position',new THREE.BufferAttribute(sPts,3));
+  var sMat=new THREE.PointsMaterial({color:0xFFD870,size:0.040,transparent:true,opacity:0.50,sizeAttenuation:true});
+  scene.add(new THREE.Points(sGeo,sMat));
 
-  grp.position.y = -0.08; scene.add(grp);
+  grp.position.y = -0.10; scene.add(grp);
 
   // ── Animation ──
-  var t=0;
+  var t = 0;
   (function anim(){
     requestAnimationFrame(anim);
-    t+=0.0065;
-    grp.rotation.y=t;
-    grp.position.y=-0.08+Math.sin(t*0.52)*0.09;
-    stars.rotation.y=-t*0.18;
-    sMat.opacity=0.4+Math.sin(t*2.8)*0.2;
-    renderer.render(scene,camera);
+    t += 0.006;
+    grp.rotation.y = t;
+    grp.position.y = -0.10 + Math.sin(t*0.50)*0.08;
+    sMat.opacity = 0.38 + Math.sin(t*2.6)*0.18;
+    renderer.render(scene, camera);
   })();
 
-  window.addEventListener('resize',function(){
-    var w=canvas.offsetWidth,h=canvas.offsetHeight; if(!w||!h)return;
+  window.addEventListener('resize', function(){
+    var w=canvas.offsetWidth, h=canvas.offsetHeight; if(!w||!h) return;
     renderer.setSize(w,h); camera.aspect=w/h; camera.updateProjectionMatrix();
   });
 }
