@@ -455,13 +455,14 @@ async function handleSubmit() {
     });
     if(!oeuvreRes.ok){var e2=await oeuvreRes.json();throw new Error(e2.error&&e2.error.message?e2.error.message:'Erreur oeuvre '+oeuvreRes.status);}
 
-    document.getElementById('form-wrapper').innerHTML=
-      '<div class="success-card"><div class="success-icon">✓</div>'
-      +'<h3>Soumission reçue !</h3>'
-      +'<p>Merci pour <em style="font-family:var(--serif);color:var(--am)">« '+titre+' »</em> de '+prenom+'.<br><br>Envoyez-nous la photo par email :</p>'
-      +'<div class="email-hint">'+CONTACT_EMAIL+'</div>'
-      +'<p>Objet : « '+titre+' » — Réponse sous <strong>48 h</strong>.</p>'
-      +'<button class="btn-outline" onclick="go('g')">Voir la galerie</button></div>';
+    var html = '<div class="success-card">';
+    html += '<div class="success-icon">✓</div>';
+    html += '<h3>Soumission reçue !</h3>';
+    html += '<p>Merci pour <em style="font-family:var(--serif);color:var(--am)">« ' + titre + ' »</em> de ' + prenom + '.<br><br>Envoyez-nous la photo par email :</p>';
+    html += '<div class="email-hint">' + CONTACT_EMAIL + '</div>';
+    html += '<p>Objet : « ' + titre + ' » — Réponse sous <strong>48 h</strong>.</p>';
+    html += "<button class='btn-outline' onclick='go(\"g\")'>Voir la galerie</button></div>";
+    document.getElementById('form-wrapper').innerHTML = html
   } catch(e){
     btn.disabled=false; lbl.textContent='Envoyer la soumission';
     alert('Erreur : '+e.message);
@@ -478,8 +479,8 @@ function go(p) {
 
 function handleNotify() {
   var v=document.getElementById('notify-email').value;
-  if(v&&v.indexOf('@')>-1){alert('Merci ! Vous serez notifié(e) à l'ouverture des inscriptions.');document.getElementById('notify-email').value='';}
-  else alert('Merci d'entrer une adresse email valide.');
+  if(v&&v.indexOf('@')>-1){alert('Merci ! Vous serez notifié(e) à l\'ouverture des inscriptions.');document.getElementById('notify-email').value='';}
+  else alert('Merci d\'entrer une adresse email valide.');
 }
 
 go('g');
