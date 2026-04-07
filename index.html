@@ -441,7 +441,7 @@ async function handleSubmit() {
     var artisteRes = await fetch('https://api.airtable.com/v0/'+AT_BASE+'/'+AT_ARTISTES, {
       method:'POST', headers:AT_HEADERS,
       body:JSON.stringify({records:[{fields:{
-        'Prenom':prenom, 'Age':age, 'Categorie':cat, 'Region':region
+        'Prenom':prenom, 'Age':age, 'Region':region
       }}]})
     });
     if(!artisteRes.ok) { var e=await artisteRes.json(); throw new Error(e.error&&e.error.message?e.error.message:'Erreur artiste '+artisteRes.status); }
