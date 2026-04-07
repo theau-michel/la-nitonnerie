@@ -435,8 +435,14 @@ async function handleSubmit() {
   if(!prenom||!age||!region||!titre||!tech||!email){alert('Merci de remplir tous les champs obligatoires.');return;}
   var cat = age>=3&&age<=6?'Petits Nitons':'Grands Nitons';
   var btn=document.getElementById('submit-btn'), lbl=document.getElementById('submit-label');
+  var photoUrl = null;
   btn.disabled=true; lbl.innerHTML='<span class="loader" style="border-top-color:#fff"></span> Envoi…';
   try {
+    // 0. Upload photo si présente
+    if (pendingFile) {
+      lbl.innerHTML='<span class="loader" style="border-top-color:#fff"></span> Upload photo…';
+      photoUrl = await uploadToCloudinary(pendingFile);
+    }
     // 1. Créer l'Artiste
     var artisteRes = await fetch('https://api.airtable.com/v0/'+AT_BASE+'/'+AT_ARTISTES, {
       method:'POST', headers:AT_HEADERS,
