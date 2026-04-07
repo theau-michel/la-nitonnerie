@@ -311,6 +311,8 @@ footer{background:var(--ink);color:rgba(251,248,242,0.38);padding:2.2rem 5vw;dis
 </div>
 
 <script>
+var CL_CLOUD  = 'dspfazrxe';
+var CL_PRESET = 'nitonnerie';
 var AT_TOKEN = 'patXBTkvRqR87CFKO.92a2f3540374de1fca10cf9899844e705358fe441c5bf5d56ff2e1328db36621';
 var AT_BASE  = 'appCRGgKOrUSJYWJ8';
 var AT_OEUVRES  = 'tbl9J6znXf0FuiW7n';
@@ -393,12 +395,26 @@ document.querySelectorAll('.fb').forEach(function(b){
 });
 
 // ── FORMULAIRE ────────────────────────────────────────────────────────────────
+var pendingFile = null;
 function handlePhotoChange(input) {
   if(!input.files||!input.files[0]) return;
   if(input.files[0].size>10*1024*1024){alert("L'image dépasse 10 Mo.");input.value='';return;}
+  pendingFile = input.files[0];
   var r=new FileReader();
   r.onload=function(e){ document.getElementById('uz-img').src=e.target.result; document.getElementById('uz-inner').style.display='none'; document.getElementById('uz-preview').style.display='block'; };
   r.readAsDataURL(input.files[0]);
+}
+
+async function uploadToCloudinary(file) {
+  var fd = new FormData();
+  fd.append('file', file);
+  fd.append('upload_preset', CL_PRESET);
+  var res = await fetch('https://api.cloudinary.com/v1_1/'+CL_CLOUD+'/image/upload', {
+    method: 'POST', body: fd
+  });
+  if (!res.ok) throw new Error('Cloudinary upload failed');
+  var data = await res.json();
+  return data.secure_url;
 }
 
 function updateCatHint() {
@@ -449,6 +465,7 @@ async function handleSubmit() {
       'Artiste':[artisteId]
     };
     if(msg) oeuvreFields['Message']=msg;
+    if(photoUrl) oeuvreFields['Photo']=[{url:photoUrl}];
     var oeuvreRes = await fetch('https://api.airtable.com/v0/'+AT_BASE+'/'+AT_OEUVRES, {
       method:'POST', headers:AT_HEADERS,
       body:JSON.stringify({records:[{fields:oeuvreFields}]})
