@@ -299,7 +299,7 @@ footer{background:var(--ink);color:rgba(251,248,242,0.38);padding:2.2rem 5vw;dis
           <div class="uz-preview" id="uz-preview"><img id="uz-img" src="" alt="Aperçu"><span class="uz-preview-label">Cliquer pour changer</span></div>
           <input type="file" accept="image/*" id="f-photo" style="display:none" onchange="handlePhotoChange(this)">
         </div>
-        <p style="font-size:0.7rem;color:var(--sg);margin-top:0.5rem;line-height:1.6">Vous pouvez aussi envoyer la photo par email après soumission.</p>
+        
       </div>
       <div class="fg"><label>Email du parent / tuteur <span style="color:var(--am)">*</span></label><input type="email" placeholder="parent@email.com" id="f-email"></div>
       <div class="fg"><label>Message (optionnel)</label><textarea placeholder="Un mot sur cette œuvre, l'inspiration de l'enfant…" id="f-message"></textarea></div>
@@ -481,9 +481,7 @@ async function handleSubmit() {
     var html = '<div class="success-card">';
     html += '<div class="success-icon">✓</div>';
     html += '<h3>Soumission reçue !</h3>';
-    html += '<p>Merci pour <em style="font-family:var(--serif);color:var(--am)">« ' + titre + ' »</em> de ' + prenom + '.<br><br>Envoyez-nous la photo par email :</p>';
-    html += '<div class="email-hint">' + CONTACT_EMAIL + '</div>';
-    html += '<p>Objet : « ' + titre + ' » — Réponse sous <strong>48 h</strong>.</p>';
+    html += '<p>Merci pour <em style="font-family:var(--serif);color:var(--am)">« ' + titre + ' »</em> de ' + prenom + '.<br><br>Votre soumission est bien enregistrée. Nous l’examinerons sous <strong>48 h</strong>.</p>';
     html += "<button class='btn-outline' onclick='go(\"g\")'>Voir la galerie</button></div>";
     document.getElementById('form-wrapper').innerHTML = html
   } catch(e){
