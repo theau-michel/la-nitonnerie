@@ -305,7 +305,7 @@ footer{background:var(--ink);color:rgba(251,248,242,0.38);padding:2.2rem 5vw;dis
       <div class="fg"><label>Technique <span style="color:var(--am)">*</span></label>
         <select id="f-technique" onchange="toggleAutre(this)">
           <option value="">Choisir…</option>
-          <option>Peinture à l’huile</option>
+          <option>Peinture à l'huile</option>
           <option>Gouache</option>
           <option>Aquarelle</option>
           <option>Feutres/crayons de couleur</option>
@@ -347,7 +347,7 @@ var AT_TOKEN = 'patXBTkvRqR87CFKO.92a2f3540374de1fca10cf9899844e705358fe441c5bf5
 var AT_BASE  = 'appCRGgKOrUSJYWJ8';
 var AT_OEUVRES  = 'tbl9J6znXf0FuiW7n';
 var AT_ARTISTES = 'tblAG4Zi0pW6ZxR3a';
-var AT_PARENTS  = 'tblSS9hcWDKjRUzIc';
+
 var CONTACT_EMAIL = 'lanitonnerie@gmail.com';
 var ALL_WORKS = [], curFilter = 'all';
 var AT_HEADERS = {'Authorization':'Bearer '+AT_TOKEN,'Content-Type':'application/json'};
@@ -355,7 +355,7 @@ var AT_HEADERS = {'Authorization':'Bearer '+AT_TOKEN,'Content-Type':'application
 // ── GALERIE ───────────────────────────────────────────────────────────────────
 async function loadData() {
   try {
-    var fields = ['Titre','Technique','Photo','Publier','Prenom (from Artistes)','Age (from Artistes)','Categorie (from Artistes)','Region (from Artistes)'];
+    var fields = ['Titre','Technique','Photo','Publier','Prenom (from Artistes)','Age (from Artistes)','Categorie (from Artistes)','Region (from Artistes)','Email parent (from Artistes)'];
     var params = fields.map(function(f){ return 'fields[]='+encodeURIComponent(f); }).join('&');
     var res = await fetch('https://api.airtable.com/v0/'+AT_BASE+'/'+AT_OEUVRES+'?'+params,
       {headers:{'Authorization':'Bearer '+AT_TOKEN}});
@@ -369,6 +369,7 @@ async function loadData() {
       var catRaw = Array.isArray(f['Categorie (from Artistes)']) ? f['Categorie (from Artistes)'][0] : (f['Categorie (from Artistes)']||'');
       var cat = catRaw.indexOf('Petit')!==-1 ? 'Petits Nitons' : catRaw.indexOf('Grand')!==-1 ? 'Grands Nitons' : catRaw;
       var region = Array.isArray(f['Region (from Artistes)']) ? f['Region (from Artistes)'][0] : (f['Region (from Artistes)']||'');
+      var emailParent = Array.isArray(f['Email parent (from Artistes)']) ? f['Email parent (from Artistes)'][0] : (f['Email parent (from Artistes)']||'');
       return {
         id:r.id, titre:f['Titre']||'Sans titre', technique:f['Technique']||'',
         categorie:cat, prenom:prenom, age:age, region:region,
@@ -484,7 +485,7 @@ async function handleSubmit() {
     var artisteRes = await fetch('https://api.airtable.com/v0/'+AT_BASE+'/'+AT_ARTISTES, {
       method:'POST', headers:AT_HEADERS,
       body:JSON.stringify({records:[{fields:{
-        'Prenom':prenom, 'Age':age, 'Region':region
+        'Prenom':prenom, 'Age':age, 'Region':region, 'Email parent':email
       }}]})
     });
     if(!artisteRes.ok) { var e=await artisteRes.json(); throw new Error(e.error&&e.error.message?e.error.message:'Erreur artiste '+artisteRes.status); }
@@ -492,21 +493,8 @@ async function handleSubmit() {
     var artisteId = artisteData.records[0].id;
 
     // 2. Créer le Parent et le lier à l'Artiste
-    var parentRes = await fetch('https://api.airtable.com/v0/'+AT_BASE+'/'+AT_PARENTS, {
-      method:'POST', headers:AT_HEADERS,
-      body:JSON.stringify({records:[{fields:{
-        'Email':email, 'Enfants':[artisteId]
-      }}]})
-    });
-    // Lier le parent à l'artiste
-    if (parentRes.ok) {
-      var parentData = await parentRes.json();
-      var parentId = parentData.records[0].id;
-      await fetch('https://api.airtable.com/v0/'+AT_BASE+'/'+AT_ARTISTES+'/'+artisteId, {
-        method:'PATCH', headers:AT_HEADERS,
-        body:JSON.stringify({fields:{'Lien vers le Parent':[parentId]}})
-      });
-    }
+
+
 
     // 3. Créer l'Œuvre liée à l'Artiste
     var oeuvreFields = {
