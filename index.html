@@ -302,13 +302,19 @@ footer{background:var(--ink);color:rgba(251,248,242,0.38);padding:2.2rem 5vw;dis
       </div>
       <div class="fg"><label>Titre de l'œuvre <span style="color:var(--am)">*</span></label><input type="text" placeholder="Mon chat dans le jardin" id="f-titre"></div>
       <div class="fg"><label>Technique <span style="color:var(--am)">*</span></label>
-        <select id="f-technique">
+        <select id="f-technique" onchange="toggleAutre(this)">
           <option value="">Choisir…</option>
-          <option>Peinture</option><option>Dessin au crayon</option>
-          <option>Feutres / crayons de couleur</option><option>Collage</option>
-          <option>Aquarelle</option><option>Sculpture photographiée</option>
-          <option>Autre medium / support</option>
+          <option>Peinture à l’huile</option>
+          <option>Gouache</option>
+          <option>Aquarelle</option>
+          <option>Feutres / crayons de couleur</option>
+          <option>Collage</option>
+          <option value="Autre">Autre (précisez)</option>
         </select>
+      </div>
+      <div class="fg" id="fg-autre" style="display:none;margin-top:-1rem">
+        <label>Précisez la technique</label>
+        <input type="text" placeholder="Ex : pastel, monotype…" id="f-technique-autre">
       </div>
       <div class="fg"><label>Photo de l'œuvre</label>
         <div class="uz" onclick="document.getElementById('f-photo').click()">
@@ -447,7 +453,11 @@ async function handleSubmit() {
   var age    = parseInt(document.getElementById('f-age').value);
   var region = document.getElementById('f-region').value;
   var titre  = document.getElementById('f-titre').value.trim();
-  var tech   = document.getElementById('f-technique').value;
+  var tech = document.getElementById('f-technique').value;
+  if (tech === 'Autre') {
+    var autreVal = document.getElementById('f-technique-autre').value.trim();
+    tech = autreVal || 'Autre';
+  }
   var email  = document.getElementById('f-email').value.trim();
   var msg    = document.getElementById('f-message').value.trim();
   if(!prenom||!age||!region||!titre||!tech||!email){alert('Merci de remplir tous les champs obligatoires.');return;}
@@ -506,6 +516,12 @@ async function handleSubmit() {
     btn.disabled=false; lbl.textContent='Envoyer la soumission';
     alert('Erreur : '+e.message);
   }
+}
+
+function toggleAutre(sel) {
+  var fg = document.getElementById('fg-autre');
+  fg.style.display = sel.value === 'Autre' ? 'block' : 'none';
+  if (sel.value !== 'Autre') document.getElementById('f-technique-autre').value = '';
 }
 
 function go(p) {
