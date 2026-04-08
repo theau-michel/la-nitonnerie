@@ -498,7 +498,15 @@ async function handleSubmit() {
         'Email':email, 'Enfants':[artisteId]
       }}]})
     });
-    // (on continue même si le parent échoue — non bloquant)
+    // Lier le parent à l'artiste
+    if (parentRes.ok) {
+      var parentData = await parentRes.json();
+      var parentId = parentData.records[0].id;
+      await fetch('https://api.airtable.com/v0/'+AT_BASE+'/'+AT_ARTISTES+'/'+artisteId, {
+        method:'PATCH', headers:AT_HEADERS,
+        body:JSON.stringify({fields:{'Lien vers le Parent':[parentId]}})
+      });
+    }
 
     // 3. Créer l'Œuvre liée à l'Artiste
     var oeuvreFields = {
