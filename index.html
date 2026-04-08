@@ -308,7 +308,7 @@ footer{background:var(--ink);color:rgba(251,248,242,0.38);padding:2.2rem 5vw;dis
           <option>Peinture à l’huile</option>
           <option>Gouache</option>
           <option>Aquarelle</option>
-          <option>Feutres / crayons de couleur</option>
+          <option>Feutres/crayons de couleur</option>
           <option>Collage</option>
           <option value="Autre">Autre (précisez)</option>
         </select>
@@ -461,9 +461,10 @@ async function handleSubmit() {
   var region = document.getElementById('f-region').value;
   var titre  = document.getElementById('f-titre').value.trim();
   var tech = document.getElementById('f-technique').value;
+  var autreDetail = '';
   if (tech === 'Autre') {
-    var autreVal = document.getElementById('f-technique-autre').value.trim();
-    tech = autreVal || 'Autre';
+    autreDetail = document.getElementById('f-technique-autre').value.trim();
+    tech = 'Autre';
   }
   var email  = document.getElementById('f-email').value.trim();
   var msg    = document.getElementById('f-message').value.trim();
@@ -506,6 +507,7 @@ async function handleSubmit() {
       'DateSoumission':new Date().toISOString().split('T')[0],
       'Artiste':[artisteId]
     };
+    if(autreDetail) msg = msg ? msg + ' — Technique : ' + autreDetail : 'Technique : ' + autreDetail;
     if(msg) oeuvreFields['Message']=msg;
     if(photoUrl) oeuvreFields['Photo']=[{url:photoUrl}];
     var oeuvreRes = await fetch('https://api.airtable.com/v0/'+AT_BASE+'/'+AT_OEUVRES, {
