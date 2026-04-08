@@ -181,6 +181,7 @@ footer{background:var(--ink);color:rgba(251,248,242,0.38);padding:2.2rem 5vw;dis
     <li><a onclick="go('n')" id="nn">Le Niton d'or</a></li>
     <li><a onclick="go('a')" id="na">À propos</a></li>
     <li><a onclick="go('s')" id="ns">Soumettre une œuvre</a></li>
+    <li><a onclick="go('m')" id="nm">Mentions légales</a></li>
   </ul>
 </nav>
 
@@ -326,6 +327,12 @@ footer{background:var(--ink);color:rgba(251,248,242,0.38);padding:2.2rem 5vw;dis
       </div>
       <div class="fg"><label>Email du parent / tuteur <span style="color:var(--am)">*</span></label><input type="email" placeholder="parent@email.com" id="f-email"></div>
       <div class="fg"><label>Message (optionnel)</label><textarea placeholder="Un mot sur cette œuvre, l'inspiration de l'enfant…" id="f-message"></textarea></div>
+      <div class="fg" style="margin-bottom:1rem">
+        <label style="display:flex;align-items:flex-start;gap:0.7rem;cursor:pointer;font-size:0.78rem;color:rgba(28,26,22,0.6);letter-spacing:0;text-transform:none;line-height:1.6">
+          <input type="checkbox" id="f-consent" style="margin-top:3px;flex-shrink:0;accent-color:var(--am);width:14px;height:14px;border:none;border-bottom:none">
+          <span>J’autorise la publication de cette œuvre et des informations associées (prénom, âge, région) sur La Nitonnerie, conformément aux <a onclick="go('m')" style="color:var(--am);cursor:pointer;text-decoration:underline">mentions légales</a>. <span style="color:var(--am)">*</span></span>
+        </label>
+      </div>
       <button class="sb" id="submit-btn" onclick="handleSubmit()"><span id="submit-label">Envoyer la soumission</span></button>
       <p class="notice">En soumettant, vous acceptez que l'œuvre puisse être publiée sur La Nitonnerie.<br>Aucune donnée personnelle n'est partagée à des tiers.</p>
     </div>
@@ -461,6 +468,7 @@ async function handleSubmit() {
   var email  = document.getElementById('f-email').value.trim();
   var msg    = document.getElementById('f-message').value.trim();
   if(!prenom||!age||!region||!titre||!tech||!email){alert('Merci de remplir tous les champs obligatoires.');return;}
+  if(!document.getElementById('f-consent').checked){alert('Merci de cocher la case d\'autorisation de publication.');return;}
   var cat = age>=3&&age<=6?'Petits Nitons':'Grands Nitons';
   var btn=document.getElementById('submit-btn'), lbl=document.getElementById('submit-label');
   var photoUrl = null;
@@ -566,6 +574,63 @@ loadData();
       <p id="lb-meta"></p>
     </div>
   </div>
+</div>
+
+<!-- MENTIONS LÉGALES -->
+<div id="pg-m" class="pg">
+  <div class="manifeste-body" style="max-width:860px">
+    <div class="eyebrow">Informations légales</div>
+    <h2 class="manifeste-h">Mentions <em>légales</em></h2>
+
+    <h3 style="font-family:var(--serif);font-size:1.4rem;font-weight:400;margin-bottom:1rem;margin-top:2.5rem">Éditeur du site</h3>
+    <p class="manifeste-p" style="font-size:1rem">
+      La Nitonnerie est un site édité par :<br><br>
+      <strong>Théau Michel</strong><br>
+      Auto-entrepreneur — activité : Autres créations artistiques (APE 9003B)<br>
+      ALZIA — 20220 Santa Réparata di Balagna<br>
+      Email : <a href="mailto:info@lanitonnerie.fr" style="color:var(--am)">info@lanitonnerie.fr</a>
+    </p>
+
+    <h3 style="font-family:var(--serif);font-size:1.4rem;font-weight:400;margin-bottom:1rem;margin-top:2.5rem">Hébergement</h3>
+    <p class="manifeste-p" style="font-size:1rem">
+      Ce site est hébergé par :<br><br>
+      <strong>GitHub Pages</strong> — GitHub, Inc.<br>
+      88 Colin P Kelly Jr Street, San Francisco, CA 94107, États-Unis<br>
+      <a href="https://pages.github.com" target="_blank" style="color:var(--am)">pages.github.com</a><br><br>
+      Les images des œuvres sont hébergées par :<br><br>
+      <strong>Cloudinary Inc.</strong><br>
+      3400 Central Expressway, Suite 110, Santa Clara, CA 95051, États-Unis<br>
+      <a href="https://cloudinary.com" target="_blank" style="color:var(--am)">cloudinary.com</a>
+    </p>
+
+    <h3 style="font-family:var(--serif);font-size:1.4rem;font-weight:400;margin-bottom:1rem;margin-top:2.5rem">Propriété intellectuelle</h3>
+    <p class="manifeste-p" style="font-size:1rem">
+      L'ensemble du contenu de ce site (textes, visuels, design) est la propriété de Théau Michel, sauf mention contraire. Les œuvres publiées restent la propriété intellectuelle de leurs auteurs. Leur reproduction, même partielle, est interdite sans autorisation préalable.
+    </p>
+
+    <h3 style="font-family:var(--serif);font-size:1.4rem;font-weight:400;margin-bottom:1rem;margin-top:2.5rem">Droit à l'image des mineurs</h3>
+    <p class="manifeste-p" style="font-size:1rem">
+      Conformément à la loi, la publication d'œuvres de mineurs sur ce site est soumise à l'autorisation expresse du parent ou tuteur légal. En soumettant une œuvre via le formulaire, le parent ou tuteur déclare être titulaire de l'autorité parentale et consent à la publication de l'œuvre et des informations associées (prénom de l'enfant, âge, région, technique) sur La Nitonnerie.<br><br>
+      Toute demande de suppression peut être adressée à <a href="mailto:info@lanitonnerie.fr" style="color:var(--am)">info@lanitonnerie.fr</a>. La suppression sera effectuée dans un délai de 72 heures.
+    </p>
+
+    <h3 style="font-family:var(--serif);font-size:1.4rem;font-weight:400;margin-bottom:1rem;margin-top:2.5rem">Données personnelles (RGPD)</h3>
+    <p class="manifeste-p" style="font-size:1rem">
+      Les données collectées via le formulaire de soumission (prénom de l'enfant, âge, région, technique, email du parent, message) sont utilisées exclusivement pour la gestion des soumissions et la publication des œuvres sur La Nitonnerie.<br><br>
+      Ces données sont stockées sur les serveurs d'Airtable Inc. (États-Unis), dans le cadre du RGPD. Elles ne sont en aucun cas cédées, revendues ou transmises à des tiers.<br><br>
+      Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés, vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Pour exercer ces droits, contactez : <a href="mailto:info@lanitonnerie.fr" style="color:var(--am)">info@lanitonnerie.fr</a>
+    </p>
+
+    <h3 style="font-family:var(--serif);font-size:1.4rem;font-weight:400;margin-bottom:1rem;margin-top:2.5rem">Cookies</h3>
+    <p class="manifeste-p" style="font-size:1rem">
+      Ce site n'utilise pas de cookies de traçage ou publicitaires. Aucun outil d'analyse de trafic n'est installé.
+    </p>
+
+    <div class="manifeste-footer">
+      <span style="font-size:0.73rem;color:var(--sg);letter-spacing:0.05em">Dernière mise à jour : avril 2025</span>
+    </div>
+  </div>
+  <footer><span class="fl" onclick="go('g')">La <em>Nitonnerie</em></span><span>Galerie d'art enfantin &nbsp;·&nbsp; 2025</span></footer>
 </div>
 </body>
 </html>
