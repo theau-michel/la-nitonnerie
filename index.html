@@ -355,7 +355,7 @@ var AT_HEADERS = {'Authorization':'Bearer '+AT_TOKEN,'Content-Type':'application
 // ── GALERIE ───────────────────────────────────────────────────────────────────
 async function loadData() {
   try {
-    var fields = ['Titre','Technique','Photo','Publier','Prenom (from Artistes)','Age (from Artistes)','Categorie (from Artistes)','Region (from Artistes)','Email parent (from Artistes)'];
+    var fields = ['Titre','Technique','Photo','Publier','Prenom (from Artistes)','Age (from Artistes)','Categorie (from Artistes)','Region (from Artistes)'];
     var params = fields.map(function(f){ return 'fields[]='+encodeURIComponent(f); }).join('&');
     var res = await fetch('https://api.airtable.com/v0/'+AT_BASE+'/'+AT_OEUVRES+'?'+params,
       {headers:{'Authorization':'Bearer '+AT_TOKEN}});
