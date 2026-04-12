@@ -171,6 +171,27 @@ footer{background:var(--ink);color:rgba(251,248,242,0.38);padding:2.2rem 5vw;dis
 .lb-close{position:absolute;top:-2rem;right:-2rem;width:32px;height:32px;background:none;border:1px solid rgba(251,248,242,0.25);color:rgba(251,248,242,0.6);font-size:0.85rem;cursor:pointer;border-radius:50%;transition:all 0.2s;display:flex;align-items:center;justify-content:center}
 .lb-close:hover{background:rgba(251,248,242,0.12);color:#fff}
 .ac{cursor:pointer}
+
+/* HAMBURGER MOBILE */
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.burger span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.3s}
+.burger.on span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.burger.on span:nth-child(2){opacity:0}
+.burger.on span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+@media(max-width:768px){
+  .burger{display:flex}
+  .nav-links{
+    display:none;flex-direction:column;gap:0;
+    position:fixed;top:64px;left:0;right:0;
+    background:rgba(251,248,242,0.98);backdrop-filter:blur(16px);
+    border-bottom:1px solid rgba(28,26,22,0.07);
+    padding:0.5rem 0;z-index:99
+  }
+  .nav-links.on{display:flex}
+  .nav-links li{border-bottom:1px solid rgba(28,26,22,0.05)}
+  .nav-links a{display:block;padding:0.9rem 5vw;font-size:0.72rem;opacity:0.7}
+  .nav-links a.on{opacity:1;color:var(--am)}
+}
 </style>
 </head>
 <body>
@@ -183,6 +204,9 @@ footer{background:var(--ink);color:rgba(251,248,242,0.38);padding:2.2rem 5vw;dis
     <li><a onclick="go('a')" id="na">À propos</a></li>
     <li><a onclick="go('s')" id="ns">Soumettre une œuvre</a></li>
   </ul>
+  <button class="burger" id="burger" onclick="toggleBurger()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- GALERIE -->
@@ -369,7 +393,7 @@ async function loadData() {
       var catRaw = Array.isArray(f['Categorie (from Artistes)']) ? f['Categorie (from Artistes)'][0] : (f['Categorie (from Artistes)']||'');
       var cat = catRaw.indexOf('Petit')!==-1 ? 'Petits Nitons' : catRaw.indexOf('Grand')!==-1 ? 'Grands Nitons' : catRaw;
       var region = Array.isArray(f['Region (from Artistes)']) ? f['Region (from Artistes)'][0] : (f['Region (from Artistes)']||'');
-      var emailParent = Array.isArray(f['Email parent (from Artistes)']) ? f['Email parent (from Artistes)'][0] : (f['Email parent (from Artistes)']||'');
+      var emailParent = '';
       return {
         id:r.id, titre:f['Titre']||'Sans titre', technique:f['Technique']||'',
         categorie:cat, prenom:prenom, age:age, region:region,
@@ -559,6 +583,19 @@ function lbHide() {
 }
 function lbBg(e) { if(e.target===document.getElementById('lb')) lbHide(); }
 document.addEventListener('keydown',function(e){ if(e.key==='Escape') lbHide(); });
+
+
+function toggleBurger() {
+  document.getElementById('burger').classList.toggle('on');
+  document.querySelector('.nav-links').classList.toggle('on');
+}
+
+document.querySelectorAll('.nav-links a').forEach(function(a){
+  a.addEventListener('click', function(){
+    document.getElementById('burger').classList.remove('on');
+    document.querySelector('.nav-links').classList.remove('on');
+  });
+});
 
 go('g');
 loadData();
