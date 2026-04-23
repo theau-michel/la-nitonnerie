@@ -192,6 +192,13 @@ footer{background:var(--ink);color:rgba(251,248,242,0.38);padding:2.2rem 5vw;dis
   .nav-links a{display:block;padding:0.9rem 5vw;font-size:0.72rem;opacity:0.7}
   .nav-links a.on{opacity:1;color:var(--am)}
 }
+
+/* --- Concours Niton d'or : masquage ludique des montants --- */
+.nd-prizes-money{position:relative;display:flex;align-items:center;gap:3.5rem;flex-wrap:wrap;justify-content:center}
+.nd-prizes-money .prize .val{visibility:hidden}
+.nd-hand-overlay{position:absolute;top:38%;left:50%;transform:translate(-50%,-50%) rotate(-6deg);pointer-events:none;z-index:4;width:min(640px,92%);height:auto;filter:drop-shadow(0 0 8px #FBF8F2) drop-shadow(0 0 4px #FBF8F2)}
+@media(max-width:640px){.nd-prizes-money{gap:2rem}.nd-hand-overlay{width:98%;top:42%}}
+
 </style>
 </head>
 <body>
@@ -242,11 +249,14 @@ footer{background:var(--ink);color:rgba(251,248,242,0.38);padding:2.2rem 5vw;dis
     <div><div class="nd-cat-circle nd-cat-circle-g"><span>Grands<br>Nitons</span><span class="age">7 – 12 ans</span></div></div>
   </div>
   <div class="nd-prizes">
-    <div class="prize"><div class="val">800 €</div><div class="rank">1er prix</div></div>
-    <div class="prize-sep"></div>
-    <div class="prize"><div class="val">400 €</div><div class="rank">2e prix</div></div>
-    <div class="prize-sep"></div>
-    <div class="prize"><div class="val">200 €</div><div class="rank">3e prix</div></div>
+    <div class="nd-prizes-money">
+      <div class="prize"><div class="val" aria-hidden="true">&nbsp;</div><div class="rank">1er prix</div></div>
+      <div class="prize-sep"></div>
+      <div class="prize"><div class="val" aria-hidden="true">&nbsp;</div><div class="rank">2e prix</div></div>
+      <div class="prize-sep"></div>
+      <div class="prize"><div class="val" aria-hidden="true">&nbsp;</div><div class="rank">3e prix</div></div>
+      <svg class="nd-hand-overlay" viewBox="0 0 1380 220" xmlns="http://www.w3.org/2000/svg" aria-label="Pas encore prêt"><g fill="none" stroke="#2a2724" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M 38 55 Q 30 115 42 180"/><path d="M 42 58 Q 78 45 82 85 Q 78 118 40 112"/><path d="M 105 180 Q 118 115 132 50"/><path d="M 132 50 Q 146 115 162 182"/><path d="M 114 132 Q 138 126 152 134"/><path d="M 238 62 Q 198 55 192 82 Q 192 102 218 108 Q 244 114 240 138 Q 236 162 196 162"/><path d="M 330 62 Q 305 55 298 65 Q 293 115 302 182 Q 338 188 352 178"/><path d="M 304 120 Q 326 116 342 122"/><path d="M 395 180 Q 390 115 398 58"/><path d="M 398 58 Q 432 118 448 180"/><path d="M 448 180 Q 454 118 448 62"/><path d="M 540 68 Q 498 58 494 120 Q 500 172 546 170"/><path d="M 610 62 Q 572 58 572 122 Q 576 178 616 176 Q 650 172 648 118 Q 642 58 610 62"/><path d="M 690 60 Q 684 118 692 184"/><path d="M 692 60 Q 732 54 738 92 Q 734 118 694 118"/><path d="M 712 118 Q 730 148 746 184"/><path d="M 798 64 Q 770 58 764 68 Q 758 118 766 184 Q 802 190 818 180"/><path d="M 770 122 Q 792 118 808 124"/><path d="M 880 58 Q 872 116 884 184"/><path d="M 884 60 Q 922 46 926 88 Q 922 120 882 116"/><path d="M 965 60 Q 958 116 968 184"/><path d="M 968 60 Q 1008 54 1014 92 Q 1010 120 970 120"/><path d="M 990 120 Q 1010 150 1026 184"/><path d="M 1105 70 Q 1075 62 1068 74 Q 1062 122 1072 184 Q 1110 190 1128 178"/><path d="M 1074 124 Q 1100 120 1118 128"/><path d="M 1065 30 L 1092 12 L 1118 32"/><path d="M 1175 58 Q 1220 48 1275 56"/><path d="M 1225 56 Q 1220 118 1228 186"/></g></svg>
+    </div>
     <div class="prize-sep"></div>
     <div class="prize"><div class="val" style="font-size:1.3rem;line-height:1.5">Goodies<br>beaux-arts</div><div class="rank">Mentions</div></div>
   </div>
